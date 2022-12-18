@@ -91,7 +91,7 @@ const WishlistItem = ({
     return availableSizes.length ? (
       <div className={styles.price}>
         {currencySign}
-        {getPriceWithCurrency(availableSizes[0].price)}
+        <p>{getPriceWithCurrency(availableSizes[0].price)}</p>
       </div>
     ) : (
       <>{t('product.sizeNotAvailable')}</>

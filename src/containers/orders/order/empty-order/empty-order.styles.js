@@ -1,14 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const titleStyles = {
+  textAlign: 'center',
   fontStyle: 'normal',
   fontWeight: 'normal',
-  fontSize: '34px',
-  lineHeight: '46px',
-  letterSpacing: '0.0025em',
-  '@media (max-width: 600px)': {
-    fontSize: '20px'
-  }
+  fontSize: '29px'
 };
 const buttonStyles = {
   height: '52px',

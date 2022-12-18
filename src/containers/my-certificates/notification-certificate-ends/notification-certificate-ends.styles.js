@@ -22,13 +22,18 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   button: {
-    fontSize: '12px',
+    fontSize: '14px',
+    lineHeight: '16px',
     color: theme.palette.black,
     fontWeight: '600',
     height: '40px',
-    border: '1px solid',
+    '@media (max-width: 750px)': {
+      fontSize: '12px',
+      lineHeight: '14px'
+    },
     '@media (max-width: 450px)': {
-      fontSize: '10px'
+      fontSize: '10px',
+      lineHeight: '12px'
     }
   }
 }));

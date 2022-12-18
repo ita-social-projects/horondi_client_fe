@@ -106,7 +106,6 @@ const AppHeader = ({ expireDate }) => {
           {notification}
         </HeaderNotificationBar>
       )}
-      <div className={styles.headerspace} />
       <Sidebar setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
     </div>
   );

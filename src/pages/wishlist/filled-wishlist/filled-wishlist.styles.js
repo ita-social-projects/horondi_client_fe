@@ -23,16 +23,15 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   tableHeader: () => ({
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: '14px',
-    lineHeight: '20px',
-    letterSpacing: '0.001em',
-    color: '#242424',
     paddingBottom: 10,
     paddingTop: 10,
     '& > th': {
-      padding: 8
+      fontWeight: '600',
+      padding: 8,
+      '&:last-child': { textAlign: 'center' },
+      '@media (max-width: 450px)': {
+        display: 'none'
+      }
     },
     borderTop: `1px solid ${palette.cart.borderColor}`,
     borderBottom: `1px solid ${palette.cart.borderColor}`

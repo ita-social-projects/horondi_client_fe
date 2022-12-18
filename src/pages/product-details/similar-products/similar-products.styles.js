@@ -1,22 +1,17 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const title = {
-  padding: '15px 0',
-  fontFamily: 'Open Sans',
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: '24px',
-  lineHeight: '32px'
-};
-
 export const useStyles = makeStyles((theme) => ({
   similarItems: {
     textAlign: 'center',
     paddingTop: '70px',
+    '@media (max-width: 900px)': {
+      paddingTop: '40px'
+    },
     '@media (max-width: 600px)': {
       paddingTop: '10px'
     }
   },
+  emptySimilarItems: { height: '180px' },
   carousel: {
     marginTop: '2rem',
     marginBottom: theme.spacing(4),
@@ -24,7 +19,10 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: '15px'
   },
   title: {
-    ...title
+    fontSize: theme.typography.h3.fontSize,
+    '@media (max-width: 600px)': {
+      fontSize: theme.typography.h4.fontSize
+    }
   },
   price: {
     display: 'flex',

@@ -35,15 +35,6 @@ export const useStyles = makeStyles((theme) => ({
       transform: 'translateY(-95px)'
     }
   },
-  headerspace: {
-    display: 'block',
-    width: '100%',
-    height: '75px',
-    backgroundColor: theme.palette.background,
-    '@media (max-width: 768px)': {
-      height: '72px'
-    }
-  },
   upperToolbar: {
     display: 'flex',
     justifyContent: 'space-between',

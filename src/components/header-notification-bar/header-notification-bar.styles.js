@@ -11,10 +11,10 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: '1000',
     top: '111px',
     '@media (max-width: 1000px)': {
-      top: '95px'
+      top: '94px'
     },
     '@media (max-width: 768px)': {
-      top: '109px'
+      top: '108px'
     }
   },
   content: {

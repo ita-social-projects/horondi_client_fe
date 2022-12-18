@@ -22,44 +22,39 @@ export const useStyles = makeStyles((theme) => ({
       justifyContent: 'left',
       textAlign: 'center',
       marginLeft: '0px',
-      fontSize: '1rem',
-      '@media (max-width: 553px)': {
-        justifyContent: 'center'
-      }
+      fontSize: '20px'
+    },
+    '@media (max-width: 500px)': {
+      fontSize: '18px'
     }
   }),
   cardBodyFooter: {
-    flex: 1,
-    padding: '50px 20px 20px',
-    '@media screen and (max-width: 768px)': {
-      flex: '1 1 50%'
-    },
-    '@media screen and (max-width: 552px)': {
-      flex: 1
+    '@media (max-width: 768px)': {
+      gridColumn: 1
     }
   },
   iconsBox: {
     display: 'flex',
     flexDirection: 'column',
     paddingTop: '65px',
-    '@media (max-width: 552px)': {
+    '@media (max-width: 768px)': {
       paddingTop: '25px'
     }
   },
   cardTitleFooter: {
-    marginTop: 'auto'
+    marginTop: 'auto',
+    '& h5': {
+      '@media screen and (max-width: 500px)': { fontSize: '14px' }
+    }
   },
   cardTitle: {
-    fontSize: '14px',
-    '@media screen and (max-width: 552px)': {
-      textAlign: 'center'
-    }
+    fontSize: '14px'
   },
   iconsContainer: ({ position, fromSideBar }) => ({
     display: 'flex',
     justifyContent: position,
     marginLeft: fromSideBar ? '6px' : '',
-    '@media screen and (max-width: 552px)': {
+    '@media screen and (max-width: 500px)': {
       justifyContent: fromSideBar ? '' : 'space-around',
       marginLeft: fromSideBar ? '0px' : ''
     },

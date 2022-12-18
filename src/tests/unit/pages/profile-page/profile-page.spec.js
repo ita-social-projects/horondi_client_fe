@@ -8,6 +8,7 @@ import ProfilePage from '../../../../pages/profile-page/profile-page';
 import { mockedUserData } from './profile-page.variables';
 import { theme } from '../../../../components/app/app-theme/app.theme';
 import { SnackBarContextProvider } from '../../../../context/snackbar-context';
+import ThemeContext from '../../../../context/theme-context';
 
 jest.mock('../../../../pages/profile-page/profile-page.styles', () => ({
   useStyles: () => ({})
@@ -24,6 +25,7 @@ const mockSubmit = jest.fn();
 const mockChange = jest.fn();
 const mockBlur = jest.fn();
 const mockReset = jest.fn();
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 const formik = {
   values: {},
@@ -50,7 +52,9 @@ describe('<Profile-page /> component tests', () => {
     const { getByTestId } = render(
       <SnackBarContextProvider>
         <ThemeProvider theme={themeValue}>
-          <ProfilePage />
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <ProfilePage />
+          </ThemeContext.Provider>
         </ThemeProvider>
       </SnackBarContextProvider>
     );
@@ -68,7 +72,9 @@ describe('<Profile-page /> component tests', () => {
     const { getAllByTestId } = render(
       <SnackBarContextProvider>
         <ThemeProvider theme={themeValue}>
-          <ProfilePage />
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <ProfilePage />
+          </ThemeContext.Provider>
         </ThemeProvider>
       </SnackBarContextProvider>
     );
@@ -84,7 +90,9 @@ describe('<Profile-page /> component tests', () => {
     const { getByTestId } = render(
       <SnackBarContextProvider>
         <ThemeProvider theme={themeValue}>
-          <ProfilePage />
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <ProfilePage />
+          </ThemeContext.Provider>
         </ThemeProvider>
       </SnackBarContextProvider>
     );
@@ -101,7 +109,9 @@ describe('<Profile-page /> component tests', () => {
     const { getByTestId } = render(
       <SnackBarContextProvider>
         <ThemeProvider theme={themeValue}>
-          <ProfilePage />
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <ProfilePage />
+          </ThemeContext.Provider>
         </ThemeProvider>
       </SnackBarContextProvider>
     );
@@ -118,7 +128,9 @@ describe('<Profile-page /> component tests', () => {
     const { getByTestId } = render(
       <SnackBarContextProvider>
         <ThemeProvider theme={themeValue}>
-          <ProfilePage />
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <ProfilePage />
+          </ThemeContext.Provider>
         </ThemeProvider>
       </SnackBarContextProvider>
     );

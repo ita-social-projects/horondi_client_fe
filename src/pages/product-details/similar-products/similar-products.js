@@ -77,7 +77,7 @@ const SimilarProducts = ({ cartList, product }) => {
           <Carousel
             className={styles.carousel}
             responsive={RESPONSIVE_PDP}
-            swipeable={false}
+            partialVisible
             autoPlay
             autoPlaySpeed={5000}
             infinite
@@ -86,7 +86,9 @@ const SimilarProducts = ({ cartList, product }) => {
             {imagesList}
           </Carousel>
         </div>
-      ) : null}
+      ) : (
+        <div className={styles.emptySimilarItems} />
+      )}
     </div>
   );
 };

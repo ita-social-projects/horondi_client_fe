@@ -85,19 +85,19 @@ const FooterLists = () => {
   ));
   return (
     <>
-      <div className={styles.cardBody}>
+      <div className={`${styles.cardBody} ${styles.catalogs}`}>
         <div className={styles.cardTitle}>
           <Typography variant='h5'>{t('footer.catalogs')}</Typography>
         </div>
         {categoriesList}
       </div>
-      <div className={styles.cardBody}>
+      <div className={`${styles.cardBody} ${styles.footerInformation}`}>
         <div className={styles.cardTitle}>
           <Typography variant='h5'>{t('footer.footerInformation.title')}</Typography>
         </div>
         {informationList}
       </div>
-      <div className={styles.cardBody}>
+      <div className={`${styles.cardBody} ${styles.contacts}`}>
         <div className={styles.cardTitle}>
           <Typography variant='h5'>{t('footer.contacts')}</Typography>
         </div>

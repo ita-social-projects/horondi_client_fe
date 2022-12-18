@@ -3,9 +3,17 @@ import { Button } from '@material-ui/core';
 import { Loader } from '../../loader/loader';
 import { useStyles } from './auth-form-button.styles';
 
-const AuthFormButton = ({ onclick, disabled = false, children, loading, className, ...props }) => {
+const AuthFormButton = ({
+  onclick,
+  disabled = false,
+  children,
+  loading,
+  className,
+  loaderHeight,
+  ...props
+}) => {
   const styles = useStyles();
-  const loaderSize = '44px';
+  const loaderSize = loaderHeight || '50px';
   const loaderGrid = '1/-1';
 
   if (loading)

@@ -213,10 +213,11 @@ const ProfilePage = () => {
                 fullWidth
                 className={classes.button}
                 type='submit'
-                loading={userLoading}
+                loading={updated}
                 onclick={() => setShouldValidate(true)}
                 data-testid='submitBtn'
                 disabled={buttonDisabled}
+                loaderHeight='58px'
               >
                 {t('profilePage.labels.saveBtnTitle')}
               </AuthButton>

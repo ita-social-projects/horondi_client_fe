@@ -117,7 +117,8 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
               promoCodeId,
               certificateId
             ),
-            currency
+            currency,
+            language
           })
         );
       } else {

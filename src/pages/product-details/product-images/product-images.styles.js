@@ -14,7 +14,11 @@ export const useStyles = makeStyles((theme) => ({
       gridRow: 1,
       display: 'grid',
       gridTemplateColumns: '72% 3% 23%',
-      gap: 0
+      gap: 0,
+      marginBottom: '16px'
+    },
+    '@media (max-width: 500px)': {
+      marginBottom: '8px'
     }
   },
   imageItem: {

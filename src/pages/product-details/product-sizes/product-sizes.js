@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import { useStyles } from './product-sizes.styles';
+import { sortSizes } from '../../../utils/productDetails';
 
 const ProductSizes = ({
   handleSizeChange,
@@ -18,9 +19,10 @@ const ProductSizes = ({
   const styles = useStyles();
 
   const filteredSizes = _.uniqBy(sizes, 'size.name');
+  const sortedSizes = filteredSizes && sortSizes(filteredSizes);
   const selectedStyles = `${styles.sizeButton} ${styles.selectedSize}`;
 
-  const sizeButtons = filteredSizes?.map(({ size }, index) => (
+  const sizeButtons = sortedSizes.map(({ size }, index) => (
     <Button
       disabled={!(size.available && available)}
       key={size._id}

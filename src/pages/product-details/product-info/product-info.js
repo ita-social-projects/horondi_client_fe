@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -12,12 +12,11 @@ import clsx from 'clsx';
 import { useStyles } from './product-info.styles';
 import { IMG_URL } from '../../../configs';
 import Colors from './colors';
-import { SCROLL_BAR_LINKS } from '../constants';
+import { SCROLL_BAR_LINKS , TOAST_SETTINGS } from '../constants';
 import { useCurrency } from '../../../hooks/use-currency';
 import { useWishlist } from '../../../hooks/use-wishlist';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import Toast from '../../../containers/toast';
-import { TOAST_SETTINGS } from '.././constants';
 
 const ProductInfo = ({ product, countComments, currentPrice }) => {
   const [isPatternZoomed, setPatternZoom] = useState(false);
@@ -50,7 +49,7 @@ const ProductInfo = ({ product, countComments, currentPrice }) => {
     <FavouriteBorderIcon data-cy='not-wishful' />
   );
 
-  const wishlistHandler = () => {
+  const wishlistHandler = useCallback(() => {
     if (!isInWishlist(product)) {
       addToWishlist(product);
     } else {
@@ -64,7 +63,7 @@ const ProductInfo = ({ product, countComments, currentPrice }) => {
       dispatch(setToastMessage(t('product.toastMessage.addedToWishList')));
       dispatch(setToastSettings(TOAST_SETTINGS));
     }
-  };
+  }, [addToWishlist, dispatch, isInWishlist, itemInWishlist, product, removeFromWishlist, t]);
 
   const correctCommentsName = (count) => {
     if (count === 0) return t('product.comments.noComments');

@@ -11,7 +11,6 @@ export const useStyles = makeStyles((theme) => ({
       gridRow: 2
     }
   },
-
   sizeButton: {
     width: '36px',
     height: '36px',

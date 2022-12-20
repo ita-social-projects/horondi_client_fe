@@ -112,15 +112,25 @@ const ProductImages = ({ images }) => {
         leftArrowTitle={t('common.prev')}
         rightArrowTitle={t('common.next')}
       />
-      <div className={styles.imagePreviewContainer} data-testid='product-image'>
-        <button className={styles.circle} onClick={prevImg} disabled={primaryImage === 0}>
+      <div className={styles.imagePreviewContainer}>
+        <button
+          className={styles.circle}
+          onClick={prevImg}
+          disabled={primaryImage === 0}
+          data-testid='next-image'
+        >
           <ArrowBackIosRounded />
         </button>
-        <div className={styles.imageOpener} onClick={handlePrimaryImageOpen} />
+        <div
+          className={styles.imageOpener}
+          onClick={handlePrimaryImageOpen}
+          data-testid='product-image'
+        />
         <button
           className={styles.circle}
           onClick={nextImg}
           disabled={primaryImage === initImages.length - 1}
+          data-testid='prev-image'
         >
           <ArrowForwardIosRounded />
         </button>

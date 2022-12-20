@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from '../../../components/app/app-theme/app.theme';
 import ThemeContext from '../../../context/theme-context';
@@ -18,7 +18,14 @@ const images = {
     small: 'small_agl7glgl46ol3ss_large_4052em10l1ahsy27_137.png',
     thumbnail: 'thumbnail_agl7glgl46ol3ss_large_4052em10l1ahsy27_137.png'
   },
-  additional: []
+  additional: [
+    {
+      large: 'large_agl7glgl46ol3ss_large_4052em10l1ahsy27_1488.png',
+      medium: 'medium_agl7glgl46ol3ss_large_4052em10l1ahsy27_1488.png',
+      small: 'small_agl7glgl46ol3ss_large_4052em10l1ahsy27_1488.png',
+      thumbnail: 'thumbnail_agl7glgl46ol3ss_large_4052em10l1ahsy27_1488.png'
+    }
+  ]
 };
 
 describe('ProductImages component tests', () => {
@@ -33,6 +40,29 @@ describe('ProductImages component tests', () => {
   });
   it('Should render ProductImages', async () => {
     const image = await screen.findByTestId('product-image');
+
+    expect(image).toBeInTheDocument();
+  });
+  it('Should change primary image', async () => {
+    const nextButton = await screen.findByTestId('next-image');
+    const prevButton = await screen.findByTestId('prev-image');
+    act(() => {
+      fireEvent.click(nextButton);
+    });
+
+    expect(nextButton).toHaveProperty('disabled');
+
+    act(() => {
+      fireEvent.click(prevButton);
+    });
+
+    expect(prevButton).toHaveProperty('disabled');
+  });
+  it('Should open primary image', async () => {
+    const image = await screen.findByTestId('product-image');
+    act(() => {
+      fireEvent.click(image);
+    });
 
     expect(image).toBeInTheDocument();
   });

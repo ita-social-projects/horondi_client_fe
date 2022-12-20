@@ -12,7 +12,7 @@ import clsx from 'clsx';
 import { useStyles } from './product-info.styles';
 import { IMG_URL } from '../../../configs';
 import Colors from './colors';
-import { SCROLL_BAR_LINKS , TOAST_SETTINGS } from '../constants';
+import { SCROLL_BAR_LINKS, TOAST_SETTINGS } from '../constants';
 import { useCurrency } from '../../../hooks/use-currency';
 import { useWishlist } from '../../../hooks/use-wishlist';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
@@ -63,6 +63,7 @@ const ProductInfo = ({ product, countComments, currentPrice }) => {
       dispatch(setToastMessage(t('product.toastMessage.addedToWishList')));
       dispatch(setToastSettings(TOAST_SETTINGS));
     }
+    setIsOpenedSnackbar(true);
   }, [addToWishlist, dispatch, isInWishlist, itemInWishlist, product, removeFromWishlist, t]);
 
   const correctCommentsName = (count) => {
@@ -142,7 +143,7 @@ const ProductInfo = ({ product, countComments, currentPrice }) => {
         isOpenedSnackbar={isOpenedSnackbar}
         setIsOpenedSnackbar={setIsOpenedSnackbar}
         message={t(
-          `product.toastMessage.${isInWishlist ? 'addedToWishList' : 'removedFromWishList'}`
+          `product.toastMessage.${itemInWishlist ? 'addedToWishList' : 'removedFromWishList'}`
         )}
       />
     </div>

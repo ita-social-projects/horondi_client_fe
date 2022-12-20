@@ -47,25 +47,9 @@ exports[`Product details test Should render product details component 1`] = `
             }
             setSizeIsNotSelectedError={[Function]}
           />
-          <WithStyles(ForwardRef(Tooltip))
-            placement="bottom"
-            title="product.tooltips.addWishful"
-          >
-            <WithStyles(ForwardRef(IconButton))>
-              <Memo(ForwardRef(FavoriteBorderIcon))
-                data-cy="not-wishful"
-                onClick={[Function]}
-              />
-            </WithStyles(ForwardRef(IconButton))>
-          </WithStyles(ForwardRef(Tooltip))>
         </div>
       </div>
     </div>
-    <Toast
-      isOpenedSnackbar={false}
-      message="product.toastMessage.addedToWishList"
-      setIsOpenedSnackbar={[Function]}
-    />
   </WithStyles(ForwardRef(Card))>
 </div>
 `;

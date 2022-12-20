@@ -7,6 +7,11 @@ import { DollarIcon } from '../../../../images/profile-icons';
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
+const mockIsInWishlist = jest.fn();
+const mockAddToWishlist = jest.fn();
+const mockRemoveFromWishlist = jest.fn();
+const mockWishlist = {};
+
 jest.mock('react-redux');
 
 jest.mock('../product-info.styles', () => ({
@@ -17,6 +22,17 @@ jest.mock('../../../../hooks/use-currency', () => ({
   useCurrency: () => ({
     getPriceWithCurrency: mockGetPriceWithCurrency,
     getCurrencySign: mockGetCurrencySign
+  })
+}));
+
+jest.mock('../../../../hooks/use-wishlist', () => ({
+  useWishlist: () => ({
+    isInWishlist: mockIsInWishlist,
+    wishlist: mockWishlist,
+    wishlistOperations: {
+      addToWishlist: mockAddToWishlist,
+      removeFromWishlist: mockRemoveFromWishlist
+    }
   })
 }));
 

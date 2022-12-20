@@ -31,12 +31,12 @@ export const useStyles = makeStyles(() => ({
     '@media screen and (max-width: 768px)': {
       gridTemplateColumns: 'repeat(2,auto)',
       gap: '32px',
-      padding: '28px'
+      padding: '42px 0 22px 22px'
     },
     '@media screen and (max-width: 500px)': {
       gridTemplateColumns: '1fr',
       gap: '24px',
-      padding: '20px'
+      padding: '36px 0 20px 20px'
     }
   },
   icons: {

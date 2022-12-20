@@ -24,7 +24,9 @@ const ProductSizes = ({
       disabled={!(size.available && available)}
       key={size._id}
       className={
-        size._id === currentSize._id && available ? styles.selectedSize : styles.sizeButton
+        size._id === currentSize._id && available
+          ? `${styles.sizeButton} ${styles.selectedSize} `
+          : styles.sizeButton
       }
       onClick={() => handleSizeChange(index)}
     >
@@ -32,26 +34,21 @@ const ProductSizes = ({
     </Button>
   ));
 
-  const checkSizeName = () => {
-    if (currentSize.available) return t(`product.size.${currentSize.name}`);
-    return '-';
-  };
+  const sizeName = currentSize.available ? t(`product.size.${currentSize.name}`) : '-';
 
   return (
-    <div>
-      <div className={styles.container}>
-        <div className={styles.label}>
-          <span>{t('common.size')}: </span>
-          <span>{checkSizeName()}</span>
-        </div>
-        {sizeButtons.length > 0 && (
-          <div className={styles.sizeButtons}>
-            <ButtonGroup disabled={isDeleted} data-cy='sizes'>
-              {sizeButtons}
-            </ButtonGroup>
-          </div>
-        )}
+    <div className={styles.container}>
+      <div className={styles.label}>
+        <span>{t('common.size')}: </span>
+        <span className={styles.sizeName}>{sizeName}</span>
       </div>
+      {sizeButtons.length > 0 && (
+        <div className={styles.sizeButtons}>
+          <ButtonGroup disabled={isDeleted} data-cy='sizes'>
+            {sizeButtons}
+          </ButtonGroup>
+        </div>
+      )}
       {sizeIsNotSelectedError ? <div className={styles.error}>{t('error.errorSize')}</div> : null}
     </div>
   );

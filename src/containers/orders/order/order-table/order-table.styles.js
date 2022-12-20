@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
       fontWeight: theme.typography.h4.fontWeight,
       textAlign: 'center',
       '&:first-child': {
-        alignItems: 'start',
+        alignItems: 'center',
         textAlign: 'left',
         '@media (max-width: 650px)': {
           alignItems: 'center'

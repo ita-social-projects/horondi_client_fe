@@ -25,15 +25,13 @@ export const useStyles = makeStyles((theme) => ({
       border: 'none',
       color: '#C2C2C2',
       height: '0.05rem'
-    },
-    '@media (max-width: 400px)': {
-      padding: '0 1rem',
-      marginTop: '0'
     }
   },
   rate: {
     display: 'inline-flex',
-    marginTop: '24px'
+    marginTop: '24px',
+    '@media (max-width: 750px)': { marginTop: '12px' },
+    '@media (max-width: 500px)': { marginTop: 0 }
   },
   textRate: {
     paddingRight: '8px',
@@ -131,13 +129,13 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     marginTop: 16,
-    marginBottom: 40,
+    marginBottom: '24px',
     '& .MuiButton-root.Mui-disabled': {
       color: theme.palette.button.disabled.color,
       backgroundColor: theme.palette.button.disabled.backgroundColor
     },
-    '@media (max-width: 950px)': {
-      justifyContent: 'space-around'
+    '@media (max-width: 900px)': {
+      gap: '18px'
     }
   },
   commentBtn: {
@@ -164,7 +162,7 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
     fontSize: '24px',
     lineHeight: '32px',
-
+    '@media (max-width: 600px)': { fontSize: '20px', lineHeight: '28px' },
     submit: {
       display: 'flex',
       justifyContent: 'flex-end'

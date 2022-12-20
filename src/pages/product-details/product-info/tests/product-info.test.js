@@ -1,4 +1,5 @@
 import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import i18next from 'i18next';
 import ProductInfo from '../product-info';
 import { props } from './product-info.variables';
@@ -12,7 +13,13 @@ const mockAddToWishlist = jest.fn();
 const mockRemoveFromWishlist = jest.fn();
 const mockWishlist = {};
 
-jest.mock('react-redux');
+const mockDispatch = jest.fn();
+
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useSelector: (selector) => selector(),
+  useDispatch: () => mockDispatch
+}));
 
 jest.mock('../product-info.styles', () => ({
   useStyles: () => ({})
@@ -60,5 +67,15 @@ describe('Product info', () => {
   it('Product info count  = 5', () => {
     const component = shallow(<ProductInfo {...props(true, 5)} />);
     expect(component.find('a').textContent).toBe(i18next.t('product.comments.title'));
+  });
+  it('Should add product to wishlist', () => {
+    render(<ProductInfo {...props(true, 1)} />);
+    const button = screen.getByTestId('addToWishlist');
+    fireEvent.click(button);
+
+    expect(mockDispatch).toHaveBeenCalledWith({
+      payload: 'product.toastMessage.addedToWishList',
+      type: 'SET_TOAST_MESSAGE'
+    });
   });
 });

@@ -86,6 +86,7 @@ const ProductInfo = ({ product, countComments, currentPrice }) => {
             disabled={product.isDeleted}
             className={styles.heart}
             onClick={wishlistHandler}
+            data-testid='addToWishlist'
           >
             {addToWishlistIcon}
           </IconButton>

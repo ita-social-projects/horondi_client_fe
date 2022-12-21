@@ -4,16 +4,14 @@ const titleStyles = {
   textAlign: 'center',
   fontStyle: 'normal',
   fontWeight: 'normal',
-  fontSize: '29px'
+  fontSize: '32px'
 };
 const buttonStyles = {
-  height: '52px',
-  width: '255px',
-  fontStyle: 'normal',
   fontWeight: '600',
   fontSize: '14px',
-  lineHeight: '20px',
-  borderRadius: '4px'
+  borderRadius: '4px',
+  padding: '14px 72px',
+  '@media (max-width: 600px)': { padding: '12px 48px' }
 };
 
 export const useStyles = makeStyles(({ palette }) => ({
@@ -28,11 +26,10 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   emptyTitle: {
     ...titleStyles,
-    color: palette.textColor
-  },
-  image: {
-    height: '182px',
-    width: '167px'
+    color: palette.textColor,
+    '@media (max-width: 600px)': {
+      fontSize: '28px'
+    }
   },
   root: {
     height: '611px',
@@ -40,10 +37,17 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
-    alignItems: 'center'
+    alignItems: 'center',
+    '@media (max-width: 600px)': {
+      height: '530px'
+    }
   },
   defaultBackpackIcon: {
     width: '167px',
-    height: '182px'
+    height: '182px',
+    '@media (max-width: 600px)': {
+      width: '137px',
+      height: '152px'
+    }
   }
 }));

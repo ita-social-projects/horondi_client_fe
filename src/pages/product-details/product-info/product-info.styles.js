@@ -1,133 +1,126 @@
 import { makeStyles } from '@material-ui/core/styles';
+const notAvaliable = { padding: '6px', fontSize: '14px', lineHeight: '20px', borderRadius: '4px' };
 
 export const useStyles = makeStyles((theme) => ({
+  common: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+    '@media (max-width: 500px)': {
+      gap: '12px'
+    }
+  },
   head: {
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '15px',
-    '@media (max-width: 600px)': {
-      flexDirection: 'column',
-      alignItems: 'center'
-    },
-    '@media (max-width: 1150px)': {
-      flexDirection: 'row'
+    alignItems: 'flex-end',
+    gap: '24px',
+    '@media (max-width: 900px)': { gap: '16px', flexWrap: 'wrap' },
+    '@media (max-width: 500px)': {
+      order: '-2'
     }
   },
-  rate: {
-    display: 'block'
-  },
-
   title: {
-    fontSize: '30px',
+    fontSize: '28px',
     lineHeight: '41px',
-    fontWeight: 600
-  },
-  description: {
-    textAlign: 'left',
-    '@media (max-width: 400px)': {
-      padding: '0'
-    }
-  },
-  priceContainer: {
-    marginBottom: '16px'
-  },
-  notAvailable: {
-    textAlignLast: 'center',
-    color: theme.palette.red,
-    background: theme.palette.lightPing,
-    padding: '6px',
-    fontSize: '16px',
-    lineHeight: '20px',
-    letterSpacing: '0.06em',
-    borderRadius: '4px'
+    fontWeight: 600,
+    '@media (max-width: 900px)': { fontSize: '26px' },
+    '@media (max-width: 750px)': { fontSize: '23px' }
   },
   isDeleted: {
-    textAlignLast: 'center',
+    ...notAvaliable,
     color: theme.palette.backgroundColor,
-    background: theme.palette.button.disabled.backgroundColor,
-    padding: '6px',
-    fontSize: '16px',
-    lineHeight: '20px',
-    letterSpacing: '0.06em',
-    borderRadius: '4px'
+    background: theme.palette.button.disabled.backgroundColor
   },
-  price: {
+  notAvailable: {
+    ...notAvaliable,
+    color: theme.palette.red,
+    background: theme.palette.lightPing
+  },
+  rate: {
     display: 'flex',
-    alignItems: 'center',
-    fontWeight: 700,
-    fontSize: '24px',
-    lineHeight: '33px',
+    flexDirection: 'column',
+    gap: '4px',
+    '@media (max-width: 750px)': { flexDirection: 'row', alignItems: 'flex-end', gap: '12px' }
+  },
+  comments: {
+    color: theme.palette.textColor,
+    textDecorationLine: 'underline'
+  },
+  text: {
+    '& p': { color: theme.palette.textColor, margin: '0', lineHeight: '22px', fontSize: '14px' }
+  },
+  priceContainer: {
+    fontWeight: 600,
+    fontSize: '26px',
     color: theme.palette.textColor,
     '& svg': {
-      color: theme.palette.textColor,
-      fontSize: '24px',
-      lineHeight: '33px'
+      verticalAlign: 'middle',
+      fontSize: '25px',
+      marginBottom: '2px',
+      '@media (max-width: 750px)': { fontSize: '23px' },
+      '@media (max-width: 500px)': { fontSize: '22px', marginBottom: '4px' }
+    },
+    '@media (max-width: 750px)': {
+      position: 'absolute',
+      top: 0,
+      right: '18px',
+      fontSize: '24px'
+    },
+    '@media (max-width: 500px)': {
+      position: 'static',
+      fontSize: '22px',
+      margin: '-4px',
+      order: '-1'
     }
   },
   look: {
-    wordSpacing: '0.2rem',
-    '& img': {
-      display: 'block'
+    display: 'flex',
+    gap: '48px',
+    fontSize: '15px',
+    '@media (max-width: 750px)': { gap: '24px' },
+    '@media (max-width: 500px)': {
+      fontSize: '14px',
+      alignItems: 'flex-end',
+      gap: '12px'
     }
   },
   colorAndPatern: {
     position: 'relative',
-    margin: '20px 0',
-    display: 'block',
-    alignItems: 'center'
-  },
-  subtitle: {
-    alignSelf: 'center',
-    fontSize: '14px',
-    '@media (max-width: 600px)': {
-      justifyContent: 'center'
-    }
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    gap: '6px'
   },
   subtitleBold: {
-    fontWeight: '700'
-  },
-  details: {
-    '& div': {
-      marginBottom: '0.3rem'
-    }
-  },
-  text: {
-    color: theme.palette.textColor,
-    margin: '16px 0',
-    letterSpacing: '0.0125em',
-    '& p': {
-      lineHeight: '20px',
-      fontSize: '14px',
-      display: 'inline',
-      margin: '0'
-    }
+    fontWeight: 600
   },
   circle: {
-    width: '32px',
-    height: '32px',
+    width: '40px',
+    height: '40px',
     borderRadius: '50%',
     transition: 'border-radius .2s'
   },
-  comments: {
-    color: theme.palette.textColor,
-    display: 'block',
-    textDecorationLine: 'underline'
-  },
   patternButton: {
-    position: 'absolute',
+    background: 'inherit',
+    textAlign: 'left',
     padding: 0,
-    display: 'block',
-    backgroundColor: 'transparent',
     border: 'none',
-    cursor: 'zoom-in',
-    zIndex: 10
+    cursor: 'zoom-in'
   },
   zoomedPattern: {
+    position: 'absolute',
     width: 'auto',
     height: 'auto',
     maxWidth: '200px',
     borderRadius: 0,
-    cursor: 'zoom-out'
+    cursor: 'zoom-out',
+    zIndex: 10
+  },
+  heart: { padding: 0, alignSelf: 'center', '& svg': { fontSize: '22px' } },
+  subtitle: {
+    '@media (max-width: 500px)': {
+      display: 'flex',
+      flexDirection: 'column'
+    }
   }
 }));

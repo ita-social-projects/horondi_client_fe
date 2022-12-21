@@ -21,7 +21,7 @@ const EmptyOrder = ({ emptyTitle, buttonTitle, currentPageText, name }) => {
         currentPageText={currentPageText}
       />
       <div className={styles.root} data-cy={name}>
-        <Typography data-testid='title' className={styles.title} variant='h2'>
+        <Typography data-testid='title' className={styles.emptyTitle} variant='h2'>
           {emptyTitle}
         </Typography>
         <BackpackIcon className={styles.defaultBackpackIcon} />

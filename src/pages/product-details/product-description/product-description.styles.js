@@ -2,8 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
   details: {
-    flex: '0 1 50%',
-    paddingTop: '50px',
+    gridColumn: 2,
+    gridRow: 2,
+    '@media (max-width: 900px)': {
+      gridColumn: '1/3',
+      gridRow: 3
+    },
     '@media (max-width: 600px)': {
       paddingTop: '10px'
     }

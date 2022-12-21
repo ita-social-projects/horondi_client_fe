@@ -51,7 +51,7 @@ const SimilarProducts = ({ cartList, product }) => {
           <span>{currencySign} </span>
         </div>
       ) : (
-        <div> {t('product.sizeNotAvailable')} </div>
+        <div className={styles.sizeNotAvailable}> {t('product.unavailable')} </div>
       );
 
     return (

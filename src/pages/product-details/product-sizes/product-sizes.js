@@ -19,15 +19,15 @@ const ProductSizes = ({
   const styles = useStyles();
 
   const filteredSizes = _.uniqBy(sizes, 'size.name');
-  const sortedSizes = filteredSizes && sortSizes(filteredSizes);
+  const sortedSizes = sortSizes(filteredSizes);
   const selectedStyles = `${styles.sizeButton} ${styles.selectedSize}`;
 
-  const sizeButtons = sortedSizes.map(({ size }, index) => (
+  const sizeButtons = sortedSizes.map(({ size }) => (
     <Button
       disabled={!(size.available && available)}
       key={size._id}
       className={size._id === currentSize._id && available ? selectedStyles : styles.sizeButton}
-      onClick={() => handleSizeChange(index)}
+      onClick={() => handleSizeChange(size._id)}
     >
       {size.name}
     </Button>

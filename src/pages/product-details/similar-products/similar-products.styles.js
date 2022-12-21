@@ -26,8 +26,12 @@ export const useStyles = makeStyles((theme) => ({
   price: {
     display: 'flex',
     whiteSpace: 'nowrap',
+    '& svg': { fontSize: '18px' },
     '& span': {
       paddingTop: '2px'
     }
+  },
+  sizeNotAvailable: {
+    fontSize: '12px'
   }
 }));

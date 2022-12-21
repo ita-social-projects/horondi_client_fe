@@ -53,7 +53,7 @@ const ProductListItem = ({ product }) => {
         <div className={styles.productItem}>
           {product.available ? '' : <div className={styles.unavailableContainer} />}
           <div className={styles.name}>
-            <StarRating size='small' readOnly rate={product.rate} />
+            <StarRating size='small' readOnly rate={product.rate} precision={1} />
             <div>
               <span className={styles.title}>
                 {t(`${product.translationsKey}.name`)}

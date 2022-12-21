@@ -13,7 +13,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     margin: '0px 12px',
     padding: '0px',
     position: 'fixed',
-    zIndex: '900',
+    zIndex: 1001,
     bottom: '30px',
     top: 'auto',
     height: '60px',
@@ -25,7 +25,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     transition: 'background 0.3s',
     '@media (max-width: 768px)': {
       boxShadow: ' 0 0 5px white',
-      zIndex: 900,
       left: `calc(100vw - 96px)`
     },
     '&:hover': {
@@ -40,7 +39,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     margin: '0px 12px',
     padding: '0px',
     position: 'fixed',
-    zIndex: '900',
+    zIndex: '1001',
     bottom: '110px',
     top: 'auto',
     height: '60px',
@@ -60,7 +59,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '60px',
     background: 'black',
     position: 'fixed',
-    zIndex: '900',
+    zIndex: '1001',
     borderRadius: '50%',
     marginBottom: '20px',
     cursor: 'pointer',
@@ -79,7 +78,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: '20px',
     cursor: 'pointer',
     position: 'fixed',
-    zIndex: '900'
+    zIndex: '1001'
   }),
   mailForm: {
     position: 'fixed',
@@ -90,27 +89,28 @@ export const useStyles = makeStyles(({ palette }) => ({
     top: '145px',
     bottom: '10%',
     minWidth: '275px',
-    width: '320px',
+    width: '340px',
     height: 'fit-content',
     borderRadius: '4px',
-    padding: '16px 4px 4px 4px',
-    zIndex: 899,
+    padding: '16px ',
+    zIndex: 1002,
     overflow: 'auto',
     background: palette.backgroundColor,
     boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)',
-    '@media (max-width: 768px)': {
+    '@media (max-width: 600px)': {
       width: '70%',
       right: '15%'
     },
-    '@media (max-width: 420px)': {
+    '@media (max-width: 450px)': {
       width: '90%',
       right: '5%'
     }
   },
   cancelIcon: {
     position: 'absolute',
-    top: '6px',
-    right: '4px',
+    top: '10px',
+    right: '10px',
+    '& svg': { height: '20px', width: '20px' },
     '&:hover': {
       cursor: 'pointer'
     }
@@ -133,8 +133,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: '10px'
   },
   mailTitle: {
-    marginTop: '5%',
-    marginBottom: '6%',
+    margin: '14px 0',
     fontSize: '1.3rem'
   },
   logo: {
@@ -150,8 +149,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: '20px',
     width: '90%',
     background: palette.button.normal.backgroundColor,
-    fontSize: '1.5em',
-    padding: 10,
+    fontSize: '1em',
+    padding: '12px',
     color: palette.button.normal.color,
     '& a': {
       color: 'inherit'
@@ -159,10 +158,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     '&:hover': {
       backgroundColor: palette.button.hover.backgroundColor,
       color: palette.button.hover.color
-    },
-    '@media (max-width: 768px)': {
-      fontSize: '1em',
-      padding: 5
     }
   },
   dataInput: {

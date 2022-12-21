@@ -8,7 +8,6 @@ import phoneNumberIcon from '../../images/footer-icons/phone.svg';
 import emailIcon from '../../images/footer-icons/email.svg';
 import locationIcon from '../../images/footer-icons/location.svg';
 
-import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 import { useStyles } from './footer-lists.styles';
 import routes from '../../configs/routes';
 import { URL_QUERIES_NAME, countPerPage } from '../../configs';
@@ -19,7 +18,7 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { CategoriesContext } from '../../context/categories/categories-context';
 import { ITEMS_PER_PAGE } from '../../pages/product-list-page/constants';
 
-const { pathToContacts } = routes;
+const { pathToContacts, pathToCategory } = routes;
 
 const FooterLists = () => {
   const styles = useStyles();
@@ -36,14 +35,12 @@ const FooterLists = () => {
 
   const countPerPageValue = ITEMS_PER_PAGE[0].value;
 
-  const categoriesList = categories.map(({ _id, name, translationsKey }) => (
+  const categoriesList = categories.map(({ _id, translationsKey }) => (
     <div key={_id}>
       <Typography variant='subtitle2'>
         <Link
           className={styles.cardLink}
-          to={`/${getCategoryURL(name)}?${URL_QUERIES_NAME.categoryFilter}=${_id}&${
-            URL_QUERIES_NAME.page
-          }=${URL_QUERIES_NAME.defaultPage}&${countPerPage}=${countPerPageValue}`}
+          to={`${pathToCategory}?${URL_QUERIES_NAME.categoryFilter}=%2C${_id}&${URL_QUERIES_NAME.page}=${URL_QUERIES_NAME.defaultPage}&${countPerPage}=${countPerPageValue}`}
         >
           {t(`${translationsKey}.name`)}
         </Link>

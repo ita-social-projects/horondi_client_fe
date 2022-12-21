@@ -41,16 +41,14 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '0px 0px 5px 5px',
     borderTop: `1px solid ${theme.palette.cart.borderColor}`
   },
-  rating: {
-    width: '350px',
-    height: '20px'
+  rate: {
+    width: '50%',
+    textAlign: 'end',
+    marginLeft: 'auto'
   },
   priceOfSimilarProducts: {
     display: 'flex',
     whiteSpace: 'nowrap',
     alignItems: 'center'
-  },
-  emptyStar: {
-    color: '#ffb400'
   }
 }));

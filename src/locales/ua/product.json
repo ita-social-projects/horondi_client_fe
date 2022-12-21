@@ -16,13 +16,17 @@
     "measurement": "Габарити"
   },
   "weight": {
-    "weightLabel": "Вага(кг)",
-    "volumeLabel": "Об'єм(л)"
+    "weightLabel": "Вага",
+    "volumeLabel": "Об'єм",
+    "heightLabel": "Висота",
+    "widthLabel": "Ширина",
+    "depthLabel": "Глибина"
   },
+  "measurment": { "kg": "кг", "l": "л", "sm": "см" },
   "priceFrom": "від ",
   "sizeNotAvailable": "Товар недоступний",
   "isDeleted": "Знято з виробництва",
-  "unavailable": "немає в наявності",
+  "unavailable": "Немає в наявності",
   "pdpButtons": {
     "cartButton": "Додати до кошика",
     "buyButton": "Купити зараз",

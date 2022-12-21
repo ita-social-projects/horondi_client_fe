@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: '12px',
-    '@media (max-width: 750px)': { position: 'absolute', top: '40px', right: '12px' },
+    '@media (max-width: 750px)': { position: 'absolute', top: '54px', right: '4px' },
     '@media (max-width: 500px)': {
       position: 'static',
       gridRow: 2
@@ -31,13 +31,13 @@ export const useStyles = makeStyles((theme) => ({
   },
   label: {
     fontSize: '15px',
-    '@media (max-width: 600px)': {
-      justifyContent: 'center'
+    '@media (max-width: 750px)': {
+      textAlign: 'end'
     },
     '@media (max-width: 500px)': {
+      textAlign: 'start',
       fontSize: '14px'
-    },
-    marginRight: '10px'
+    }
   },
   sizeName: {
     fontWeight: '600'

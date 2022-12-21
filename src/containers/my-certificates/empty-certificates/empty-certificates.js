@@ -28,10 +28,12 @@ const EmptyCertificates = () => {
         currentPageText='certificate.title'
       />
       <div className={styles.root} data-cy='empty-certificates-item'>
-        <Typography className={styles.title} variant='h2'>
+        <Typography className={styles.emptyTitle} variant='h2'>
           {t('certificate.emptyTitle')}
         </Typography>
-        <EmptyOrderImg alt='empty certificate icon' />
+        <div className={styles.defaultCertificateIcon}>
+          <EmptyOrderImg alt='empty certificate icon' />
+        </div>
         <Link to={pathToGiftСertificate}>
           <Button className={styles.button} variant='contained'>
             {t('certificate.buy')}

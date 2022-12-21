@@ -8,6 +8,7 @@ import { RESPONSIVE_CATEGORIES } from '../constants';
 
 import { CategoriesContext } from '../../../context/categories/categories-context';
 import { useStyles } from './categories-list.style';
+import routes from '../../../configs/routes';
 
 import './categories-carousel.css';
 import { ITEMS_PER_PAGE } from '../../product-list-page/constants';
@@ -18,13 +19,12 @@ const CategoriesList = () => {
   const { t } = useTranslation();
 
   const countPerPageValue = ITEMS_PER_PAGE[0].value;
+  const { pathToCategory } = routes;
 
   const categoriesList = categories.map(({ _id, name, images, translationsKey }) => (
     <CategoryItem
       key={_id}
-      categoryUrl={`${getCategoryURL(name)}?${URL_QUERIES_NAME.categoryFilter}=${_id}&${
-        URL_QUERIES_NAME.page
-      }=${URL_QUERIES_NAME.defaultPage}&${countPerPage}=${countPerPageValue}`}
+      categoryUrl={`${pathToCategory}?${URL_QUERIES_NAME.categoryFilter}=%2C${_id}&${countPerPage}=${countPerPageValue}&${URL_QUERIES_NAME.page}=${URL_QUERIES_NAME.defaultPage}`}
       categoryName={t(`${translationsKey}.name`)}
       categoryImageUrl={images.large}
     />
@@ -46,14 +46,6 @@ const CategoriesList = () => {
       </div>
     </div>
   );
-};
-
-export const getCategoryURL = (category) => {
-  const [filteredCategory] = category.filter((item) => item.lang === 'en');
-
-  if (filteredCategory.value) {
-    return `catalog/${filteredCategory.value.toLowerCase()}`;
-  }
 };
 
 export default CategoriesList;

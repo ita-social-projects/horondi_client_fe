@@ -93,19 +93,16 @@ const ProductInfo = ({ product, countComments, currentPrice }) => {
         </Tooltip>
         {productStatus}
       </div>
-      <Tooltip className={styles.rate} title={rate.toFixed(2)} placement='left'>
-        <span>
-          <Rating value={rate} readOnly precision={0.1} />
-          <a href={SCROLL_BAR_LINKS} className={styles.comments}>
-            {countComments.count ? countComments.count : null}{' '}
-            {correctCommentsName(countComments.count)}
-          </a>
-        </span>
-      </Tooltip>
+      <span className={styles.rate}>
+        <Rating value={rate} readOnly precision={0.1} />
+        <a href={SCROLL_BAR_LINKS} className={styles.comments}>
+          {countComments.count ? countComments.count : null}{' '}
+          {correctCommentsName(countComments.count)}
+        </a>
+      </span>
       <div className={styles.text}>
         {shortProductInfo(parse(t(`${translationsKey}.description`)))}
       </div>
-
       {currentPrice ? (
         <div className={styles.priceContainer}>
           <span data-cy='price' className={styles.price}>

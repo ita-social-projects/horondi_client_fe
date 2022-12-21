@@ -12,13 +12,13 @@ const promoInput = {
   fontWeight: '400',
   fontSize: '16px',
   lineHeight: '24px',
-  '@media (max-width: 425px)': {
+  '@media (max-width: 450px)': {
     fontSize: '12px'
   }
 };
 const totalWrapper = {
   display: 'flex',
-  gap: '20px',
+  gap: '28px',
   flexDirection: 'column',
   alignItems: 'center',
   fontWeight: '600',
@@ -50,10 +50,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   promoWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '20px',
-    '@media (max-width: 650px)': {
-      gap: '12px'
-    },
+    gap: '6px',
     '& >div': {
       display: 'flex',
       gap: '8px'
@@ -67,6 +64,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     '&:hover': {
       backgroundColor: palette.button.hover.backgroundColor,
       color: palette.button.hover.color
+    },
+
+    '@media (max-width: 450px)': {
+      fontSize: '12px'
     }
   },
   shoppingButton: {
@@ -77,6 +78,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%',
     '& span': {
       fontWeight: 600
+    },
+    '@media (max-width: 450px)': {
+      fontSize: '12px'
     }
   },
   ordersButton: {
@@ -94,8 +98,9 @@ export const useStyles = makeStyles(({ palette }) => ({
       padding: '14px 90px'
     },
     '@media (max-width: 450px)': {
-      padding: '14px 65px',
-      marginBottom: '12px'
+      padding: '14px 70px',
+      marginBottom: '12px',
+      fontSize: '12px'
     }
   },
   orderWrapper: {

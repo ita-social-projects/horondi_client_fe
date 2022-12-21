@@ -58,13 +58,14 @@ export const useStyles = makeStyles(({ palette }) => ({
     columnGap: '8px',
     fontSize: '16px',
     marginTop: '5px',
+    minHeight: '38px',
     textTransform: 'capitalize',
     '@media (max-width: 750px)': { fontSize: '14px' }
   },
   unavailableText: {
     fontSize: '10px',
     lineHeight: '28px',
-    textTransform: 'capitalize'
+    textTransform: 'none'
   },
   price: {
     display: 'flex',

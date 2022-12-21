@@ -13,8 +13,8 @@ export const useStyles = makeStyles((theme) => ({
       gridColumn: '1/3',
       gridRow: 1,
       display: 'grid',
-      gridTemplateColumns: '72% 3% 23%',
-      gap: 0,
+      gridTemplateColumns: '74% 23.5%',
+      gap: '2.5%',
       marginBottom: '16px'
     },
     '@media (max-width: 500px)': {
@@ -69,7 +69,8 @@ export const useStyles = makeStyles((theme) => ({
     aspectRatio: 1,
     background: `url(${imageUrl}) center center / cover no-repeat`,
     maxHeight: '520px',
-    maxWidth: '520px'
+    maxWidth: '520px',
+    '@media (max-width: 750px)': { maxHeight: '528px', maxWidth: '528px' }
   }),
   sideImage: {
     width: '100%',
@@ -87,10 +88,10 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 900px)': { gap: '20px' },
     '@media (max-width: 750px)': {
       flexDirection: 'column',
-      gridColumn: 3,
+      gridColumn: 2,
       gap: '2%',
       alignItems: 'start',
-      maxWidth: '156px'
+      maxWidth: '173px'
     }
   },
   circle: {

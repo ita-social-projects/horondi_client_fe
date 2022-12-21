@@ -70,8 +70,8 @@ const ProductDetails = ({ match }) => {
     setCountComments(count);
   };
 
-  const handleSizeChange = (selectedPosition) => {
-    const selectedSize = sizes[selectedPosition];
+  const handleSizeChange = (id) => {
+    const selectedSize = sizes.find((el) => el.size._id === id);
     setProductToSend({
       ...productToSend,
       id: Date.now().toString(),

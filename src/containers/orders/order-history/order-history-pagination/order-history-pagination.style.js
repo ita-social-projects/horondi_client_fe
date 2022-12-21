@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
       }
     },
     '& .Mui-selected': {
-      border: ' 1px solid'
+      border: '1px solid'
     },
     '@media (max-width:500px)': {
       padding: '1rem 0'

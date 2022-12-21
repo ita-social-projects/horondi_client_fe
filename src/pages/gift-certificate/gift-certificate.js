@@ -117,6 +117,7 @@ const GiftCertificate = () => {
   ));
 
   const certificateText = (index) => t(`certificate.certificateRules.${index}`);
+  const disableSubmit = findCheckedCertificates(checkboxesArr);
 
   const certificateRulesContent = certificateRules.map((_, index) => (
     <React.Fragment key={index}>
@@ -156,6 +157,7 @@ const GiftCertificate = () => {
                 className={styles.purchaseButton}
                 fullWidth
                 type='submit'
+                disabled={!disableSubmit.length}
               >
                 {t('buttons.buyButton')}
               </Button>

@@ -41,8 +41,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   promoInput: {
     '&, &::placeholder': {
-      ...promoInput,
-      border: `1px solid ${palette.cart.borderColor}`
+      ...promoInput
     }
   },
   textField: {

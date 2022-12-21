@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   paginationDiv: {
     display: 'flex',
     justifyContent: 'center',
@@ -15,8 +15,8 @@ export const useStyles = makeStyles(() => ({
         }
       }
     },
-    '& Mui-selected': {
-      backgroundColor: 'black'
+    '& .Mui-selected': {
+      border: '1px solid'
     },
     '@media (max-width:500px)': {
       padding: '1rem 0'

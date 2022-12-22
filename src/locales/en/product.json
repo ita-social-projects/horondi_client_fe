@@ -70,6 +70,7 @@
     "unregisteredTip": "You should be logged in to leave rate",
     "registeredTip": "You should buy the product to leave rate",
     "successfulTip": "Set rate",
+    "emptyComments": "There are no reviews for this product yet.",
     "loadMore": "SHOW MORE",
     "hideBtn": "Hide comments"
   },

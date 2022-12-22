@@ -155,7 +155,11 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   priceNotification: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    '& svg': {
+      marginRight: '5px',
+      fontSize: '20px'
+    }
   },
   orderTable: {
     flexGrow: 1,

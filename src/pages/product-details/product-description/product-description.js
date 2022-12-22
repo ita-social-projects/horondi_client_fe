@@ -42,12 +42,24 @@ const ProductDescription = ({ product, currentSize }) => {
         tittle: Object.keys(currentSize).length > 0 && t('product.productDescription.measurement'),
         details: [
           {
-            subtitle: t('product.weight.volumeLabel'),
-            description: currentSize?.volumeInLiters
+            subtitle: t('product.weight.heightLabel'),
+            description: currentSize && `${currentSize.heightInCm} ${t('product.measurment.sm')}`
+          },
+          {
+            subtitle: t('product.weight.widthLabel'),
+            description: currentSize && `${currentSize.widthInCm} ${t('product.measurment.sm')}`
+          },
+          {
+            subtitle: t('product.weight.depthLabel'),
+            description: currentSize && `${currentSize.depthInCm} ${t('product.measurment.sm')}`
           },
           {
             subtitle: t('product.weight.weightLabel'),
-            description: currentSize?.weightInKg
+            description: currentSize && `${currentSize.weightInKg} ${t('product.measurment.kg')}`
+          },
+          {
+            subtitle: t('product.weight.volumeLabel'),
+            description: currentSize && `${currentSize.volumeInLiters} ${t('product.measurment.l')}`
           }
         ]
       }

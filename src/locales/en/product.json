@@ -17,12 +17,16 @@
     "measurement": "Measurement"
   },
   "weight": {
-    "weightLabel": "Weight(kg)",
-    "volumeLabel": "Volume(L)"
+    "weightLabel": "Weight",
+    "volumeLabel": "Volume",
+    "heightLabel": "Height",
+    "widthLabel": "Width",
+    "depthLabel": "Depth"
   },
+  "measurment": { "kg": "kg", "l": "L", "sm": "sm" },
   "priceFrom": "from ",
   "sizeNotAvailable": "Product isn't available",
-  "unavailable": "unavailable",
+  "unavailable": "Unavailable",
   "pdpButtons": {
     "cartButton": "Add to cart",
     "buyButton": "Buy now",

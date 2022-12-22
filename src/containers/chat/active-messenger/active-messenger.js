@@ -103,7 +103,6 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           label={t('common.name')}
           variant='outlined'
           name='firstName'
-          size='small'
           rows={1}
           error={!firstNameValidated && shouldValidate}
           helperText={helperTextForName}
@@ -119,7 +118,6 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           label={t('common.email')}
           variant='outlined'
           name='email'
-          size='small'
           rows={1}
           error={!emailValidated && shouldValidate}
           helperText={handleHelperText(emailValidated, shouldValidate, 'profile.email')}
@@ -135,7 +133,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           variant='outlined'
           name='message'
           multiline
-          rows={6}
+          rows={8}
           inputProps={{ maxLength: 500 }}
           error={!messageValidated && shouldValidate}
           helperText={handleHelperText(messageValidated, shouldValidate, 'profile.message')}

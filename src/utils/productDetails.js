@@ -34,7 +34,7 @@ export const getFullProducts = (similarProducts, cartList) => {
   return productsInCart;
 };
 
-export const sortSizes = (unOrderedSizes) => {
+export const sortSizes = (unOrderedSizes = []) => {
   const listOfSizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'];
   const orderedSizes = [];
   unOrderedSizes.forEach((el) => {

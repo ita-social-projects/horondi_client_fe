@@ -196,7 +196,7 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
               inputRef={certificateAndPromoInput}
               disabled={Boolean(certificate || promoCode)}
               error={promoCodeError || certificateError}
-              helperText={errorHandler()}
+              helperText={errorHandler() || ' '}
             />
             <Button
               data-testid='promoButton'

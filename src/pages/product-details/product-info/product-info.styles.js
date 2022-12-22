@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+
 const notAvaliable = { padding: '6px', fontSize: '14px', lineHeight: '20px', borderRadius: '4px' };
 
 export const useStyles = makeStyles((theme) => ({
@@ -63,7 +64,7 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 750px)': {
       position: 'absolute',
       top: 0,
-      right: '18px',
+      right: '4px',
       fontSize: '24px'
     },
     '@media (max-width: 500px)': {

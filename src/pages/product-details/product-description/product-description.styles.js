@@ -25,6 +25,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     textTransform: 'capitalize'
   },
   text: {
+    lineHeight: '18px',
     '& p': {
       display: 'inline',
       fontSize: '14px',

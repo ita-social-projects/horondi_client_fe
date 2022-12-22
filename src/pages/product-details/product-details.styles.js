@@ -55,7 +55,7 @@ export const useStyles = makeStyles((theme) => ({
       gridRow: 1,
       gridColumn: 2,
       alignSelf: 'start',
-      marginTop: '128px',
+      marginTop: '140px'
     },
     '@media (max-width: 500px)': {
       margin: 0,

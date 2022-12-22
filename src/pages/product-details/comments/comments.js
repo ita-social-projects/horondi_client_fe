@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Rating from '@material-ui/lab/Rating';
@@ -102,10 +102,15 @@ const Comments = ({ productId, checkCountComments }) => {
     setCurrentLimit((prev) => prev + 10);
   };
 
-  const handleCommentChange = (e) => {
-    const value = e.target.value.replace(formRegExp.link, '');
-    setFieldValue(commentFields.text.name, value);
-  };
+  const handleRatingChange = useCallback((_e, newRate) => !!newRate && setRate(newRate), []);
+
+  const handleCommentChange = useCallback(
+    (e) => {
+      const value = e.target.value.replace(formRegExp.link, '');
+      setFieldValue(commentFields.text.name, value);
+    },
+    [setFieldValue]
+  );
 
   return (
     <div className={styles.comment} id='comment'>
@@ -118,7 +123,7 @@ const Comments = ({ productId, checkCountComments }) => {
             disabled={!userData}
             name='edit-rate'
             value={rate}
-            onChange={(_e, newRate) => !!newRate && setRate(newRate)}
+            onChange={handleRatingChange}
           />
         </span>
       </Tooltip>

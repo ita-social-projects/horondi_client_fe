@@ -59,9 +59,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     '@media (max-width: 450px)': {
       fontSize: '1.3em'
-    },
-    '&:hover': {
-      opacity: 0
     }
   },
   modelItemImage: {
@@ -77,7 +74,7 @@ export const useStyles = makeStyles((theme) => ({
       height: '100%',
       '@media (max-width: 1150px)': {
         height: '90%',
-        marginLeft: '-10px',
+        marginLeft: '-10px'
       },
       '@media (max-width: 950px)': {
         height: '80%',
@@ -109,7 +106,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     '@media (max-width: 1010px)': {
       fontSize: '10px',
-      bottom: 10,
+      bottom: 10
     }
   }
 }));

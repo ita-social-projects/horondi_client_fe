@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     boxShadow: theme.palette.carouselItem.shadow.boxShadow,
     borderRadius: '6px',
-    color: theme.palette.textColor,
+    color: theme.palette.black,
     outline: '1px solid transparent',
     transition: 'all 0.2s ease-in-out',
     '&:hover, &:active': {
@@ -63,6 +63,6 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '600',
     lineHeight: '28px',
     letterSpacing: '0.0015em',
-    color: theme.palette.textColor
+    color: theme.palette.black
   }
 }));

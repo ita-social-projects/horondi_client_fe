@@ -42,100 +42,42 @@ export const useStyles = makeStyles((theme) => ({
   },
   form: {
     marginTop: '15px',
-    '& *': {
-      '& .MuiOutlinedInput-root': {
-        '& fieldset': {
-          borderColor: theme.palette.comments.formBorder.borderColor
-        },
-        '&.Mui-focused fieldset': {
-          borderColor: theme.palette.textColor
-        }
+    display: 'flex',
+    flexDirection: 'column',
+
+    '& .MuiOutlinedInput-inputMultiline': {
+      fontWeight: 400,
+      fontSize: '16px'
+    },
+    '& .MuiFormHelperText-root': {
+      color: 'tomato',
+      marginLeft: '15px'
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: theme.palette.comments.formBorder.borderColor
       },
-      '& label.Mui-focused': {
-        color: theme.palette.textColor
-      },
-      '& label': {
-        color: 'gray',
-        transform: 'translate(14px, 14px) scale(1)'
-      },
-      '& div > input': {
-        padding: '13px 16px',
-        fontSize: '0.9rem'
-      },
-      '& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline': {
-        borderColor: 'tomato'
-      },
-      '& .MuiFormLabel-root.Mui-error': {
-        color: 'tomato'
-      },
-      '& .MuiFormHelperText-root.Mui-error': {
-        color: 'tomato'
+      '&.Mui-focused fieldset': {
+        borderColor: theme.palette.textColor
       }
     },
-    '@media (max-width: 950px)': {
-      marginTop: '0',
-      display: 'flex',
-      flexDirection: 'column'
-    }
-  },
-  input: {
-    marginBottom: '45px',
-    float: 'left',
-    width: '308px',
-    paddingRight: '1rem',
-    height: '2rem',
-    '@media (max-width: 950px)': {
-      marginTop: '15px',
-      width: '100%',
-      padding: 0
+    '& label.Mui-focused': {
+      color: theme.palette.textColor
     },
-    '& p': {
-      position: 'absolute',
-      top: '45px',
-      fontSize: '10px'
+    '& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline': {
+      borderColor: 'tomato'
     },
-    '& input': {
-      background: '#fff',
-      fontWeight: '500'
-    }
-  },
-  text: {
-    marginRight: '500px',
-    position: 'relative',
-    width: '100%',
-    '@media (max-width: 950px)': {
-      width: '100%',
-      marginTop: '1rem'
-    },
-    '@media (max-width: 600px)': {
-      width: '100%',
-      padding: 0,
-      '& label': {
-        width: '90%'
-      }
-    },
-    '& p': {
-      position: 'absolute',
-      top: '130px',
-      fontSize: '10px'
-    },
-    '& textarea': {
-      color: theme.palette.textColor,
-      fontSize: '0.875rem',
-      fontWeight: '500'
-    }
+    '& .MuiFormLabel-root.Mui-error': { color: 'tomato' }
   },
   commentBtnContainer: {
     display: 'flex',
     justifyContent: 'flex-end',
-    marginTop: 16,
+    gap: '18px',
+    marginTop: '8px',
     marginBottom: '24px',
     '& .MuiButton-root.Mui-disabled': {
       color: theme.palette.button.disabled.color,
       backgroundColor: theme.palette.button.disabled.backgroundColor
-    },
-    '@media (max-width: 900px)': {
-      gap: '18px'
     }
   },
   commentBtn: {
@@ -153,9 +95,8 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color
     },
-    '@media (max-width: 950px)': {
-      marginTop: '0',
-      marginBottom: '1.5rem'
+    '@media (max-width: 600px)': {
+      fontSize: '12px'
     }
   },
   title: {
@@ -169,7 +110,6 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   cancelBtn: {
-    marginRight: '16px',
     fontWeight: 600,
     color: theme.palette.textColor,
     backgroundColor: theme.palette.backgroundColor,
@@ -181,5 +121,16 @@ export const useStyles = makeStyles((theme) => ({
     '&:disabled': {
       border: 0
     }
+  },
+  emptyComments: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '20px',
+    fontWeight: 600,
+    margin: '40px 0'
+  },
+  showMore: {
+    marginBottom: '20px'
   }
 }));

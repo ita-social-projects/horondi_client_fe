@@ -124,6 +124,17 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
     }
   };
 
+  const priceNotification = () => {
+    if (price <= 0) {
+      const lastPrice = Math.abs(price);
+      return (
+        <div className={styles.priceNotification}>
+          {t('cart.priceNotification')} {currencySign} {lastPrice}
+        </div>
+      );
+    }
+  };
+
   const onGoToCheckout = async () => {
     const itemsFromConstructor = items.filter((item) => item.isFromConstructor);
 
@@ -218,9 +229,10 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
             <span>{t('cart.totalPrice')}</span>
             <div>
               {currencySign}
-              {price}
+              {price > 0 ? price : 0}
             </div>
           </div>
+          {priceNotification()}
           <Button variant='contained' className={styles.ordersButton} onClick={onGoToCheckout}>
             {t('cart.checkout')}
           </Button>

@@ -25,5 +25,6 @@
   "price": "Price",
   "quantity": "Quantity",
   "toPay": "Total",
-  "actions": "Action"
+  "actions": "Action",
+  "priceNotification":"The remaining cost of the certificate will be cancelled - "
 }

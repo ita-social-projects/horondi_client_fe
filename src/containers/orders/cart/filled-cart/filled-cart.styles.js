@@ -153,6 +153,10 @@ export const useStyles = makeStyles(({ palette }) => ({
       alignItems: 'center'
     }
   },
+  priceNotification: {
+    display: 'flex',
+    alignItems: 'center'
+  },
   orderTable: {
     flexGrow: 1,
     '@media (max-width: 813px)': {

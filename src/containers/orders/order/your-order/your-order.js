@@ -24,7 +24,9 @@ const YourOrder = ({ ...props }) => {
   } = props;
 
   const totalPrice = certificate
-    ? getTotalPriceWithCertificate(certificate)
+    ? getTotalPriceWithCertificate(certificate) >= 0
+      ? getTotalPriceWithCertificate(certificate)
+      : 0
     : getPriceWithCurrency(totalPriceToPay);
 
   const orderItems =

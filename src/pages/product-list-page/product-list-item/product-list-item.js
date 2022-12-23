@@ -10,6 +10,7 @@ import StarRating from '../../../components/star-rating';
 import routes from '../../../configs/routes';
 import { useCurrency } from '../../../hooks/use-currency';
 import useProductImage from '../../../hooks/use-product-image';
+import AddToWishListIcon from '../../../components/add-to-wishlist-icon';
 
 const ProductListItem = ({ product }) => {
   const { t } = useTranslation();
@@ -49,6 +50,7 @@ const ProductListItem = ({ product }) => {
 
   return (
     <Grid item xs={6} sm={6} md={6} lg={4} className={styles.wrapper} data-testid='product'>
+      <AddToWishListIcon product={product} className={styles.addToFavouriteButton} />
       <Link to={`${pathToProducts}/${product._id}`}>
         <div className={styles.productItem}>
           {product.available ? '' : <div className={styles.unavailableContainer} />}

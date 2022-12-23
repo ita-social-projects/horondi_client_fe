@@ -65,6 +65,7 @@ export const getFilteredProductsQuery = gql`
               large
               medium
               small
+              thumbnail
             }
           }
           pattern {
@@ -78,10 +79,12 @@ export const getFilteredProductsQuery = gql`
           availableCount
           available
           rate
+          isDeleted
           translationsKey
           sizes {
             size {
               available
+              _id
             }
             price
           }

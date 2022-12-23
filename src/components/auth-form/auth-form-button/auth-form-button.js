@@ -13,14 +13,14 @@ const AuthFormButton = ({
   ...props
 }) => {
   const styles = useStyles();
-  const loaderSize = loaderHeight || '50px';
+  const loaderSize = loaderHeight || 50;
   const loaderGrid = '1/-1';
 
   if (loading)
     return (
       <Loader
-        height={loaderSize}
-        width={loaderSize}
+        height={loaderSize - 10}
+        width={loaderSize - 10}
         heightWrap={loaderSize}
         gridColumn={loaderGrid}
       />

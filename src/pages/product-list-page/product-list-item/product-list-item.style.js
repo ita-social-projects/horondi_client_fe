@@ -17,6 +17,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     maxHeight: '380px',
     aspectRatio: 0.8,
     cursor: 'pointer',
+    position: 'relative',
     '@media (max-width: 600px)': {
       maxHeight: '340px'
     },
@@ -80,5 +81,16 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   currency: {
     paddingTop: '5px'
+  },
+  addToFavouriteButton: {
+    position: 'absolute',
+    top: '18px',
+    right: '18px',
+    zIndex: 2,
+    background: palette.common.white,
+    opacity: '0.5',
+    width: '30px',
+    height: '30px',
+    '&:hover': { opacity: '0.8', background: palette.common.white }
   }
 }));

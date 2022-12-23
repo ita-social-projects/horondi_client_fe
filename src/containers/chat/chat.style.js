@@ -7,88 +7,44 @@ const flexCenter = {
 };
 
 export const useStyles = makeStyles(({ palette }) => ({
-  chatIcon: () => ({
+  iconsMessengers: {
+    position: 'fixed',
+    zIndex: '1001',
+    bottom: '30px',
+    right: '22px',
+    display: 'flex',
+    flexDirection: 'column',
+    background: 'none'
+  },
+  msgIcon: {
     ...flexCenter,
     background: palette.black,
-    margin: '0px 12px',
-    padding: '0px',
-    position: 'fixed',
-    zIndex: 1001,
-    bottom: '30px',
-    top: 'auto',
     height: '60px',
     width: '60px',
-    borderRadius: '29px',
+    marginTop: '20px',
+    borderRadius: '50%',
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
-    left: `calc(100vw - 113px)`,
     border: 'none',
-    transition: 'background 0.3s',
-    '@media (max-width: 768px)': {
-      boxShadow: ' 0 0 5px white',
-      left: `calc(100vw - 96px)`
-    },
     '&:hover': {
       cursor: 'pointer',
       background: palette.yellow
     },
-    '&:disabled': {
-      background: palette.lightGrayShade
-    }
-  }),
-  iconsMessengers: {
-    margin: '0px 12px',
-    padding: '0px',
-    position: 'fixed',
-    zIndex: '1001',
-    bottom: '110px',
-    top: 'auto',
-    height: '60px',
-    width: '60px',
-    borderRadius: '29px',
-    boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
-    background: 'none',
-    display: 'block',
-    left: `calc(100vw - 113px)`,
     '@media (max-width: 768px)': {
-      left: `calc(100vw - 96px)`
-    }
-  },
-  msgIcon: {
-    ...flexCenter,
-    width: '60px',
-    height: '60px',
-    background: 'black',
-    position: 'fixed',
-    zIndex: '1001',
-    borderRadius: '50%',
-    marginBottom: '20px',
-    cursor: 'pointer',
-    boxShadow: 'white 0px 0px 10px',
-    transition: 'background 0.3s',
-    '&:hover': {
-      background: palette.yellow
+      boxShadow: ' 0 0 5px white'
+    },
+    '&:disabled': {
+      background: 'lightGrayShade'
     }
   },
   msgIconActive: (mailFormVisible) => ({
-    ...flexCenter,
-    width: '60px',
-    height: '60px',
-    background: mailFormVisible ? palette.yellow : palette.black,
-    borderRadius: '50%',
-    marginBottom: '20px',
-    cursor: 'pointer',
-    position: 'fixed',
-    zIndex: '1001'
+    background: mailFormVisible ? palette.yellow : palette.black
   }),
   mailForm: {
+    ...flexCenter,
     position: 'fixed',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
     right: '7.5%',
     top: '145px',
     bottom: '10%',
-    minWidth: '275px',
     width: '340px',
     height: 'fit-content',
     borderRadius: '4px',
@@ -115,30 +71,9 @@ export const useStyles = makeStyles(({ palette }) => ({
       cursor: 'pointer'
     }
   },
-  contacts: {
-    ...flexCenter,
-    background: palette.backgroundColor,
-    height: '40%',
-    fontSize: '1rem',
-    flexDirection: 'column',
-    margin: '0 60px 0 0'
-  },
-  contactsTitle: {
-    margin: '3px 70px 10px 0',
-    fontSize: '1.3rem'
-  },
-  phoneNumbers: {
-    color: palette.textColor,
-    display: 'flex',
-    marginBottom: '10px'
-  },
   mailTitle: {
     margin: '14px 0',
     fontSize: '1.3rem'
-  },
-  logo: {
-    height: '15px',
-    width: '15px'
   },
   contactForm: {
     ...flexCenter,
@@ -146,19 +81,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%'
   },
   btnSend: {
-    marginBottom: '20px',
-    width: '90%',
-    background: palette.button.normal.backgroundColor,
-    fontSize: '1em',
-    padding: '12px',
-    color: palette.button.normal.color,
-    '& a': {
-      color: 'inherit'
-    },
-    '&:hover': {
-      backgroundColor: palette.button.hover.backgroundColor,
-      color: palette.button.hover.color
-    }
+    width: '90%'
   },
   dataInput: {
     height: '100%',
@@ -171,11 +94,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 768px)': {
       fontSize: '25px !important'
     }
-  },
-  iconContact: {
-    margin: '0 15px 0 0',
-    fontSize: '20px',
-    paddingTop: '2px'
   },
   activeMsgWrapper: {
     height: '65%',

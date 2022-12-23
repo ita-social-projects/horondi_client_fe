@@ -43,8 +43,6 @@ const ProductListFilter = ({ filterParams }) => {
     }
   });
 
-  if (error || loading) return errorOrLoadingHandler(error, loading);
-
   const handleClearFilter = () => {
     const sortQuery = searchParams.get(TEXT_FIELDS.SORT);
     const quantityPerPage = searchParams.get(countPerPage);
@@ -65,9 +63,12 @@ const ProductListFilter = ({ filterParams }) => {
     )
   );
 
+  const errorOrLoading = (error || loading) && errorOrLoadingHandler(error, loading);
+
   return (
     <div>
       <Grid container direction='column' className={styles.wrapper} spacing={2}>
+        {errorOrLoading}
         <Button className={styles.button} data-cy='clear_filter_button' onClick={handleClearFilter}>
           {t('common.clearFilter')}
         </Button>

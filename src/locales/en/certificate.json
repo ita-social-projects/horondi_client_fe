@@ -24,6 +24,7 @@
   "certificateRules": [
     "Gift certificate provides a discount of 500, 1000, 1500 UAH, for any Horondi products.",
     "If the purchase price exceeds the available balance of the gift certificate, you can pay the difference in a convenient way.",
+    "Gift certificate can be used for a single transaction. If your order value is less than certificate value the remaining amount will be lost",
     "The gift certificate is not refundable or exchangeable for the relevant money equivalent.",
     "The certificate is valid for 365 days from the date of purchase."
   ],

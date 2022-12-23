@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@apollo/client';
 import { TextField, Snackbar } from '@material-ui/core';
@@ -51,17 +51,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
-  const handleValidForms = () => {
-    setShouldValidate(true);
-    allFieldsValidated && sendHandler();
-  };
-
-  const handleClick = () => {
-    setOpen(true);
-    setUser(CHAT_USER_DATA);
-  };
-
-  const sendHandler = () => {
+  const sendHandler = useCallback(() => {
     setAllFieldsValidated(false);
     sendEmail({
       variables: {
@@ -72,6 +62,16 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
       }
     });
     handleClick();
+  }, [email, firstName, language, message, sendEmail]);
+
+  const handleValidForms = useCallback(() => {
+    setShouldValidate(true);
+    allFieldsValidated && sendHandler();
+  }, [allFieldsValidated, sendHandler]);
+
+  const handleClick = () => {
+    setOpen(true);
+    setUser(CHAT_USER_DATA);
   };
 
   const handleClose = (_event, reason) => {

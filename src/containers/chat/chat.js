@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { Transition, config } from 'react-spring';
-import { useQuery } from '@apollo/client';
-import { getContactsForChat } from './operations/chat-contacts.query';
-import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
 import { showIcon } from './helperFunc';
@@ -15,10 +12,6 @@ export const Chat = () => {
   const style = useStyles({ iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
 
-  const { loading, error, data } = useQuery(getContactsForChat);
-  if (loading || error) return errorOrLoadingHandler(error, loading);
-  const contacts = data.getContacts.items;
-
   const chatButtonHandler = () => {
     setMailFormVisible(false);
     setIconsVisible(!iconsVisible);
@@ -26,11 +19,11 @@ export const Chat = () => {
   };
 
   return (
-    <>
+    <div className={style.iconsMessengers}>
       {iconsVisible && (
-        <div className={style.iconsMessengers}>
+        <>
           <div
-            className={mailFormVisible ? style.msgIconActive : style.msgIcon}
+            className={mailFormVisible ? `${style.msgIcon} ${style.msgIconActive}` : style.msgIcon}
             onClick={() => setMailFormVisible(!mailFormVisible)}
             data-testid='messengerBtn'
           >
@@ -44,24 +37,23 @@ export const Chat = () => {
             leave={{ opacity: 0, height: 0 }}
             config={config.gentle}
           >
-            {(styles, item) => (
+            {(styles, item) =>
               item && (
                 <div style={styles}>
                   <MailForm
-                    contacts={contacts}
                     cancelIconHandler={cancelIconHandler}
                     iconsVisible={iconsVisible}
                     mailFormVisible={mailFormVisible}
                   />
                 </div>
               )
-            )}
+            }
           </Transition>
-        </div>
+        </>
       )}
-      <button data-testid='chatBtn' onClick={chatButtonHandler} className={style.chatIcon}>
+      <button data-testid='chatBtn' onClick={chatButtonHandler} className={style.msgIcon}>
         <ForumIcon className={style.icon} style={{ fontSize: 40 }} />
       </button>
-    </>
+    </div>
   );
 };

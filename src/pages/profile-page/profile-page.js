@@ -217,7 +217,6 @@ const ProfilePage = () => {
                 onclick={() => setShouldValidate(true)}
                 data-testid='submitBtn'
                 disabled={buttonDisabled}
-                loaderHeight='58px'
               >
                 {t('profilePage.labels.saveBtnTitle')}
               </AuthButton>

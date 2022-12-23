@@ -23,8 +23,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(3,1fr)',
     rowGap: '8px',
+    '@media (max-width: 768px)': { padding: '48px 85px' },
     '@media (max-width: 575px)': {
-      padding: '56px 40px'
+      padding: '40px '
     }
   },
   formTitle: {
@@ -52,8 +53,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   button: {
-    gridColumn: 'span 3',
-    padding: '10px'
+    gridColumn: 'span 3'
   },
   userActions: {
     flexBasis: '40%',

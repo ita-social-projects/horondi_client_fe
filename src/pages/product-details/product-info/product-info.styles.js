@@ -117,7 +117,9 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'zoom-out',
     zIndex: 10
   },
-  heart: { padding: 0, alignSelf: 'center', '& svg': { fontSize: '22px' } },
+  addToFavouriteButton: {
+    '&:hover': { background: 'inherit' }
+  },
   subtitle: {
     '@media (max-width: 500px)': {
       display: 'flex',

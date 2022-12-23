@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@apollo/client';
-import { TextField, Button, Snackbar } from '@material-ui/core';
+import { TextField, Snackbar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
 import { get } from 'lodash';
@@ -11,6 +11,7 @@ import { useStyles } from '../chat.style';
 import { handleHelperText } from '../../../utils/handle-active-massenger';
 import { sendEmailMutation } from '../operations/chat.mutations';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
+import { AuthButton } from '../../../components/auth-form';
 
 export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
   const style = useStyles({ iconsVisible, mailFormVisible });
@@ -90,7 +91,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
     }
   }, [firstNameValidated, emailValidated, messageValidated]);
 
-  if (loading || error) return errorOrLoadingHandler(error, loading);
+  if (error) return errorOrLoadingHandler(error);
 
   return (
     <form className={style.contactForm}>
@@ -149,9 +150,9 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           {t('chat.thanksMsg')}
         </Alert>
       </Snackbar>
-      <Button className={style.btnSend} onClick={handleValidForms}>
+      <AuthButton className={style.btnSend} onClick={handleValidForms} loading={loading}>
         {t('buttons.sendBtn')}
-      </Button>
+      </AuthButton>
     </form>
   );
 };

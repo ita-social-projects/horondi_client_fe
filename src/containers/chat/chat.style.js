@@ -81,19 +81,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%'
   },
   btnSend: {
-    marginBottom: '20px',
-    width: '90%',
-    background: palette.button.normal.backgroundColor,
-    fontSize: '1em',
-    padding: '12px',
-    color: palette.button.normal.color,
-    '& a': {
-      color: 'inherit'
-    },
-    '&:hover': {
-      backgroundColor: palette.button.hover.backgroundColor,
-      color: palette.button.hover.color
-    }
+    width: '90%'
   },
   dataInput: {
     height: '100%',

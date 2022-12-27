@@ -2,7 +2,7 @@ import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { TextField } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router';
 
@@ -25,7 +25,7 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
   const styles = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
-  const { currencySign } = useCurrency();
+  const { currencySign, getCertificatePriceInUSD } = useCurrency();
 
   const [addConstructorProduct] = useMutation(addProductFromConstructor);
 
@@ -34,6 +34,9 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
   const [price, setPrice] = useState();
   const [inputValue, setInputValue] = useState('');
   const [productFromConstructorLoading, setProductFromConstructorLoading] = useState(false);
+  const [discount, setDiscount] = useState({});
+  const [certificate, setCertificate] = useState('');
+  const [promoCode, setPromoCode] = useState('');
 
   const { currency } = useContext(CurrencyContext);
 
@@ -46,6 +49,9 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
     {
       variables: {
         code: inputValue
+      },
+      onCompleted: () => {
+        setPromoCode(promoCodeData);
       }
     }
   );
@@ -57,11 +63,12 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
         params: {
           name: inputValue
         }
+      },
+      onCompleted: (data) => {
+        setCertificate(certificateData);
       }
     }
   );
-  const certificate = certificateData || certificateInCart;
-  const promoCode = promoCodeData || promoCodedInCart;
 
   const errorHandler = () => {
     if (certificateData || promoCodeData) return null;
@@ -91,9 +98,22 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
     certificateAndPromoInput.current.value = '';
   };
 
+  const resetDiscount = () => {
+    setCertificate('');
+    setPromoCode('');
+  };
+
   useLayoutEffect(() => {
-    if (certificate) return setPrice(getTotalPriceWithCertificate(certificate));
-    if (promoCode) return setPrice(getTotalPricesWithPromoCode(promoCode));
+    if (certificate) {
+      const { name, value } = certificate.getCertificateByParams;
+      setDiscount({ type: 'certificate', name, value });
+      return setPrice(getTotalPriceWithCertificate(certificate));
+    }
+    if (promoCode) {
+      const { code, discount } = promoCode.getPromoCodeByCode;
+      setDiscount({ type: 'promoCode', name: code, value: discount });
+      return setPrice(getTotalPricesWithPromoCode(promoCode));
+    }
     setPrice(getTotalPrice());
   }, [
     items,
@@ -117,7 +137,7 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
           <div>
             {currencySign}
             {promoCode && getTotalPrice() - getTotalPricesWithPromoCode(promoCode)}
-            {certificate && getTotalPrice() - price}
+            {certificate && getTotalPrice()}
           </div>
         </div>
       );
@@ -164,6 +184,17 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
     history.push(pathToCheckout);
   };
 
+  const discountFormat = () => {
+    if (certificate)
+      return (
+        <span>
+          {currencySign}
+          {currency === 'UAH' ? discount.value : getCertificatePriceInUSD(discount.value)}
+        </span>
+      );
+    if (promoCode) return <span>{discount.value}%</span>;
+  };
+
   return (
     <div className={styles.root} data-cy='filled-cart'>
       <PathBack
@@ -185,32 +216,48 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
       </div>
       <div className={styles.promoAndTotalWrapper}>
         <div className={styles.promoWrapper}>
-          <div>
-            <TextField
-              className={styles.textField}
-              InputProps={{
-                className: styles.promoInput
-              }}
-              placeholder={t('cart.promoPlaceHolder')}
-              variant={TEXT_FIELD_VARIANT.OUTLINED}
-              inputRef={certificateAndPromoInput}
-              disabled={Boolean(certificate || promoCode)}
-              error={promoCodeError || certificateError}
-              helperText={errorHandler() || ' '}
-            />
-            <Button
-              data-testid='promoButton'
-              variant='contained'
-              className={`${styles.promoButton} ${styles.promoInput}`}
-              onClick={checkPromoOrCertificate}
-              disabled={Boolean(certificate || promoCode)}
-            >
-              {t('cart.applyPromoCode')}
-            </Button>
-          </div>
-          <Link to={pathToCategory}>
-            <Button className={styles.shoppingButton}>{t('cart.continue')}</Button>
-          </Link>
+          {certificate || promoCode ? (
+            <div className={styles.withSelectedDiscountWrapper}>
+              <Typography variant='h6' className={styles.discountHeading}>
+                {t('cart.discountInformation')}
+              </Typography>
+              <Typography variant='body1' className={styles.discountInfo}>
+                {t(`cart.discountType.${discount.type}`)}
+                <span>{discount.name}</span>
+              </Typography>
+              <Typography variant='body1' className={styles.discountInfo}>
+                {t('cart.discountSize')}
+                <span>{discountFormat()}</span>
+              </Typography>
+              <Typography className={styles.discountRemark}>{t('cart.discountRemark')}</Typography>
+              <Button className={styles.resetDiscountButton} onClick={resetDiscount}>
+                {t('cart.resetDiscount')}
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <TextField
+                className={styles.textField}
+                InputProps={{
+                  className: styles.promoInput
+                }}
+                placeholder={t('cart.promoPlaceHolder')}
+                variant={TEXT_FIELD_VARIANT.OUTLINED}
+                inputRef={certificateAndPromoInput}
+                error={promoCodeError || certificateError}
+                helperText={errorHandler() || ' '}
+              />
+              <Button
+                data-testid='promoButton'
+                variant='contained'
+                className={`${styles.promoButton} ${styles.promoInput}`}
+                onClick={checkPromoOrCertificate}
+                disabled={Boolean(certificate || promoCode)}
+              >
+                {t('cart.applyPromoCode')}
+              </Button>
+            </div>
+          )}
         </div>
         <div className={styles.totalWrapper}>
           {totalSavePrice()}
@@ -224,6 +271,9 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
           <Button variant='contained' className={styles.ordersButton} onClick={onGoToCheckout}>
             {t('cart.checkout')}
           </Button>
+          <Link to={pathToCategory}>
+            <Button className={styles.shoppingButton}>{t('cart.continue')}</Button>
+          </Link>
         </div>
       </div>
       <SimilarProducts cartList={items} />

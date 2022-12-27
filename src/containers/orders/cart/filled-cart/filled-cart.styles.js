@@ -56,6 +56,49 @@ export const useStyles = makeStyles(({ palette }) => ({
       gap: '8px'
     }
   },
+  withSelectedDiscountWrapper: {
+    maxWidth: '309px',
+    flexDirection: 'column'
+  },
+  discountHeading: {
+    ...totalWrapper,
+    alignItems: 'left'
+  },
+  discountInfo: {
+    fontWeight: 400,
+    fontSize: '16px',
+    lineHeight: '24px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    '& svg': {
+      marginRight: '5px',
+      fontSize: '20px'
+    },
+    '& span': {
+      fontWeight: 600,
+      display: 'flex',
+      alignItems: 'center'
+    }
+  },
+  discountRemark: {
+    fontWeight: 400,
+    fontSize: '10px',
+    lineHeight: '14px',
+    textAlign: 'justify'
+  },
+  resetDiscountButton: {
+    ...button,
+    border: '1px solid',
+    borderColor: palette.button.normal.borderColor,
+    padding: '12px',
+    width: '100%',
+    '& span': {
+      fontWeight: 600
+    },
+    '@media (max-width: 450px)': {
+      fontSize: '12px'
+    }
+  },
   promoButton: {
     ...button,
     background: palette.button.normal.backgroundColor,
@@ -70,6 +113,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       fontSize: '12px'
     }
   },
+
   shoppingButton: {
     ...button,
     border: '1px solid',
@@ -89,7 +133,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     padding: '16px 42px',
     background: palette.button.normal.backgroundColor,
     color: palette.button.normal.color,
-    marginBottom: '20px',
     '&:hover': {
       backgroundColor: palette.button.hover.backgroundColor,
       color: palette.button.hover.color

@@ -25,5 +25,13 @@
   "price": "Ціна",
   "quantity": "Кількість",
   "toPay": "До оплати",
-  "actions": "Дія"
+  "actions": "Дія",
+  "discountInformation": "Інформація про знижку",
+  "discountType": {
+    "certificate": "Сертифікат",
+    "promoCode": "Промокод"
+  },
+  "discountSize": "Розмір знижки",
+  "discountRemark": "Якщо розмір знижки покриває ціну товару - залишок буде списано, до оплати залишиться 1 грн",
+  "resetDiscount": "Скасувати знижку"
 }

@@ -25,5 +25,13 @@
   "price": "Price",
   "quantity": "Quantity",
   "toPay": "Total",
-  "actions": "Action"
+  "actions": "Action",
+  "discountInformation": "Discount information",
+  "discountType": {
+    "certificate": "Certificate",
+    "promoCode": "Promo Code"
+  },
+  "discountSize": "Discount size",
+  "discountRemark": "If the amount of the discount covers the price of the product, the balance will be debited, leaving 1 hryvnia for payment",
+  "resetDiscount": "Reset discount"
 }

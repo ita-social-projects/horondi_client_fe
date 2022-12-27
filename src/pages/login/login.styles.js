@@ -19,7 +19,9 @@ export const useStyles = makeStyles((theme) => ({
     textOverflow: 'ellipsis',
     height: theme.typography.body1.lineHeight,
     fontSize: theme.typography.body1.fontSize,
-    color: theme.palette.error.main
+    color: theme.palette.error.main,
+    marginTop: '4px',
+    marginLeft: '14px'
   },
   orText: {
     margin: '12px 0',

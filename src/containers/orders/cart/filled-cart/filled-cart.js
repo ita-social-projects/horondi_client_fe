@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useLayoutEffect, useRef, useState } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -98,10 +98,10 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
     certificateAndPromoInput.current.value = '';
   };
 
-  const resetDiscount = () => {
+  const resetDiscount = useCallback(() => {
     setCertificate('');
     setPromoCode('');
-  };
+  }, []);
 
   useLayoutEffect(() => {
     if (certificate) {

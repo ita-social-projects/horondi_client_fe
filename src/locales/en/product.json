@@ -27,6 +27,7 @@
   "priceFrom": "from ",
   "sizeNotAvailable": "Product isn't available",
   "unavailable": "Unavailable",
+  "category": "Category",
   "pdpButtons": {
     "cartButton": "Add to cart",
     "buyButton": "Buy now",

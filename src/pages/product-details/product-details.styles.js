@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   product: {
     display: 'grid',
     gridTemplateColumns: 'repeat(2,1fr)',
-    gridTemplateRows: '1fr minmax(220px,auto)',
+    gridTemplateRows: '1fr minmax(320px,auto)',
     gap: '24px',
     marginBottom: '32px',
     '@media (max-width: 900px)': {

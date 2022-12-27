@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import { Transition, config } from 'react-spring';
+import { Transition, config, animated } from 'react-spring';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
 import { showIcon } from './helperFunc';
@@ -39,13 +39,13 @@ export const Chat = () => {
           >
             {(styles, item) =>
               item && (
-                <div style={styles}>
+                <animated.div style={styles}>
                   <MailForm
                     cancelIconHandler={cancelIconHandler}
                     iconsVisible={iconsVisible}
                     mailFormVisible={mailFormVisible}
                   />
-                </div>
+                </animated.div>
               )
             }
           </Transition>

@@ -107,11 +107,12 @@ export function* handleUserLogin({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     yield setLoginUser(user);
-    yield put(setUserLoading(false));
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
   } catch (e) {
     yield call(handleUserError, e);
+  } finally {
+    yield put(setUserLoading(false));
   }
 }
 
@@ -240,6 +241,7 @@ export function* handleRefreshTokenInvalid() {
 
 export function* handleUserError(e) {
   if (e?.message === USER_IS_BLOCKED) {
+    yield put(setUserError(USER_ERROR[USER_IS_BLOCKED]));
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
     yield call(handleRefreshTokenInvalid);

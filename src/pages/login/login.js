@@ -96,7 +96,7 @@ const Login = () => {
           />
         </div>
 
-        <AuthButton loading={userLoading} onclick={handleSubmit}>
+        <AuthButton loading={userLoading} onclick={handleSubmit} className={styles.authBtn}>
           {t('login.formLabel').toUpperCase()}
         </AuthButton>
         {wrongCredentials}

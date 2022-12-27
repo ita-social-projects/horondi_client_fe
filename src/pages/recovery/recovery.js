@@ -67,7 +67,7 @@ const Recovery = () => {
             onChange={handleChange}
             onFocus={handleFocus}
             value={values.email}
-            errorMsg={errorMsg}
+            errorMsg={touched.email && errorMsg}
           />
           <p className={styles.recoveryText}>{t('recovery.recoveryText')}</p>
           <AuthButton loading={recoveryLoading}>{t('recovery.recoveryButtonText')}</AuthButton>

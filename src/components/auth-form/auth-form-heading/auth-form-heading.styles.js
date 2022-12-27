@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   heading: {
     fontFamily: theme.typography.fontFamily,
     color: theme.palette.textColor,
-    fontSize: theme.typography.h1.fontSize,
+    fontSize: '38px',
     fontWeight: theme.typography.h2.fontWeight,
     letterSpacing: theme.typography.h2.letterSpacing,
     lineHeight: theme.typography.h2.lineHeight,

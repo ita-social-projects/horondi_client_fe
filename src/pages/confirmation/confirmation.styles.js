@@ -15,25 +15,11 @@ export const useStyles = makeStyles((theme) => ({
   welcome: {
     display: 'flex',
     flexDirection: 'column',
-    padding: '20px',
+    minWidth: '320px',
+    padding: '32px',
     textAlign: 'center',
     borderRadius: '7px',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    buttonGroup: {
-      display: 'flex',
-      flexDirection: 'row'
-    },
-    '& h2': {
-      margin: '0',
-      color: 'white',
-      textTransform: 'uppercase',
-      fontSize: '3rem'
-    },
-    '& h3': {
-      margin: '0',
-      color: 'white',
-      fontSize: '1.5rem'
-    },
     '& button': {
       marginTop: '45px',
       backgroundColor: '#404040',
@@ -52,5 +38,9 @@ export const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       textTransform: 'capitalize'
     }
+  },
+  text: {
+    color: theme.palette.common.white,
+    marginBottom: '12px'
   }
 }));

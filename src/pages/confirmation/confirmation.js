@@ -12,14 +12,13 @@ import routes from '../../configs/routes';
 const { pathToMain } = routes;
 
 const Confirmation = ({ token }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const { loading, error } = useSelector(({ User }) => ({
     loading: User.userLoading,
     error: User.error
   }));
 
-  const language = i18n.language === 'ua' ? 0 : 1;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,7 +54,7 @@ const Confirmation = ({ token }) => {
           <Loader heightWrap={130} />
         ) : (
           <>
-            {handleMessage(error, language)}
+            {handleMessage(error)}
             <div className={styles.buttonGroup}>
               <Button variant='contained' onClick={() => goTo(pathToMain)}>
                 {t('confirmation.goToShop')}

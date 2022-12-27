@@ -4,8 +4,9 @@ export const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
+    marginTop: '12px',
     gap: '12px',
-    '@media (max-width: 750px)': { position: 'absolute', top: '54px', right: '4px' },
+    '@media (max-width: 750px)': { position: 'absolute', top: '54px', right: '4px', marginTop: 0 },
     '@media (max-width: 500px)': {
       position: 'static',
       gridRow: 2

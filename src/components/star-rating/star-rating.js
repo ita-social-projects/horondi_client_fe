@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Rating } from '@material-ui/lab';
 
-const StarRating = ({ rate, size = 'normal', disabled = false, precision = 0.1 }) => (
+const StarRating = ({ rate, size = 'normal', disabled = false, precision = 0.1, readOnly }) => (
   <Rating
     name='simple-controlled'
     value={rate}
     size={size}
     disabled={disabled}
     precision={precision}
+    readOnly
   />
 );
 StarRating.propTypes = {

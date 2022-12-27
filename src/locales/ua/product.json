@@ -27,6 +27,7 @@
   "sizeNotAvailable": "Товар недоступний",
   "isDeleted": "Знято з виробництва",
   "unavailable": "Немає в наявності",
+  "category": "Категорія",
   "pdpButtons": {
     "cartButton": "Додати до кошика",
     "buyButton": "Купити зараз",

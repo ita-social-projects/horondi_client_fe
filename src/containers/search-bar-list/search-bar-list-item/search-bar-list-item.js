@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import Typography from '@material-ui/core/Typography';
@@ -6,20 +6,19 @@ import { useTheme } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './search-bar-list-item.styles';
-import { ClassicButton } from '../../../components/classic-button/classic-button';
+import StarRating from '../../../components/star-rating';
 import routes from '../../../configs/routes';
 import { useCurrency } from '../../../hooks/use-currency';
-import { CurrencyContext } from '../../../context/currency-context';
 import useProductImage from '../../../hooks/use-product-image';
 
 const { pathToProducts } = routes;
 
 const SearchBarListItem = ({ product }) => {
   const { getPriceWithCurrency } = useCurrency();
-  const { currency } = useContext(CurrencyContext);
-  const { t } = useTranslation();
-
+  const { currencySign } = useCurrency();
+  const { t, i18n } = useTranslation();
   const { imageUrl, checkImage } = useProductImage();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const dispatch = useDispatch();
   const styles = useStyles({ imageUrl });
@@ -31,25 +30,37 @@ const SearchBarListItem = ({ product }) => {
     checkImage(product.images.primary.small, isLightTheme);
   }, [product.images.primary.small, checkImage, isLightTheme]);
 
+  const productPrices = product.sizes.map((size) => getPriceWithCurrency(size.price));
+  const lowestPrice = productPrices.length ? (
+    <div className={styles.price}>
+      {currencySign}
+      <div>{productPrices[0]}</div>
+    </div>
+  ) : (
+    <div className={styles.unavailable}>{t('product.unavailable')}</div>
+  );
+
   return (
     <div className={styles.searchBarListItem}>
-      <div data-testid='image' className={styles.image} style={{ backgroundSize: 'cover' }} />
-      <div className={styles.content}>
-        <div className={styles.title}>
-          <Typography data-testid='title' variant='h6'>
-            {t(`${product.translationsKey}.name`)}
-          </Typography>
-          <div>
-            {Math.min(...product.sizes.map((size) => getPriceWithCurrency(size.price)))} {currency}
+      <div
+        className={styles.itemBody}
+        data-testid='list-item'
+        onClick={() => dispatch(push(`${pathToProducts}/${product._id}`))}
+      >
+        <div data-testid='image' className={styles.image} style={{ backgroundSize: 'cover' }} />
+        <div className={styles.content}>
+          <div className={styles.title}>
+            <Typography data-testid='title' variant='h5' className={styles.name}>
+              {t(`${product.translationsKey}.name`)}
+            </Typography>
+            {lowestPrice}
           </div>
-        </div>
-        <div className={styles.buttons}>
-          <ClassicButton
-            buttonType='button'
-            innerText={t('common.details')}
-            onClickHandler={() => dispatch(push(`${pathToProducts}/${product._id}`))}
-            buttonStyle='classic'
-          />
+          <div className={styles.rate}>
+            <StarRating size='small' readOnly rate={product.rate} />
+          </div>
+          <div className={styles.category}>{`${t('product.category')}: ${
+            product.category.name[language].value
+          }`}</div>
         </div>
       </div>
     </div>

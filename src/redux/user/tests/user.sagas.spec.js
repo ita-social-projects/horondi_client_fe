@@ -481,7 +481,8 @@ describe('user sagas tests', () => {
       .withReducer(userReducer)
       .provide([[call(handleUserIsBlocked)]])
       .hasFinalState({
-        ...initialStateMock
+        ...initialStateMock,
+        error: 'error.userError.userIsBlocked'
       })
       .run()
       .then((result) => {

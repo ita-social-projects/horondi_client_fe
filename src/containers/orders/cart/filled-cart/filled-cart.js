@@ -137,7 +137,7 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
           <div>
             {currencySign}
             {promoCode && getTotalPrice() - getTotalPricesWithPromoCode(promoCode)}
-            {certificate && getTotalPrice()}
+            {certificate && getTotalPrice() - price}
           </div>
         </div>
       );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useCallback } from 'react';
 import { FormControl, FormControlLabel, Radio, RadioGroup, Select } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -51,11 +51,14 @@ const DeliveryType = ({
     />
   ));
 
-  const handleDeliveryType = (e) => {
-    const currentValues = { ...values };
-    setDeliveryTypeValue(e.target.value);
-    resetForm({ values: { ...currentValues, ...deliveryMethodValues } });
-  };
+  const handleDeliveryType = useCallback(
+    (e) => {
+      const currentValues = { ...values };
+      setDeliveryTypeValue(e.target.value);
+      resetForm({ values: { ...currentValues, ...deliveryMethodValues } });
+    },
+    [resetForm, values]
+  );
 
   return (
     <div className={styles.deliveryTypeContainer}>

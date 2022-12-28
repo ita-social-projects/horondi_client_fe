@@ -100,38 +100,46 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
     </div>
   );
 
-  const { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
-    enableReinitialize: true,
-    validationSchema: validationSchema(deliveryType, countryOption, t),
-    initialValues,
+  const { values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
+    useFormik({
+      enableReinitialize: true,
+      validationSchema: validationSchema(deliveryType, countryOption, t),
+      initialValues,
 
-    onSubmit: (data) => {
-      if (data.paymentMethod === checkoutPayMethod.card) {
-        dispatch(
-          getFondyData({
-            order: orderInputData(
-              data,
-              deliveryType,
-              cartItems,
-              countryOption,
-              promoCodeId,
-              certificateId
-            ),
-            currency,
-            language
-          })
-        );
-      } else {
-        dispatch(
-          addOrder(
-            orderInputData(data, deliveryType, cartItems, countryOption, promoCodeId, certificateId)
-          )
-        );
-        handleCashPayment();
+      onSubmit: (data) => {
+        if (data.paymentMethod === checkoutPayMethod.card) {
+          dispatch(
+            getFondyData({
+              order: orderInputData(
+                data,
+                deliveryType,
+                cartItems,
+                countryOption,
+                promoCodeId,
+                certificateId
+              ),
+              currency,
+              language
+            })
+          );
+        } else {
+          dispatch(
+            addOrder(
+              orderInputData(
+                data,
+                deliveryType,
+                cartItems,
+                countryOption,
+                promoCodeId,
+                certificateId
+              )
+            )
+          );
+          handleCashPayment();
+        }
+        clearSessionStorage();
       }
-      clearSessionStorage();
-    }
-  });
+    });
 
   useEffect(() => {
     setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values);
@@ -219,6 +227,7 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
               handleChange={handleChange}
               setFieldValue={setFieldValue}
               setDeliveryType={setDeliveryType}
+              resetForm={resetForm}
             />
             <div>
               <h2 className={styles.title}>{t('checkout.checkoutTitles.payment')}</h2>

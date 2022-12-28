@@ -38,6 +38,21 @@ export const stateInitialValues = {
   cityCode: ''
 };
 
+export const deliveryMethodValues = {
+  courierOrganization: '',
+  courierOffice: '',
+  city: '',
+  street: '',
+  house: '',
+  flat: '',
+  region: '',
+  district: '',
+  regionId: '',
+  districtId: '',
+  cityId: '',
+  cityCode: ''
+};
+
 export const checkoutPropTypes = {
   language: PropTypes.number,
   isLightTheme: PropTypes.bool,

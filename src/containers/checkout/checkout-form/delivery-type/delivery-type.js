@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useCallback } from 'react';
 import { FormControl, FormControlLabel, Radio, RadioGroup, Select } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStyles } from './delivery-type.styles';
 import { deliveryTypes, CY_CODE_ERR, TEXT_FIELD_VARIANT } from '../../../../configs';
-import { setDeliveryTypeToStorage } from '../../../../utils/checkout';
+import { deliveryMethodValues, setDeliveryTypeToStorage } from '../../../../utils/checkout';
 
-const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliveryType }) => {
+const DeliveryType = ({
+  setFieldValue,
+  touched,
+  errors,
+  deliveryType,
+  setDeliveryType,
+  resetForm,
+  values
+}) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
@@ -43,6 +51,15 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
     />
   ));
 
+  const handleDeliveryType = useCallback(
+    (e) => {
+      const currentValues = { ...values };
+      setDeliveryTypeValue(e.target.value);
+      resetForm({ values: { ...currentValues, ...deliveryMethodValues } });
+    },
+    [resetForm, values]
+  );
+
   return (
     <div className={styles.deliveryTypeContainer}>
       <FormControl component='fieldset' classes={{ root: styles.radioBtnWrapper }}>
@@ -51,7 +68,7 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
           aria-label='Delivery type'
           name='delivery-type'
           value={deliveryTypeValue}
-          onChange={(e) => setDeliveryTypeValue(e.target.value)}
+          onChange={handleDeliveryType}
         >
           {radioButtons}
         </RadioGroup>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
@@ -11,13 +11,13 @@ const { pathToMain } = routes;
 const BackButton = ({ path }) => {
   const styles = useStyles();
   const history = useHistory();
-  const backToCatalog = () => {
+  const backToCatalog = useCallback(() => {
     if (history.location.key) {
       history.goBack();
     } else {
       history.push(path);
     }
-  };
+  }, [history, path]);
   return (
     <Button className={styles.backBtn} onClick={backToCatalog}>
       <ArrowIcon className={styles.arrowIcon} />

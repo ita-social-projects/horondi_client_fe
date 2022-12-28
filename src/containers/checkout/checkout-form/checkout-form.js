@@ -6,7 +6,6 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import { Link } from 'react-router-dom';
-import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
@@ -26,7 +25,6 @@ import {
   checkoutDefaultProps,
   checkoutFormBtnValue,
   checkoutPropTypes,
-  getThemeColor,
   handleError,
   updateInitialValues,
   stateInitialValues,
@@ -45,6 +43,7 @@ import PageTitle from '../../../components/page-title';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import { useAppStyles } from '../../../components/app/app.styles';
 import { CurrencyContext } from '../../../context/currency-context';
+import BackButton from '../../../components/back-button';
 
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 const userContactLabels = userContactInputLabels();
@@ -83,17 +82,12 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
     <div className={styles.consentMessage}>
       {' '}
       {t('checkout.checkoutAdditionalInfo.consent.0')}
-      <Link
-        className={styles.consentLink}
-        to={pathToUserAgreement}
-        target='_blank'
-        rel='noreferrer'
-      >
+      <Link className={styles.consentLink} to={pathToUserAgreement} rel='noreferrer'>
         {' '}
         {t('checkout.checkoutAdditionalInfo.consent.1')}{' '}
       </Link>{' '}
       {t('checkout.checkoutAdditionalInfo.consent.2')}
-      <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
+      <Link className={styles.consentLink} to={pathToTerms} rel='noreferrer'>
         {' '}
         {t('checkout.checkoutAdditionalInfo.consent.3')}{' '}
       </Link>
@@ -156,9 +150,7 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
       <form onSubmit={handleSubmit} className={appStyles.containerApp}>
         <Grid item className={styles.checkoutFormContainer}>
           <div className={styles.checkoutTitleInfo}>
-            <Link to={pathToCart} className={styles.backBtn}>
-              <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
-            </Link>
+            <BackButton path={pathToCart} />
             <PageTitle title={t('checkout.checkoutTitles.checkoutTitle')} titleLine />
           </div>
           <Grid item className={styles.userInfoContainer}>

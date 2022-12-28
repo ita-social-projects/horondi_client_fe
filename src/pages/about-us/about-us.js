@@ -8,6 +8,7 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getBusinessTextByCode } from './operation/about-us.queries';
 import { ABOUT_US_CODE } from './constants';
 import PageTitle from '../../components/page-title';
+import BackButton from '../../components/back-button';
 
 const AboutUs = () => {
   const { t } = useTranslation();
@@ -41,6 +42,7 @@ const AboutUs = () => {
   return (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.root}`}>
+        <BackButton />
         <PageTitle title={translatedTitle} titleLine />
         <div className={`${styles.sections}`}>{sections}</div>
         <img

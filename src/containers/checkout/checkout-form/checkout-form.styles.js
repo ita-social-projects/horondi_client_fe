@@ -151,7 +151,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%'
   },
   checkoutTitleInfo: {
-    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     width: '100%'

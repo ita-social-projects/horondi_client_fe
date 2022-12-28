@@ -6,8 +6,8 @@ export const navItems = [
   },
   {
     id: '2',
-    url: '/materials',
-    label: 'materials'
+    url: '/pages/user-agreement',
+    label: 'userAgreement'
   },
   {
     id: '3',

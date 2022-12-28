@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
+    marginBottom: '140px',
     '& p, & ul, & li, & span': {
       color: `${theme.palette.textColor} !important`,
       fontSize: '1rem',
@@ -16,13 +17,6 @@ export const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         fontSize: '1.5rem'
       }
-    },
-    '& ul:last-child': {
-      marginBottom: '140px'
-    },
-    '& p:last-child': {
-      marginBottom: '140px',
-      '@media (max-width: 670px)': { marginBottom: '140px' }
     },
     '& > pre': {
       padding: '3px',

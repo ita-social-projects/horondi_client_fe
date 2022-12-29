@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -18,9 +18,9 @@ const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemS
   const styles = useStyles();
   const [isListOpen, setIsListOpen] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     setIsListOpen((prevValue) => setIsListOpen(!prevValue));
-  };
+  }, []);
 
   const modelsList = models.map((model) => {
     const modelUrl = `${pathToCategory}?${categoryFilter}=%2C${category}&${modelsFilter}=%2C${model._id}`;

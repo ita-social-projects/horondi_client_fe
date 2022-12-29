@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -30,9 +30,9 @@ export default function RegisterForm({
   const styles = useStyles();
   const { t } = useTranslation();
   const [checked, setChecked] = useState(false);
-  const handleChecked = (event) => {
+  const handleChecked = useCallback((event) => {
     setChecked(event.target.checked);
-  };
+  }, []);
   const { handleSubmit, handleChange, handleBlur } = formOperations;
   const { pass, passConfirm } = USER_REGISTER_LABELS;
   const consentLink = (

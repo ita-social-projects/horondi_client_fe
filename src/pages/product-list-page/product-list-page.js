@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pagination } from '@material-ui/lab';
 import Grid from '@material-ui/core/Grid';
@@ -80,7 +80,7 @@ const ProductListPage = ({ width }) => {
     window.scrollTo(0, 0);
   };
 
-  const handleFilterShow = () => setFilterMenuStatus((prevState) => !prevState);
+  const handleFilterShow = useCallback(() => setFilterMenuStatus((prevState) => !prevState), []);
 
   useEffect(() => {
     if (data) {

@@ -8,7 +8,7 @@ export const useCurrency = () => {
 
   const convertNotPositivePrice = useMemo(
     () => (currentCurrency === 'USD' ? (1 / currencies.UAH.exchangeRate).toFixed(2) : 1),
-    [currencies.UAH, currentCurrency]
+    [currencies, currentCurrency]
   );
 
   const getPriceWithCurrency = useCallback(

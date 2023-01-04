@@ -70,6 +70,7 @@ export const getUserOrdersQuery = gql`
             }
           }
         }
+        promoCodeId
         totalPriceToPay
         fixedExchangeRate
         itemsPriceWithDiscount

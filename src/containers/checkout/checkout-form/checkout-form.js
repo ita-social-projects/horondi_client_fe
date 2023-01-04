@@ -44,6 +44,7 @@ import { calcPriceForCart } from '../../../utils/priceCalculating';
 import { useAppStyles } from '../../../components/app/app.styles';
 import { CurrencyContext } from '../../../context/currency-context';
 import BackButton from '../../../components/back-button';
+import { useCart } from '../../../hooks/use-cart';
 
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 const userContactLabels = userContactInputLabels();
@@ -62,6 +63,7 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
   const [countryOption, setCountryOption] = useState(countryOptions.WITHIN_UKRAINE);
   const [initialValues, setInitialValues] = useState(stateInitialValues);
   const [pricesFromQuery, setPricesFromQuery] = useState([]);
+  const { cartOperations } = useCart();
 
   const handleCountryOption = (_, newTabValue) => setCountryOption(newTabValue);
 
@@ -132,6 +134,8 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
           handleCashPayment();
         }
         clearSessionStorage();
+        cartOperations.addPromocode(null);
+        cartOperations.addCertificate(null);
       }
     });
 

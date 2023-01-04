@@ -6,12 +6,19 @@ import { HryvniaIcon, DollarIcon } from '../images/profile-icons';
 export const useCurrency = () => {
   const { currency: currentCurrency, currencies } = useContext(CurrencyContext);
 
+  const convertNotPositivePrice = useMemo(
+    () => (currentCurrency === 'USD' ? (1 / currencies.UAH.exchangeRate).toFixed(2) : 1),
+    [currencies.UAH, currentCurrency]
+  );
+
   const getPriceWithCurrency = useCallback(
     (value, exchangeRate) => {
+      if (value <= 0) return convertNotPositivePrice;
       const fixedRateExchange = currentCurrency === 'UAH' && exchangeRate;
+
       return Math.round(value * (fixedRateExchange || currencies[currentCurrency].exchangeRate));
     },
-    [currentCurrency, currencies]
+    [currentCurrency, currencies, convertNotPositivePrice]
   );
 
   const currencySign = useMemo(

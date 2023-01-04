@@ -44,13 +44,16 @@ export function* handleGetFondyUrl({ payload }) {
 
     const { totalPriceToPay, fixedExchangeRate } = newOrder;
     const orderPrice =
-      payload.currency === 'UAH' ? totalPriceToPay * fixedExchangeRate : totalPriceToPay;
+      payload.currency === 'UAH'
+        ? Math.round(totalPriceToPay * fixedExchangeRate)
+        : totalPriceToPay;
+    const priceForCheckout = orderPrice.toFixed(2).toString().replace(/\./g, '');
 
     const orderWithCheckoutUrl = yield call(
       getPaymentCheckout,
       newOrder._id,
       payload.currency,
-      (Math.round(orderPrice) * 100).toString(),
+      priceForCheckout,
       payload.language
     );
 

@@ -6,7 +6,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     alignSelf: 'center',
     '& svg': {
       fontSize: '22px',
-      color: palette.common.black,
       '&:hover': {
         transform: 'scale(1.1)'
       }

@@ -5,7 +5,7 @@ export const useStyles = makeStyles(() => ({
     width: '450px',
     height: 'fit-content',
     maxHeight: '436px',
-    minHeight: '150px',
+    minHeight: '110px',
     overflowY: 'auto',
     position: 'absolute',
     top: 54,
@@ -26,7 +26,8 @@ export const useStyles = makeStyles(() => ({
     },
     '@media (max-width: 500px)': {
       width: '100%',
-      maxHeight: '400px'
+      maxHeight: '400px',
+      minHeight: '100px'
     }
   },
   emptyList: {

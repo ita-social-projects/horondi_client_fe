@@ -6,8 +6,8 @@ export const CartContext = React.createContext();
 
 const CartContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(getFromLocalStorage(CART_KEY));
-  const [promoCode, setPromocode] = useState('');
-  const [certificate, setCertificate] = useState('');
+  const [promoCode, setPromocode] = useState(null);
+  const [certificate, setCertificate] = useState(null);
 
   useEffect(() => {
     setToLocalStorage(CART_KEY, cartItems);

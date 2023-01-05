@@ -91,6 +91,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     opacity: '0.5',
     width: '30px',
     height: '30px',
+    '& svg': { color: palette.common.black },
     '&:hover': { opacity: '0.8', background: palette.common.white }
   }
 }));

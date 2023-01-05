@@ -18,8 +18,8 @@ export const useCart = () => {
 
   const clearCart = () => {
     setCartItems([]);
-    setPromocode('');
-    setCertificate('');
+    setPromocode(null);
+    setCertificate(null);
   };
 
   const addPromocode = (promoCode) => {
@@ -35,10 +35,8 @@ export const useCart = () => {
 
   const getTotalPriceWithCertificate = (certificate) => {
     const { value } = certificate.getCertificateByParams;
-    if (currency === 'USD') {
-      return getTotalPrice() - getCertificatePriceInUSD(value);
-    }
-    return getTotalPrice() - value;
+    const withCertificateValue = currency === 'USD' ? getCertificatePriceInUSD(value) : value;
+    return getPriceWithCurrency(getTotalPrice() - withCertificateValue, 1);
   };
 
   const getTotalPricesWithPromoCode = (promoCode) => {

@@ -2,20 +2,31 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   searchBarList: {
-    width: '100%',
+    width: '450px',
     height: 'fit-content',
-    maxHeight: '100vh',
+    maxHeight: '436px',
     minHeight: '150px',
     overflowY: 'auto',
     position: 'absolute',
-    top: 96,
+    top: 54,
     right: 0,
     backgroundColor: 'white',
     boxShadow: 'rgb(197 197 197) 0px 5px 10px',
     zIndex: 10000,
-    '@media (min-width: 555px)': {
-      top: 52,
-      width: '450px'
+    '&::-webkit-scrollbar': {
+      width: '8px'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(0,0,0,.2)',
+      borderRadius: '3px'
+    },
+    '@media (max-width: 1000px)': { top: 50 },
+    '@media (max-width: 768px)': {
+      top: 94
+    },
+    '@media (max-width: 500px)': {
+      width: '100%',
+      maxHeight: '400px'
     }
   },
   emptyList: {

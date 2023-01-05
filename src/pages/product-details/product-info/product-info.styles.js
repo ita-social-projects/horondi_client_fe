@@ -118,7 +118,8 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: 10
   },
   addToFavouriteButton: {
-    '&:hover': { background: 'inherit' }
+    '& svg': { color: theme.palette.text.primary },
+    '&:hover': { background: 'inherit', transform: 'scale(1.05)' }
   },
   subtitle: {
     '@media (max-width: 500px)': {

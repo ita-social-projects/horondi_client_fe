@@ -14,8 +14,8 @@ const Cart = () => {
           <FilledCart
             items={cartItems}
             cartOperations={cartOperations}
-            promoCodedInCart={promoCode}
-            certificateInCart={certificate}
+            promoCode={promoCode}
+            certificate={certificate}
           />
         ) : (
           <EmptyCart />

@@ -5,28 +5,27 @@ const button = {
   fontSize: '14px',
   lineHeight: '20px',
   letterSpacing: '0.0125em',
-  textTransform: 'uppercase'
+  textTransform: 'uppercase',
+  '@media (max-width: 450px)': {
+    marginBottom: '12px',
+    fontSize: '12px'
+  }
 };
 const promoInput = {
   height: '48px',
   fontWeight: '400',
   fontSize: '16px',
-  lineHeight: '24px',
-  '@media (max-width: 450px)': {
-    fontSize: '12px'
-  }
+  lineHeight: '24px'
 };
 const totalWrapper = {
   display: 'flex',
-  gap: '28px',
+  gap: '14px',
   flexDirection: 'column',
   alignItems: 'center',
   fontWeight: '600',
   fontSize: '20px',
   lineHeight: '28px',
-  '@media (max-width: 650px)': {
-    gap: '12px'
-  }
+  minWidth: '280px'
 };
 
 export const useStyles = makeStyles(({ palette }) => ({
@@ -44,21 +43,13 @@ export const useStyles = makeStyles(({ palette }) => ({
       ...promoInput
     }
   },
-  textField: {
-    width: '75%'
-  },
   promoWrapper: {
     display: 'flex',
     flexDirection: 'column',
     gap: '6px',
-    '& >div': {
-      display: 'flex',
-      gap: '8px'
-    }
-  },
-  withSelectedDiscountWrapper: {
-    maxWidth: '309px',
-    flexDirection: 'column'
+    maxWidth: '300px',
+    width: '100%',
+    '@media (max-width: 900px)': { maxWidth: '320px' }
   },
   discountHeading: {
     ...totalWrapper,
@@ -107,15 +98,12 @@ export const useStyles = makeStyles(({ palette }) => ({
     '&:hover': {
       backgroundColor: palette.button.hover.backgroundColor,
       color: palette.button.hover.color
-    },
-
-    '@media (max-width: 450px)': {
-      fontSize: '12px'
     }
   },
 
   shoppingButton: {
     ...button,
+
     border: '1px solid',
     borderColor: palette.button.normal.borderColor,
     padding: '12px',
@@ -136,14 +124,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     '&:hover': {
       backgroundColor: palette.button.hover.backgroundColor,
       color: palette.button.hover.color
-    },
-    '@media (max-width: 900px)': {
-      padding: '14px 90px'
-    },
-    '@media (max-width: 450px)': {
-      padding: '14px 70px',
-      marginBottom: '12px',
-      fontSize: '12px'
     }
   },
   orderWrapper: {
@@ -159,10 +139,14 @@ export const useStyles = makeStyles(({ palette }) => ({
     color: palette.textColor,
     '& a': {
       width: '100%'
+    },
+    '@media (max-width: 900px)': {
+      width: '100%'
     }
   },
   promoAndTotalWrapper: {
     maxWidth: '1200px',
+    minHeight: '200px',
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
@@ -171,9 +155,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     paddingBottom: '100px',
     '@media (max-width: 900px)': {
       width: '100%',
+      gap: '14px',
       flexDirection: 'column-reverse',
-      justifyContent: 'center',
-      alignItems: 'center'
+      maxWidth: '320px',
+      margin: '0 auto'
     },
     '@media (max-width: 650px)': {
       padding: '16px 0',

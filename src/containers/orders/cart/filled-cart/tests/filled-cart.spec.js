@@ -36,6 +36,8 @@ const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 const mockCartOperations = {
   changeQuantity: mockChangeQuantity,
+  addPromocode: jest.fn(),
+  addCertificate: jest.fn(),
   getTotalPrice: mockGetTotalPrice,
   getCartItem: mockGetCartItem,
   getProductPrice: mockGetProductPrice,

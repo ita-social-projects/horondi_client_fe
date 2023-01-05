@@ -153,7 +153,7 @@ describe('use-cart tests', () => {
     });
 
     expect(wrap.result.current.cartItems).toHaveLength(0);
-    expect(wrap.result.current.certificate).toBe('');
-    expect(wrap.result.current.certificate).toBe('');
+    expect(wrap.result.current.certificate).toBe(null);
+    expect(wrap.result.current.certificate).toBe(null);
   });
 });

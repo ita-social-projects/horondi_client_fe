@@ -19,6 +19,7 @@ const OrderHistoryItem = ({ order }) => {
     orderNumber,
     fixedExchangeRate,
     status,
+    promoCodeId,
     itemsPriceWithDiscount
   } = order;
 
@@ -28,7 +29,7 @@ const OrderHistoryItem = ({ order }) => {
     <OrderHistoryItemProduct
       key={item.product._id + idx}
       item={item}
-      itemPriceWithDiscount={itemsPriceWithDiscount[idx]}
+      itemPriceWithDiscount={promoCodeId ? itemsPriceWithDiscount[idx] : item.fixedPrice}
       fixedExchangeRate={fixedExchangeRate}
     />
   ));

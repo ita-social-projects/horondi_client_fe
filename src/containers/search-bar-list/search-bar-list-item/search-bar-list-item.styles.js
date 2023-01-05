@@ -4,7 +4,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   searchBarListItem: {
     width: '100%',
     padding: '12px 12px 16px',
-    borderBottom: '1px solid #c3c3c3'
+    borderBottom: '1px solid #c3c3c3',
+    marginBottom: '1px'
   },
   itemBody: { display: 'flex', gap: '12px', cursor: 'pointer' },
   image: ({ imageUrl }) => ({

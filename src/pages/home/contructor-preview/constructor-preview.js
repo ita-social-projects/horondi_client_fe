@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 
 import { Button } from '@material-ui/core';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
@@ -10,10 +11,22 @@ import { useTranslation } from 'react-i18next';
 import { useStyles } from './constructor-preview.style';
 import { CONSTRUCTOR_VIDEO_LINK } from '../constants';
 import routes from '../../../configs/routes';
+import { getAllConstructors } from '../../images-constructor/operations/getAllConstructors.queries';
 
 const { pathToConstructor } = routes;
 
 const ConstructorPreview = () => {
+  const [isConstructor, setIsConstructor] = useState(false);
+
+  useQuery(getAllConstructors, {
+    variables: {
+      limit: 0,
+      skip: 0
+    },
+    onCompleted: ({ getAllConstructors }) =>
+      setIsConstructor(Boolean(getAllConstructors.items.length))
+  });
+
   const { t } = useTranslation();
 
   const [isZeroVolume, setIsZeroVolume] = useState(0);
@@ -38,9 +51,11 @@ const ConstructorPreview = () => {
           <h2 className={styles.constructorTitle}> {t('home.createUniqueStyle')} </h2>
           <p className={styles.constructorDescription}> {t('home.constructorName')} </p>
         </div>
-        <Link to={pathToConstructor}>
-          <Button className={styles.buttonStyles}> {t('home.createStyle')} </Button>
-        </Link>
+        {isConstructor && (
+          <Link to={pathToConstructor}>
+            <Button className={styles.buttonStyles}> {t('home.createStyle')} </Button>
+          </Link>
+        )}
       </div>
       <div className={styles.playerSoundControl}>
         {isZeroVolume ? (

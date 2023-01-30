@@ -3,23 +3,18 @@ import { useTranslation } from 'react-i18next';
 import ImgsViewer from 'react-images-viewer';
 import { ArrowForwardIosRounded, ArrowBackIosRounded } from '@material-ui/icons';
 import { useTheme } from '@material-ui/styles';
-import Loader from '../../../components/loader';
 
 import { useStyles } from './product-images.styles';
-import { getImage } from '../../../utils/imageLoad';
-import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
-import productPlugLight from '../../../images/product-plug-light-theme-img.png';
+import useProductImage from '../../../hooks/use-product-image';
 
 const ProductImages = ({ images }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [imagesSet, setImagesSet] = useState([]);
   const [currImg, setCurrImg] = useState(0);
 
   const [primaryImage, setPrimaryImage] = useState(0);
   const [secondaryImages, setSecondaryImages] = useState([]);
 
-  const [loading, setLoading] = useState(false);
-
+  const { imageUrlArray: imagesSet, checkImage } = useProductImage();
   const { t } = useTranslation();
   const { palette } = useTheme();
 
@@ -31,27 +26,11 @@ const ProductImages = ({ images }) => {
   );
 
   useEffect(() => {
-    const initialPhotos = async () => {
-      setLoading(true);
-      const mapImages = await Promise.all(
-        initImages.map(async (item) => {
-          try {
-            const result = await getImage(item);
-            return { src: result };
-          } catch (e) {
-            return { src: isLightTheme ? productPlugLight : productPlugDark };
-          }
-        })
-      );
-
-      setImagesSet(mapImages);
-      setLoading(false);
-    };
-    initialPhotos();
-  }, [isLightTheme, initImages]);
+    checkImage(initImages, isLightTheme);
+  }, [isLightTheme, initImages, checkImage]);
 
   useEffect(() => {
-    setSecondaryImages(imagesSet.slice(1, images.length));
+    imagesSet.length && setSecondaryImages(imagesSet.slice(1, images.length));
   }, [imagesSet, images.length]);
 
   useEffect(() => {
@@ -59,7 +38,7 @@ const ProductImages = ({ images }) => {
     setSecondaryImages(updatedSecondaryImages);
   }, [primaryImage, imagesSet]);
 
-  const styles = useStyles();
+  const styles = useStyles({ imageUrl: imagesSet[primaryImage] });
 
   const openImage = (idx) => {
     setIsOpen(true);
@@ -73,12 +52,12 @@ const ProductImages = ({ images }) => {
         return (
           <div className={styles.lastImagesBox} key={i} onClick={() => openImage(i + 1)}>
             <div className={styles.lastImageText}>
-              {t('product.allPhotos.viewAll')} {`(${images.additional.length})`}{' '}
+              {t('product.allPhotos.viewAll')} {` (${images.additional.length}) `}
               {t('product.allPhotos.photo')}
             </div>
             <img
               className={styles.lastImage}
-              src={image.src}
+              src={image}
               alt={t('product.imgAltInfo')}
               data-cy='image'
             />
@@ -89,7 +68,7 @@ const ProductImages = ({ images }) => {
         <div key={i} className={styles.imageItem}>
           <img
             className={styles.sideImage}
-            src={image.src}
+            src={image}
             alt={t('product.imgAltInfo')}
             onClick={() => setPrimaryImage(imagesSet.indexOf(secondaryImages[i]))}
             data-cy='image'
@@ -100,19 +79,31 @@ const ProductImages = ({ images }) => {
 
   const nextImg = () => {
     setPrimaryImage((prev) => prev + 1);
+    setCurrImg((prev) => prev + 1);
   };
 
   const prevImg = () => {
     setPrimaryImage((prev) => prev - 1);
+    setCurrImg((prev) => prev - 1);
   };
 
+  const handlePrimaryImageOpen = () => {
+    setCurrImg(primaryImage);
+    setIsOpen(true);
+  };
+
+  const imagesForViewer = imagesSet.map((image) => ({
+    src: image
+  }));
+
   return (
-    <div className={styles.imageBody}>
+    <div className={styles.images}>
       <ImgsViewer
-        imgs={imagesSet}
+        imgs={imagesForViewer}
         currImg={currImg}
         showThumbnails
         isOpen={isOpen}
+        backdropCloseable
         onClickPrev={() => setCurrImg((prev) => prev - 1)}
         onClickNext={() => setCurrImg((prev) => prev + 1)}
         onClickThumbnail={(index) => setCurrImg(index)}
@@ -121,32 +112,30 @@ const ProductImages = ({ images }) => {
         leftArrowTitle={t('common.prev')}
         rightArrowTitle={t('common.next')}
       />
-      <div className={styles.images}>
-        <div className={styles.imagePreviewContainer}>
-          <button className={styles.circle} onClick={prevImg} disabled={primaryImage === 0}>
-            <ArrowBackIosRounded />
-          </button>
-          <div className={styles.imageContainer}>
-            {loading ? (
-              <Loader heightWrap='100px' />
-            ) : (
-              <img
-                src={imagesSet[primaryImage]?.src}
-                className={styles.primaryImage}
-                alt={t('product.imgAltInfo')}
-              />
-            )}
-          </div>
-          <button
-            className={styles.circle}
-            onClick={nextImg}
-            disabled={primaryImage === initImages.length - 1}
-          >
-            <ArrowForwardIosRounded />
-          </button>
-        </div>
-        <div className={styles.additionalImagePreview}>{sideImages}</div>
+      <div className={styles.imagePreviewContainer}>
+        <button
+          className={styles.circle}
+          onClick={prevImg}
+          disabled={primaryImage === 0}
+          data-testid='next-image'
+        >
+          <ArrowBackIosRounded />
+        </button>
+        <div
+          className={styles.imageOpener}
+          onClick={handlePrimaryImageOpen}
+          data-testid='product-image'
+        />
+        <button
+          className={styles.circle}
+          onClick={nextImg}
+          disabled={primaryImage === initImages.length - 1}
+          data-testid='prev-image'
+        >
+          <ArrowForwardIosRounded />
+        </button>
       </div>
+      <div className={styles.additionalImagePreview}>{sideImages}</div>
     </div>
   );
 };

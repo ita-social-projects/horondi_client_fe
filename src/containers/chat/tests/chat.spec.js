@@ -1,49 +1,70 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import Chat from '..';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/core';
+import { Provider } from 'react-redux';
+import { MockedProvider } from '@apollo/client/testing';
+import { theme } from '../../../components/app/app-theme/app.theme.js';
+import { Chat } from '../chat.js';
+import '../../../index.css';
+import { getContactsForChat } from '../operations/chat-contacts.query.js';
+import configureStore from '../../../store/store.js';
 
-let wrapper;
-const useQueryData = {
-  loading: false,
-  error: false,
-  data: { getContacts: [{}] }
-};
+const store = configureStore();
+jest.mock('@material-ui/icons/Forum', () => {
+  const icons = {
+    __esModule: true
+  };
+  const handler = {
+    get(_, prop) {
+      // eslint-disable-next-line react/display-name
+      return () => <div prop={prop} />;
+    }
+  };
 
-jest.mock('react-redux');
-jest.mock('@apollo/client');
-jest.mock('../chat.style.js', () => ({ useStyles: () => ({}) }));
-jest.mock('../../../context/theme-context', () => ({}));
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useContext: () => [true, () => null]
-}));
-jest.mock('react-messenger-chat-plugin', () => ({
-  showMessenger: () => jest.mock(),
-  hideMessenger: () => jest.mock()
-}));
+  return new Proxy(icons, handler);
+});
+
+const mocks = [
+  {
+    request: {
+      query: getContactsForChat
+    },
+    result: {
+      data: {
+        getContacts: {
+          items: [
+            {
+              _id: '61800553cc84b200255f6bcd',
+              phoneNumber: '0961737361',
+              email: 'horondi.adm@gmail.com'
+            }
+          ]
+        }
+      }
+    }
+  }
+];
 
 describe('chat tests', () => {
-  useQuery.mockImplementation(() => ({
-    ...useQueryData
-  }));
+  const themeValue = theme('light');
+  render(
+    <div id='fb-root'>
+      <ThemeProvider theme={themeValue}>
+        <Provider store={store}>
+          <MockedProvider mocks={mocks} addTypename={false}>
+            <Chat />
+          </MockedProvider>
+        </Provider>
+      </ThemeProvider>
+    </div>
+  );
 
-  beforeEach(() => {
-    wrapper = shallow(<Chat />);
-  });
-
-  it('Should render chat', () => {
-    expect(wrapper).toBeDefined();
-  });
-
-  it('Should render button', () => {
-    const button = wrapper.find('button');
-
-    expect(button).toBeDefined();
-  });
-
-  it('Button should be disabled', () => {
-    wrapper.find('button').prop('onClick')();
-
-    expect(wrapper.find('button').prop('disabled')).toBe(true);
+  it('Click on messanger btn mail icon shows', async () => {
+    const buttonChat = await screen.findByTestId('chatBtn');
+    fireEvent.click(buttonChat);
+    const button = screen.getByTestId('messengerBtn');
+    fireEvent.click(button);
+    expect(screen.getByTestId('mailIconBtn')).toBeInTheDocument();
+    fireEvent.click(buttonChat);
   });
 });

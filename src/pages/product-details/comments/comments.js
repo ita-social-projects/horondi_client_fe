@@ -1,23 +1,18 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Rating from '@material-ui/lab/Rating';
-import { Button, TextField, Tooltip } from '@material-ui/core';
+import { Button, FormHelperText, TextField, Tooltip } from '@material-ui/core';
 import { useMutation, useQuery } from '@apollo/client';
 import { useStyles } from './comments.styles';
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
-import { commentFields, TEXT_VALUE } from '../../../configs/index';
+import { commentFields } from '../../../configs/index';
 import { ERROR } from '../constants';
 import { formRegExp } from '../../../configs/regexp';
 import useCommentValidation from '../../../hooks/use-comment-validation';
-import {
-  handleArrowIcon,
-  handleClassName,
-  handleTextField,
-  handleUserLogin
-} from '../../../utils/handle-comments';
+import { handleArrowIcon, handleUserLogin } from '../../../utils/handle-comments';
 import { addCommentMutation, getCommentsQuery } from './operations/comments.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../hooks/useIsLoadingOrError';
@@ -26,7 +21,7 @@ import { SnackBarContext } from '../../../context/snackbar-context';
 const Comments = ({ productId, checkCountComments }) => {
   const styles = useStyles();
   const [comments, setComments] = useState({ items: [], count: 0 });
-  const [currentLimit, setCurrentLimit] = useState(10);
+  const [currentLimit, setCurrentLimit] = useState(3);
   const { userData } = useSelector(({ User }) => ({ userData: User.userData }));
   const { t } = useTranslation();
   const { setSnackBarMessage } = useContext(SnackBarContext);
@@ -45,7 +40,6 @@ const Comments = ({ productId, checkCountComments }) => {
     },
     onError: (err) => errorOrLoadingHandler(err)
   });
-
   const [addComment, { loading: addCommentLoading }] = useMutation(addCommentMutation, {
     onCompleted: () => setSnackBarMessage(t('product.snackBar.added')),
     onError: (err) => {
@@ -90,7 +84,7 @@ const Comments = ({ productId, checkCountComments }) => {
     return t('product.comments.successfulTip');
   }, [t, userId]);
 
-  const commentsCount = comments.items.length;
+  const commentsCount = comments.count;
 
   const commentsList = comments.items.map(({ _id, ...rest }) => (
     <CommentsItem
@@ -108,10 +102,15 @@ const Comments = ({ productId, checkCountComments }) => {
     setCurrentLimit((prev) => prev + 10);
   };
 
-  const handleCommentChange = (e) => {
-    const value = e.target.value.replace(formRegExp.link, '');
-    setFieldValue(commentFields.text.name, value);
-  };
+  const handleRatingChange = useCallback((_e, newRate) => !!newRate && setRate(newRate), []);
+
+  const handleCommentChange = useCallback(
+    (e) => {
+      const value = e.target.value.replace(formRegExp.link, '');
+      setFieldValue(commentFields.text.name, value);
+    },
+    [setFieldValue]
+  );
 
   return (
     <div className={styles.comment} id='comment'>
@@ -124,34 +123,28 @@ const Comments = ({ productId, checkCountComments }) => {
             disabled={!userData}
             name='edit-rate'
             value={rate}
-            onChange={(_e, newRate) => setRate(newRate)}
+            onChange={handleRatingChange}
           />
         </span>
       </Tooltip>
       <form onSubmit={handleSubmit}>
         <div className={styles.form}>
-          {Object.values(commentFields).map(
-            ({ name, multiline = null, rows = null }) =>
-              handleTextField(name, userData) && (
-                <div key={name}>
-                  <TextField
-                    className={handleClassName(name, styles.text, styles.input)}
-                    name={name}
-                    onChange={name === TEXT_VALUE ? handleCommentChange : null}
-                    onBlur={handleBlur}
-                    value={values[name]}
-                    disabled={!userData}
-                    label={t(`product.comments.${name}`)}
-                    error={!!errors[name]}
-                    helperText={errors.text && t('error.textLength')}
-                    multiline={multiline}
-                    rows={rows}
-                    variant='outlined'
-                    data-cy={name}
-                  />
-                </div>
-              )
-          )}
+          <TextField
+            id='text'
+            onChange={handleCommentChange}
+            onBlur={handleBlur}
+            value={values.text}
+            disabled={!userData}
+            label={t(`product.comments.text`)}
+            error={!!errors.text}
+            multiline
+            rows={5}
+            variant='outlined'
+            data-cy='text'
+          />
+          <FormHelperText className={styles.errorTextarea}>
+            {errors.text ? t('error.textLength') : ' '}
+          </FormHelperText>
         </div>
 
         <div className={styles.submit}>
@@ -179,31 +172,32 @@ const Comments = ({ productId, checkCountComments }) => {
               </div>
             </Tooltip>
           </div>
-
-          {addCommentLoading && (
-            <div className={styles.loader} data-testid='addCommentLoader'>
-              <Loader width={40} height={40} heightWrap={40} />
-            </div>
-          )}
         </div>
       </form>
       <h2 className={styles.title}>
         {t('product.comments.commentsTitle')} ({commentsCount})
       </h2>
-      {commentsList}
-      {currentLimit < comments.count && (
-        <div className={styles.loadMore}>
-          {handleArrowIcon(limitOption)}
-          <span onClick={handleCommentsReload} className={styles.loadMoreText}>
-            {limitOption ? null : t('product.comments.loadMore')}
-          </span>
-        </div>
+      {commentsList.length ? (
+        commentsList
+      ) : (
+        <div className={styles.emptyComments}>{t('product.comments.emptyComments')}</div>
       )}
-      {getCommentsLoading ? (
-        <div className={styles.loader} data-testid='getCommentsLoader'>
-          <Loader width={40} height={40} heightWrap={40} />
-        </div>
-      ) : null}
+      <div className={styles.showMore}>
+        {getCommentsLoading ? (
+          <div className={styles.loader} data-testid='getCommentsLoader'>
+            <Loader width={40} height={40} heightWrap={55} />
+          </div>
+        ) : (
+          currentLimit < comments.count && (
+            <div className={styles.loadMore} data-testid='showMore'>
+              {handleArrowIcon(limitOption)}
+              <span onClick={handleCommentsReload} className={styles.loadMoreText}>
+                {limitOption ? null : t('product.comments.loadMore')}
+              </span>
+            </div>
+          )
+        )}
+      </div>
       <SnackbarItem />
     </div>
   );

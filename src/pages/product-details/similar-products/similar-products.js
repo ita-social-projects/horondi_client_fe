@@ -15,7 +15,7 @@ import { useCurrency } from '../../../hooks/use-currency';
 
 const SimilarProducts = ({ cartList, product }) => {
   const [similarProducts, setSimilarProducts] = useState([]);
-  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
+  const { getPriceWithCurrency, currencySign } = useCurrency();
   const styles = useStyles();
 
   const { error, loading } = useQuery(getFilteredProductsQuery, {
@@ -24,7 +24,6 @@ const SimilarProducts = ({ cartList, product }) => {
 
   const { t } = useTranslation();
 
-  const currencySign = getCurrencySign();
   let imagesList;
 
   if (error || loading) return errorOrLoadingHandler(error, loading);
@@ -52,7 +51,7 @@ const SimilarProducts = ({ cartList, product }) => {
           <span>{currencySign} </span>
         </div>
       ) : (
-        <div> {t('product.sizeNotAvailable')} </div>
+        <div className={styles.sizeNotAvailable}> {t('product.unavailable')} </div>
       );
 
     return (
@@ -78,7 +77,7 @@ const SimilarProducts = ({ cartList, product }) => {
           <Carousel
             className={styles.carousel}
             responsive={RESPONSIVE_PDP}
-            swipeable={false}
+            partialVisible
             autoPlay
             autoPlaySpeed={5000}
             infinite
@@ -87,7 +86,9 @@ const SimilarProducts = ({ cartList, product }) => {
             {imagesList}
           </Carousel>
         </div>
-      ) : null}
+      ) : (
+        <div className={styles.emptySimilarItems} />
+      )}
     </div>
   );
 };

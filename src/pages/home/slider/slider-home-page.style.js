@@ -8,6 +8,8 @@ export const useStyles = makeStyles(() => ({
   },
   overlay: {
     position: 'relative',
+    marginTop: '-92px',
+    paddingTop: '92px',
     top: '0',
     left: '0',
     width: '100%',

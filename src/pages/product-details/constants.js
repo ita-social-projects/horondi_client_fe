@@ -24,19 +24,21 @@ export const defaultProductToSend = {
 
 export const RESPONSIVE_PDP = {
   superLargeDesktop: {
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5
+    breakpoint: { max: 4000, min: 1150 },
+    items: 3.5
   },
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    breakpoint: { max: 1150, min: 950 },
     items: 3
   },
   tablet: {
-    breakpoint: { max: 1146, min: 464 },
-    items: 2
+    breakpoint: { max: 950, min: 750 },
+    items: 2.5
   },
+  smallerTablet: { breakpoint: { max: 750, min: 550 }, items: 2 },
+  biggerMobile: { breakpoint: { max: 550, min: 400 }, items: 1.5 },
   mobile: {
-    breakpoint: { max: 810, min: 0 },
+    breakpoint: { max: 400, min: 0 },
     items: 1
   }
 };

@@ -99,9 +99,7 @@ describe('Comments page tests', () => {
 
   it('Show loader on page startup', () => {
     const getCommentsLoader = screen.queryByTestId('getCommentsLoader');
-    const addCommentLoader = screen.queryByTestId('addCommentLoader');
 
-    expect(addCommentLoader).toBe(null);
     expect(getCommentsLoader).toBeTruthy();
   });
 

@@ -2,24 +2,32 @@
   "title": "My certificates",
   "emptyTitle": "You don't have certificates",
   "certificate": "Certificate",
+  "certificates": "Certificates",
   "code": "Code",
   "price": "Price",
   "expiration": "Expiration date",
   "status": "Status",
+  "actions": "Actions",
   "buy": "Buy certificate",
   "add": "Add certificate",
   "active": "Active",
+  "inProgress": "In progress",
   "expired": "Expired",
   "used": "Used",
   "copy": "Copy",
+  "gift": "Gift",
   "currency": "UAH",
   "giftCertificate": "Gift Certificate",
   "for": "for",
   "chooseCertificate": "Choose your certificate",
+  "successfulCopy": "Certificate has been copied",
   "certificateRules": [
     "Gift certificate provides a discount of 500, 1000, 1500 UAH, for any Horondi products.",
     "If the purchase price exceeds the available balance of the gift certificate, you can pay the difference in a convenient way.",
+    "Gift certificate can be used for a single transaction. If your order value is less than certificate value the remaining amount will be lost",
     "The gift certificate is not refundable or exchangeable for the relevant money equivalent.",
     "The certificate is valid for 365 days from the date of purchase."
-  ]
+  ],
+  "certificateNotification": "Your certificate expires on {{date}} at {{time}}",
+  "certificateNotificationButton": "View certificates"
 }

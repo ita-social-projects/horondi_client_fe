@@ -1,53 +1,32 @@
 import React from 'react';
-
-import { useDispatch, useSelector } from 'react-redux';
+import { render } from '@testing-library/react';
 import Wishlist from '../wishlist';
 
-jest.mock('connected-react-router', () => ({
-  push: jest.fn()
-}));
 jest.mock('../../../components/app/app.styles', () => ({ useAppStyles: () => ({}) }));
-jest.mock('react-redux');
-jest.mock('../../../services/local-storage.service');
-jest.mock('../../../hooks/use-wishlist-loader', () => ({
-  __esModule: true,
-  default: () => ({ loading: false, error: null, wishlist: {} })
+
+const mockWishlist = [{ _id: '614cb8', price: '2840' }];
+jest.mock('../../../hooks/use-wishlist', () => ({
+  useWishlist: () => ({ wishlist: mockWishlist })
 }));
 
-jest.mock('@apollo/client', () => ({
-  ...jest.requireActual('@apollo/client'),
-  useMutation: () => [
-    () => null,
-    {
-      loading: true,
-      error: null,
-      data: { addProductToWishlist: { products: [{ _id: 1 }] } }
-    }
-  ]
-}));
+const mockFilledWishlist = jest.fn().mockImplementation(() => null);
+jest.mock(
+  '../filled-wishlist',
+  () =>
+    ({ items }) =>
+      mockFilledWishlist(items)
+);
 
-const dispatch = jest.fn();
-const state = {
-  isLightTheme: true,
-  language: 0,
-  loading: false
-};
-
-useDispatch.mockImplementation(() => dispatch);
-useSelector.mockImplementation(() => state);
-
-let wrapper;
+const mockToast = jest.fn().mockImplementation(() => null);
+jest.mock('../../../containers/toast', () => () => mockToast());
 
 describe('Wishlist component tests', () => {
   beforeEach(() => {
-    wrapper = shallow(<Wishlist />);
-  });
-
-  afterEach(() => {
-    wrapper = null;
+    render(<Wishlist />);
   });
 
   it('Should render Wishlist', () => {
-    expect(wrapper).toBeDefined();
+    expect(mockFilledWishlist).toHaveBeenCalledWith(mockWishlist);
+    expect(mockToast).toHaveBeenCalled();
   });
 });

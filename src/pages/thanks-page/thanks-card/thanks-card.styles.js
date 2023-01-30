@@ -6,6 +6,7 @@ const blackText = '#242424';
 
 export const useStyles = makeStyles(({ palette }) => ({
   thanksCardContainer: {
+    width: '100%',
     height: '100vh',
     display: 'flex',
     justifyContent: 'center',
@@ -14,8 +15,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   imageWrapper: {
     background: `url(${BG}) no-repeat center center`,
     backgroundSize: 'cover',
-    height: '65%',
-    width: '50vh',
+    height: '600px',
+    width: '460px',
     '@media (max-width: 959px)': {
       display: 'none'
     }
@@ -23,9 +24,12 @@ export const useStyles = makeStyles(({ palette }) => ({
   infoCard: {
     backgroundColor: palette.type === 'light' ? '#FFFFFF' : '#242424',
     width: '460px',
-    height: '499px',
+    minHeight: '499px',
     left: '260px',
-    top: '268px'
+    top: '268px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
   thanksForBuy: {
     margin: '40px 30px 40px 30px',
@@ -41,26 +45,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: '22px',
     textAlign: 'center'
   },
-  customerInfo: {
-    margin: '10px 25px 10px 25px'
-  },
-  infoChunk: {
-    margin: '10px 25px 10px 25px',
-    fontSize: '16px',
-    color: palette.type === 'light' ? blackText : whiteText
-  },
-  chunkName: {
-    display: 'inline'
-  },
-  chunkValue: {
-    display: 'inline',
-    fontWeight: 'bold'
-  },
-  controllBlock: {
-    marginTop: '5%'
-  },
   continueShopping: {
-    margin: '10px 10% 10px 10%',
+    margin: '50px 10% 10px 10%',
     backgroundColor: palette.button.normal.backgroundColor,
     color: palette.button.normal.color,
     '&:hover': {

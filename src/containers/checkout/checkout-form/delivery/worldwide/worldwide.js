@@ -6,6 +6,7 @@ import { messengers } from './const';
 import { TEXT_FIELD_VARIANT, RESET } from '../../../../../configs';
 import { useStyles } from './worldwide.styles';
 import WorldwideService from '../../../../../services/worldwide-delivery.service';
+import { getOptionSelected } from '../../../../../utils/handle-delivery';
 
 const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => {
   const styles = useStyles();
@@ -57,7 +58,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
       setStatesOptions([]);
       setCitiesOptions([]);
     }
-  }, [values.worldWideCountry]);
+  }, [values.worldWideCountry, setFieldValue]);
 
   useEffect(() => {
     if (values.stateOrProvince) {
@@ -68,7 +69,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
       setFieldValue('cityCode', '');
       setCitiesOptions([]);
     }
-  }, [values.stateOrProvince]);
+  }, [values.stateOrProvince, setFieldValue, values.worldWideCountry]);
 
   return (
     <div className={styles.worldwide}>
@@ -120,6 +121,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
         <Autocomplete
           className={styles.addressInput}
           options={countryOptions}
+          getOptionSelected={getOptionSelected}
           value={values.worldWideCountry}
           inputValue={countryInputState}
           onInputChange={(_, value) => setCountryInput(value)}
@@ -140,6 +142,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
           className={styles.addressInput}
           options={statesOptions}
           value={values.stateOrProvince}
+          getOptionSelected={getOptionSelected}
           inputValue={stateOrProvinceInput}
           onInputChange={(_, value) => setStateOrProvinceInput(value)}
           onChange={(_, value) => setFieldValue('stateOrProvince', value || '')}
@@ -161,8 +164,9 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
             handleCityInputChange(value, reason);
           }}
           onChange={(_, value) => setFieldValue('worldWideCity', value || '')}
+          getOptionSelected={getOptionSelected}
           data-testid='worldWideCity'
-          disabled={!values.worldWideCountry}
+          disabled={!values.stateOrProvince}
           renderInput={(params) => (
             <TextField
               {...params}

@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const addProductFromConstructor = gql`
-  mutation ($product: ProductInput!, $upload: Upload!) {
-    addProductFromConstructor(product: $product, upload: $upload) {
+  mutation ($product: ProductInput!) {
+    addProductFromConstructor(product: $product) {
       ... on Product {
         __typename
         _id

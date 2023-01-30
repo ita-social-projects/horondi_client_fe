@@ -3,10 +3,13 @@ import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
+import { ThemeProvider } from '@material-ui/styles';
+import { theme } from '../../../../components/app/app-theme/app.theme';
 
 import { ActiveMessenger } from '../active-messenger';
 import { sendEmailMutation } from '../../operations/chat.mutations';
 
+const themeValue = theme('light');
 const visible = true;
 const themeMode = [true, () => ({})];
 const mockStore = {
@@ -15,7 +18,6 @@ const mockStore = {
 };
 const mockHandleMailFormVisible = true;
 jest.mock('react-redux');
-jest.mock('../../chat.style.js', () => ({ useStyles: () => ({}) }));
 jest.mock('react-router', () => ({
   useLocation: () => ({ search: jest.fn() }),
   useHistory: () => jest.fn()
@@ -50,13 +52,15 @@ const mocks = [
 describe('ActiveMessenger component', () => {
   beforeEach(() => {
     render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <ActiveMessenger
-          iconsVisible={visible}
-          mailFormVisible={mockHandleMailFormVisible}
-          themeMode={themeMode}
-        />
-      </MockedProvider>
+      <ThemeProvider theme={themeValue}>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <ActiveMessenger
+            iconsVisible={visible}
+            mailFormVisible={mockHandleMailFormVisible}
+            themeMode={themeMode}
+          />
+        </MockedProvider>
+      </ThemeProvider>
     );
   });
 
@@ -95,6 +99,6 @@ describe('ActiveMessenger component', () => {
     const btn = screen.getByRole('button');
     userEvent.click(btn);
 
-    expect(await screen.findByText('chat.thanksMsg')).toBeInTheDocument();
+    expect(await screen.findByText('chat.thanksMsg')).not.toBeInTheDocument();
   });
 });

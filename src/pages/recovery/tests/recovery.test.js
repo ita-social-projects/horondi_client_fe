@@ -41,3 +41,18 @@ describe('Recovery component tests', () => {
     expect(component.find(AuthWrapper).length).toBe(1);
   });
 });
+
+describe('Recovery component', () => {
+  it('Should contains succes window', () => {
+    useSelector.mockImplementation(() => ({
+      error: false,
+      userRecovered: true,
+      recoveryLoading: ''
+    }));
+
+    const wrapper = mount(<Recovery />);
+    const successHeading = wrapper.find('h2');
+
+    expect(successHeading.length).toBe(1);
+  });
+});

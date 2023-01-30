@@ -15,7 +15,8 @@ const Delivery = ({
   handleChange,
   setFieldValue,
   setDeliveryType,
-  countryOption
+  countryOption,
+  resetForm
 }) => (
   <>
     <TabPanel value={countryOption} index={countryOptions.WITHIN_UKRAINE}>
@@ -25,6 +26,8 @@ const Delivery = ({
         setFieldValue={setFieldValue}
         deliveryType={deliveryType}
         setDeliveryType={setDeliveryType}
+        values={values}
+        resetForm={resetForm}
       />
       {deliveryType === deliveryTypes.NOVAPOST && (
         <NovaPost

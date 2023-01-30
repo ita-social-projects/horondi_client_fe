@@ -2,15 +2,17 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useMutation } from '@apollo/client';
 import { render, screen } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/styles';
 import { MailForm } from '../mail-form';
 import { mockedCartItemsData } from '../../../../tests/unit/components/your-order/your-order.variables';
+import { theme } from '../../../../components/app/app-theme/app.theme';
 
-jest.mock('../../chat.style.js', () => ({ useStyles: () => ({}) }));
 jest.mock('@apollo/client');
-
 jest.mock('react-redux', () => ({
   useSelector: jest.fn()
 }));
+
+const themeValue = theme('light');
 useMutation.mockImplementation(() => [
   jest.fn(),
   {
@@ -27,34 +29,28 @@ const userData = {
 
 const props = {
   cancelIconHandler: jest.fn(),
-  contacts: [
-    {
-      _id: '234',
-      phoneNumber: '0690000000',
-      email: 'test@gmail.com'
-    }
-  ],
   themeMode: true
 };
 
 describe('<MailForm />', () => {
   it('should render SendButton', () => {
     useSelector.mockImplementation(() => userData);
-    render(<MailForm {...props} />);
+    render(
+      <ThemeProvider theme={themeValue}>
+        <MailForm {...props} />
+      </ThemeProvider>
+    );
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
   it('should render 3 inputs', () => {
-    render(<MailForm {...props} />);
+    render(
+      <ThemeProvider theme={themeValue}>
+        <MailForm {...props} />
+      </ThemeProvider>
+    );
     const inputs = document.querySelectorAll('input');
     const spans = document.querySelectorAll('span');
     expect(inputs.length).toBe(2);
-    expect(spans.length).toBe(12);
-  });
-  it('should render phoneNumber & email', () => {
-    const { getByText } = render(<MailForm {...props} />);
-    const phone = getByText(/069000000/i);
-    const email = getByText(/test@gmail.com/i);
-    expect(phone).toBeInTheDocument();
-    expect(email).toBeInTheDocument();
+    expect(spans.length).toBe(9);
   });
 });

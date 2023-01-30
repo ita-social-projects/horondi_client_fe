@@ -13,6 +13,7 @@ const loginUser = async (data) => {
     email
     firstName
     lastName
+	 certificateExpires
     phoneNumber
     confirmed
     configs {
@@ -49,19 +50,44 @@ const loginUser = async (data) => {
 const getGoogleUser = async ({ idToken }) => {
   const getGoogleUserMutation = `
     mutation($idToken:String!){googleUser(idToken:$idToken){
-      _id
-      firstName,
-      lastName,
-      email,
+		orders
+		token
+		refreshToken
+		_id
+		email
+		firstName
+		lastName
+		certificateExpires
+		phoneNumber
+		confirmed
+		configs {
+		  language
+		  currency
+		  theme
+		}
+		images {
+		  thumbnail
+		}
+		address {
+		  country
+		  city
+		  street
+		  buildingNumber
+		  appartment
+		  region
+		  district
+		  zipcode
+		  }
+		  banned{
+		  blockPeriod
+		  blockCount
+		  updatedAt
+		}
       credentials{
-        source,
+        source
         tokenPass
       }
-      token
-} 
-
-}
-  `;
+	}}`;
   const result = await getItems(getGoogleUserMutation, { idToken });
 
   return result?.data?.googleUser;
@@ -70,11 +96,12 @@ const getFacebookUser = async ({ idToken }) => {
   const getFacebookUserMutation = `
     mutation($idToken:String!){facebookUser(idToken:$idToken){
       _id
-      firstName,
-      lastName,
-      email,
+      firstName
+      lastName
+      email
+		certificateExpires
       credentials{
-        source,
+        source
         tokenPass
       }
       token
@@ -206,31 +233,39 @@ const getUserByToken = async () => {
       query {
         getUserByToken {
           ... on User {
-            orders
-            _id
-            email
-            firstName
-            lastName
-            phoneNumber
-            configs {
-              language
-              currency
-              theme
-            }
-            images {
-              thumbnail
-            }
-            address {
-              country
-              city
-              street
-              buildingNumber
-              appartment
-              zipcode
-              region
-              district
-            }
-            confirmed
+				orders
+				token
+				refreshToken
+				_id
+				email
+				firstName
+				lastName
+				phoneNumber
+				certificateExpires
+				confirmed
+				configs {
+				  language
+				  currency
+				  theme
+				}
+				images {
+				  thumbnail
+				}
+				address {
+				  country
+				  city
+				  street
+				  buildingNumber
+				  appartment
+				  region
+				  district
+				  zipcode
+				  }
+				  banned{
+				  blockPeriod
+				  blockCount
+				  updatedAt
+				}
           }
           ... on Error {
             statusCode

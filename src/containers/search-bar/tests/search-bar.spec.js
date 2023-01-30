@@ -2,7 +2,11 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { ThemeProvider } from '@material-ui/core';
 import { mocks, TestWrapper } from './search-bar.variables';
+import { theme } from '../../../components/app/app-theme/app.theme';
+
+const themeValue = theme('light');
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
@@ -20,9 +24,11 @@ describe('search-bar testing', () => {
 
   beforeEach(() => {
     render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <TestWrapper />
-      </MockedProvider>
+      <ThemeProvider theme={themeValue}>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <TestWrapper />
+        </MockedProvider>
+      </ThemeProvider>
     );
   });
 
@@ -59,5 +65,15 @@ describe('search-bar testing', () => {
 
     const element = await screen.findByTestId(targetValue);
     expect(element.textContent).toBe('1');
+  });
+
+  test('should clear input when click on icon click', () => {
+    fireEvent.change(screen.getByPlaceholderText('searchBarPlaceholder'), {
+      target: { value: targetValue }
+    });
+    const inputValue = screen.getByPlaceholderText('searchBarPlaceholder');
+    expect(inputValue.value).toBe(targetValue);
+    fireEvent.click(screen.getByTestId('clear-icon'));
+    expect(inputValue.value).toBe('');
   });
 });

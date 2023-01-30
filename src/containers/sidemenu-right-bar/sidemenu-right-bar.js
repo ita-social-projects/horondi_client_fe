@@ -5,31 +5,38 @@ import Currency from '../currency';
 import Language from '../language';
 import CartHeader from '../cart-header';
 import WishlistHeader from '../wishlist-header';
+import ThemeComponent from '../theme';
 
 const SidemenuRightBar = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
-
   return (
-    <div className={styles.root}>
-      <div
-        className={`${styles.wishlist} ${styles.iconItem}`}
-        onClick={() => setIsMenuOpen(false)}
-        data-testid='wishlist-icon'
-      >
-        <WishlistHeader />
+    <div className={styles.flexColumn}>
+      <div className={styles.topIcons}>
+        <div
+          className={`${styles.wishListAndCartIcon} ${styles.iconItem}`}
+          onClick={() => setIsMenuOpen(false)}
+          data-testid='wishlist-icon'
+        >
+          <WishlistHeader fromSideBar />
+        </div>
+        <div
+          className={`${styles.wishListAndCartIcon} ${styles.iconItem}`}
+          onClick={() => setIsMenuOpen(false)}
+          data-testid='cart-icon'
+        >
+          <CartHeader fromSideBar />
+        </div>
       </div>
-      <div
-        className={`${styles.cartHeader} ${styles.iconItem}`}
-        onClick={() => setIsMenuOpen(false)}
-        data-testid='cart-icon'
-      >
-        <CartHeader fromSideBar />
-      </div>
-      <div className={`${styles.language} ${styles.iconItem}`}>
-        <Language fromSideBar />
-      </div>
-      <div className={`${styles.currency} ${styles.iconItem}`}>
-        <Currency fromSideBar />
+      <div className={styles.bottomIcons}>
+        <div className={styles.iconItem}>
+          <Language fromSideBar />
+        </div>
+        <div className={styles.iconItem}>
+          <Currency fromSideBar />
+        </div>
+        <div className={styles.iconItem}>
+          <ThemeComponent fromSideBar />
+        </div>
       </div>
     </div>
   );

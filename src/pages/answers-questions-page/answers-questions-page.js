@@ -3,10 +3,12 @@ import parse from 'html-react-parser';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import Accordions from '../../components/accordion/accordions';
+import PageTitle from '../../components/page-title';
 import { useStyles } from './answers-questions-page.style';
 import { getAllQuestionsAnswers } from './operations/answers-questions.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useAppStyles } from '../../components/app/app.styles';
+import BackButton from '../../components/back-button';
 
 const AnswersQuestionsPage = () => {
   const { t } = useTranslation();
@@ -24,27 +26,28 @@ const AnswersQuestionsPage = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const answers = page.map((accordion) => {
+    const { _id } = accordion;
+    const question = accordion.question && <h2>{t(`${accordion.translationsKey}.question`)}</h2>;
+    const answer = accordion?.answer && parse(t(`${accordion.translationsKey}.answer`));
+    return (
+      <Accordions
+        key={_id}
+        id={_id}
+        title={question}
+        text={answer}
+        expanded={expanded}
+        handleChange={handleChange}
+      />
+    );
+  });
+
   return (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.container}`}>
-        <h1>{t('common.titleQuestionsAnswers')}</h1>
-        {page.map((accordion) => {
-          const { _id } = accordion;
-          const question = accordion.question && (
-            <h1>{t(`${accordion.translationsKey}.question`)}</h1>
-          );
-          const answer = accordion?.answer && parse(t(`${accordion.translationsKey}.answer`));
-          return (
-            <Accordions
-              key={_id}
-              id={_id}
-              title={question}
-              text={answer}
-              expanded={expanded}
-              handleChange={handleChange}
-            />
-          );
-        })}
+        <BackButton />
+        <PageTitle title={t('common.titleQuestionsAnswers')} />
+        {answers}
       </div>
     </div>
   );

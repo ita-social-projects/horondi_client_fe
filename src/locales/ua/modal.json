@@ -1,9 +1,16 @@
 {
-    "modalDeleteAllMessage": "Видалити всі товари з кошику?",
-    "modalDeleteItemMessage": "Видалити товар з кошику?",
-    "modalDeleteFromWishlistMessage": "Ви дійсно бажаєте видалити ",
-    "modalButtons": {
+  "modalDeleteAllMessage": "Видалити всі товари з кошику?",
+  "modalDeleteItemMessage": "Видалити товар з кошику?",
+  "modalDeleteFromWishlistMessage": "Ви дійсно бажаєте видалити ",
+  "modalButtons": {
     "confirm": "Видалити",
     "camcel": "Скасувати"
+  },
+  "giftCertificate": {
+    "title": "Бажаєте подарувати цей сертифікат?",
+    "successfulTitle": "Сертифікат успішно надіслано!",
+    "confirmButton": "Подарувати",
+    "dismissButton": "Скасувати",
+	 "closeButton":"Закрити"
   }
 }

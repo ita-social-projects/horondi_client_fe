@@ -5,21 +5,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    position: 'relative'
   },
-  title: (isLightTheme) => ({
-    fontStyle: 'normal',
-    marginTop: '50px',
-    fontWeight: 'normal',
-    fontSize: '38px',
-    lineHeight: '65px',
-    marginBottom: '80px',
-    color: isLightTheme ? '#242424' : '#FEFEFE',
-    '@media screen and (max-width:768px)': {
-      fontSize: '28px',
-      margin: '30px 0 40px'
-    }
-  }),
   table: {
     flexGrow: 1,
     width: '100%',
@@ -35,18 +23,22 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   tableHeader: () => ({
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: '14px',
-    lineHeight: '20px',
-    letterSpacing: '0.001em',
-    color: '#242424',
     paddingBottom: 10,
     paddingTop: 10,
     '& > th': {
-      padding: 8
+      fontWeight: '600',
+      padding: 8,
+      '&:last-child': { textAlign: 'center' },
+      '@media (max-width: 450px)': {
+        display: 'none'
+      }
     },
     borderTop: `1px solid ${palette.cart.borderColor}`,
     borderBottom: `1px solid ${palette.cart.borderColor}`
-  })
+  }),
+  pathBack: {
+    position: 'absolute',
+    top: 0,
+    left: 0
+  }
 }));

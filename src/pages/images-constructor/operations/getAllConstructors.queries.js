@@ -59,18 +59,8 @@ export const getAllConstructors = gql`
           }
           absolutePrice
         }
-        pocketsWithRestrictions {
-          currentPocketWithPosition {
-            pocket {
-              _id
-              images {
-                large
-                medium
-                small
-                thumbnail
-              }
-            }
-          }
+        pockets {
+          _id
         }
         patterns {
           _id

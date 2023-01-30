@@ -5,11 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { useStyles } from './thanks-card.styles';
 import routes from '../../../configs/routes';
 
-const ThanksCard = ({ orderNumber, customerName, phoneNumber, deliveryType, address }) => {
+const ThanksCard = ({ orderNumber }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const { pathToCategory, pathToMain } = routes;
-  const isFromUkraine = phoneNumber?.length === 9;
 
   return (
     <div className={styles.thanksCardContainer} data-testid='thanks-card'>
@@ -18,26 +17,6 @@ const ThanksCard = ({ orderNumber, customerName, phoneNumber, deliveryType, addr
         <div className={styles.thanksForBuy}>{t('thanksPage.thanksCard.thanksForBuy')}</div>
         <div className={styles.orderNumber}>
           {`${t('thanksPage.thanksCard.orderNumber')} ${orderNumber}`}
-        </div>
-        <div className={styles.customerInfo}>
-          <div className={styles.infoChunk}>
-            <p className={styles.chunkName}>{t('thanksPage.thanksCard.customer')}</p>
-            <p className={styles.chunkValue}>{customerName}</p>
-          </div>
-          <div className={styles.infoChunk}>
-            <p className={styles.chunkName}>{t('thanksPage.thanksCard.phone')}</p>
-            <p className={styles.chunkValue}>
-              {isFromUkraine ? `+380${phoneNumber}` : phoneNumber}
-            </p>
-          </div>
-          <div className={styles.infoChunk}>
-            <p className={styles.chunkName}>{t('thanksPage.thanksCard.deliveryType')}</p>
-            <p className={styles.chunkValue}>{deliveryType}</p>
-          </div>
-          <div className={styles.infoChunk}>
-            <p className={styles.chunkName}>{t('thanksPage.thanksCard.address')}</p>
-            <p className={styles.chunkValue}>{address}</p>
-          </div>
         </div>
         <div className={styles.controllBlock}>
           <Link to={pathToCategory} style={{ textDecoration: 'none' }}>

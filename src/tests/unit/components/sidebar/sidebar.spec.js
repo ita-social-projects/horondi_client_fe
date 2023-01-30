@@ -85,11 +85,6 @@ describe('Сheck if the setIsMenuOpen function is called for an element with the
     expect(setIsMenuOpen).toHaveBeenCalled();
   });
 
-  it('linkToConstructor', () => {
-    wrapper.find('[data-testid="linkToConstructor"]').simulate('click');
-    expect(setIsMenuOpen).toHaveBeenCalled();
-  });
-
   it('linkToSidebar', () => {
     wrapper.find('[data-testid="linkToSidebar"]').simulate('close');
     expect(setIsMenuOpen).toHaveBeenCalled();

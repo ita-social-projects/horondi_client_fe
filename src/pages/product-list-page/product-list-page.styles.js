@@ -7,91 +7,47 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    padding: '0 2rem 1rem 2rem',
-    width: '100%'
+    padding: '0 32px 16px',
+    width: '100%',
+    '@media (max-width: 768px)': { padding: '0 0 16px' }
   },
   productsWrapper: {
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    rowGap: '48px',
+    marginBottom: '96px',
+    '@media (max-width:600px)': { marginBottom: '60px', rowGap: '24px' }
   },
   productsDiv: {
     width: '100%',
-
     '@media (max-width: 768px)': {
       padding: 0,
       margin: 0
     }
   },
-  sortDiv: {
-    paddingTop: '51px',
-    '@media (max-width: 960px)': {
-      paddingTop: '21px'
-    },
-    '& div': {
-      flexWrap: 'wrap',
-      marginRight: 0
-    }
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'center',
-    fontSize: '59px',
-    fontWeight: 'normal',
-    borderBottom: '1px solid gray',
-    padding: '80px 1rem 50px 1rem'
-  },
-
   paginationDiv: {
     display: 'flex',
     justifyContent: 'center',
-    margin: '76px 0 98px 0',
     '& ul': {
       '& li': {
         '& button': {
-          borderRadius: 0,
-          height: '50px',
-          width: '50px',
-          margin: '0 5px'
-        },
-        '& button.Mui-selected': {
-          backgroundColor: theme.palette.backgroundColor,
-          border: theme.palette.type === 'light' ? '1px solid #000000' : '1px solid #FEFEFE'
+          opacity: 1,
+          borderRadius: 2,
+          padding: '25px 20px',
+          margin: '0 5px',
+          '@media (max-width:600px)': { padding: '22px 15px' }
         }
       }
+    },
+    '& .Mui-selected': {
+      border: '1px solid'
     },
     '@media (max-width:500px)': {
-      padding: '1rem 0',
-      '& ul': {
-        '& li': {
-          '& button': {
-            minWidth: '25px !important',
-            height: '25px !important',
-            padding: 0,
-            margin: 0
-          }
-        }
-      }
+      padding: '1rem 0'
     }
-  },
-  button: {
-    fontSize: '0.9em',
-    margin: '0 auto',
-    display: 'none',
-    color: theme.palette.backgroundColor,
-    backgroundColor: theme.palette.textColor,
-    '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
-    },
-    '@media (max-width: 959px)': {
-      display: 'block'
-    }
-  },
-  filterButtonBlock: {
-    padding: '15px'
   },
   products: {
     display: 'flex',
@@ -115,10 +71,10 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
+    overflowY: 'auto'
   },
   drawerContainer: {
-    overflow: 'auto',
     display: 'flex',
     paddingTop: '20px',
     justifyContent: 'center'

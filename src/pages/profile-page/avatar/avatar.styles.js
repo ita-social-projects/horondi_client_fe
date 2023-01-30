@@ -4,6 +4,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   userImage: {
     height: '100%',
     width: '100%',
+    objectFit: 'cover',
     borderRadius: '50%',
     '&:hover': {
       zIndex: -1
@@ -20,6 +21,11 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 768px)': {
       gridColumn: 'span 3',
       margin: '0 auto'
+    },
+    '@media (max-width: 575px)': {
+      width: 130,
+      height: 130,
+      marginBottom: '14px'
     }
   },
   imageContainerLabel: {

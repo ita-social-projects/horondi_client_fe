@@ -3,16 +3,10 @@ import BG from '../../images/9.jpg';
 
 export const useStyles = makeStyles(({ palette }) => ({
   thanksBackground: {
-    background: `url(${BG}) no-repeat `,
+    background: `url(${BG}) no-repeat center center fixed `,
     backgroundSize: 'cover',
-    height: '1000px',
+    height: '100%',
     position: 'relative'
-  },
-  thanksContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '100%'
   },
   linkToPayment: {
     display: 'flex',
@@ -35,17 +29,8 @@ export const useStyles = makeStyles(({ palette }) => ({
       color: palette.button.hover.color
     }
   },
-  thunksTitle: () => ({
-    fontSize: 30,
-    color: palette.type === 'light' ? '#000000' : '#ffffff',
-    fontWeight: 400,
-    marginBottom: 0
-  }),
-
-  thunksInfo: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+  thanksInfo: {
+    height: '100%',
+    width: '100%'
   }
 }));

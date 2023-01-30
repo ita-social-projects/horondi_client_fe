@@ -20,7 +20,7 @@ jest.mock('react-i18next', () => ({
 let wrapper;
 describe('Test Product-description component', () => {
   it('should render component when Loading true', () => {
-    wrapper = shallow(<ProductDescription product={product} currentSizeIndex={0} />);
+    wrapper = shallow(<ProductDescription product={product} currentSize={product.sizes[0].size} />);
     expect(wrapper).toBeTruthy();
   });
 });

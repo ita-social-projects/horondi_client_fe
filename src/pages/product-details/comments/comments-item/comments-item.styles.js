@@ -155,7 +155,7 @@ export const useStyles = makeStyles((theme) => {
       color,
       opacity: 0.5
     },
-    iconF: {
+    feedbackIcon: {
       height: '16px',
       width: '16px',
       color,

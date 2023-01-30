@@ -47,7 +47,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%',
     marginBottom: 10,
     '@media (max-width: 991px)': {
-      flexDirection: 'column'
+      flexDirection: 'column',
+      alignItems: 'center'
     }
   },
   userInfoContainer: {
@@ -71,6 +72,9 @@ export const useStyles = makeStyles(({ palette }) => ({
       '&.Mui-focused fieldset': {
         borderColor: palette.textColor
       }
+    },
+    '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': {
+      marginRight: '4px'
     },
     width: '100%'
   },
@@ -142,56 +146,31 @@ export const useStyles = makeStyles(({ palette }) => ({
   delivery: {
     width: '100%'
   },
-  deliveryContainer: {
-    '@media (max-width: 991px)': {
-      width: '100%',
-      marginTop: '2%'
-    }
-  },
   inputData: {
     marginBottom: 10,
     width: '100%'
   },
-
   checkoutTitleInfo: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%'
   },
-  checkoutTitleInfoData: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginTop: '25px',
-    width: '100%'
-  },
   backBtn: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    padding: '0 20px 0 0',
-    height: '100%',
+    position: 'absolute',
+    top: '40px',
     width: 48,
     color: palette.backspaceIcon.color,
+    '@media (max-width: 900px)': { top: '32px' },
+    '@media (max-width: 600px)': { top: '24px' },
     '&:hover': {
       transform: 'scale(1.1)',
       transition: '0.1s'
     }
   },
-  checkoutTitle: {
-    fontSize: 30,
-    fontWeight: 400,
-    textAlign: 'center',
-    color: palette.textColor,
-    width: '100%'
-  },
   checkoutTitleLine: {
     background: '#636262',
     height: 1,
-    marginTop: 15,
-    '@media (max-width: 768px)': {
-      width: '90%'
-    }
+    marginTop: 15
   },
 
   consentMessage: {
@@ -217,7 +196,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     padding: '32px 24px',
     marginTop: '20px',
     '@media (max-width: 1150px)': {
-      position: 'inherit',
       marginBottom: '20px'
     },
     '&.MuiPaper-root': {
@@ -227,7 +205,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   yourOrderList: {
     marginTop: '10px',
     position: 'static',
-    height: '136px',
+    height: '150px',
     width: '105%',
     overflowX: 'hidden',
     overflowY: 'scroll',
@@ -243,61 +221,36 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   yourOrderListImg: {
-    position: 'absolute',
     width: '56px',
     height: '56px',
     objectFit: 'cover',
     objectPosition: '55% 50%',
-    left: '25px',
-    top: '0px'
+    marginLeft: '10px'
   },
   yourOrderListItem: {
-    height: '56px'
+    height: '50%'
+  },
+  listItemQuantity: {
+    marginBottom: '7px'
   },
   yourOrderListItemDescriptionContainer: {
-    position: 'absolute',
-    height: '53px',
-    left: '93px',
-    top: '1px'
+    maxWidth: '184px',
+    margin: '0px 0px 10px 10px'
   },
   yourOrderListItemDescriptionPrimary: {
-    top: '1px',
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: '14px',
-    lineHeight: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    letterSpacing: '0.001em'
+    fontSize: '14px'
   },
   yourOrderListItemDescriptionSecondary: {
-    position: 'absolute',
-    height: '32px',
-    width: 'max-content',
-    top: '23px',
-    fontStyle: 'normal',
+    marginTop: '5px',
     fontWeight: 'normal',
-    fontSize: '12px',
-    lineHeight: '16px',
-    display: 'flex',
-    flexDirection: 'column',
-    letterSpacing: '0.004em',
     opacity: '75%'
   },
   yourOrderListItemPrice: {
-    position: 'absolute',
     display: 'flex',
     justifyContent: 'flex-end',
-    width: '28px',
-    height: '20px',
-    left: '295px',
-    top: '7px',
-    fontStyle: 'normal',
-    fontWeight: '600',
     fontSize: '14px',
     lineHeight: '20px',
-    textAlign: 'right',
-    letterSpacing: '0.001em'
+    margin: '0px 0px 40px'
   },
   yourOrderTotalPrice: {
     position: 'static',
@@ -357,8 +310,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   priceForItem: {
-    display: 'flex',
-    whiteSpace: 'nowrap',
     '& svg': {
       fontSize: '18px',
       paddingTop: '2px'

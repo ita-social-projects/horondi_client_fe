@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
@@ -12,24 +12,21 @@ import { useCart } from '../../../hooks/use-cart';
 
 const { pathToCart } = routes;
 
-const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSizes }) => {
+const ConstructorSubmit = ({ constructorValues }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { userData } = useSelector(({ User }) => ({
-    userData: User.userData
-  }));
-  const { cartOperations, isInCart } = useCart(userData);
+  const { cartOperations, isInCart } = useCart();
+  const { addToCart, getConstructorPrice } = cartOperations;
 
   const { t } = useTranslation();
 
-  const isItemInCart = isInCart(constructorValues._id, constructorValues.size._id);
+  const isItemInCart = isInCart(constructorValues._id, constructorValues.sizeAndPrice.size._id);
 
   const TOAST_SETTINGS = {
     autoClose: 3000,
     hideProgressBar: true
   };
 
-  const { addToCart } = cartOperations;
   const cartTootipTitle = isItemInCart
     ? t('product.tooltips.itemInCart')
     : t('product.tooltips.itemInCartAlready');
@@ -46,8 +43,14 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSize
       const newCart = {
         id: Date.now(),
         ...constructorValues,
-        sizeAndPrice,
+        sizeAndPrice: {
+          ...constructorValues.sizeAndPrice,
+          price: getConstructorPrice(constructorValues)
+        },
         quantity: 1,
+        constructorBasics: constructorValues.basic._id,
+        constructorBottom: constructorValues.bottom._id,
+        constructorFrontPocket: constructorValues.pocket._id,
         isFromConstructor: true,
         category: { code: 'constructor' }
       };

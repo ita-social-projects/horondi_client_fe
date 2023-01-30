@@ -1,36 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useStyles } from './filled-wishlist.styles';
 import WishlistItem from '../wishlist-item';
-import Modal from '../../../components/modal';
-import ThemeContext from '../../../context/theme-context';
+import ConfirmDialog from '../../../components/confirm-dialog';
 import EmptyWishlist from '../empty-wishlist';
 import SimilarProducts from '../../product-details/similar-products';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import { TOAST_SETTINGS } from '../../product-details/constants';
 import { useCart } from '../../../hooks/use-cart';
 import { useWishlist } from '../../../hooks/use-wishlist';
+import PathBack from '../../../containers/orders/cart/path-back/path-back';
+import routes from '../../../configs/routes';
+import PageTitle from '../../../components/page-title/page-title';
 
 const FilledWishlist = ({ items }) => {
-  const { userData } = useSelector(({ User }) => ({
-    userData: User.userData
-  }));
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
   const [wishlist, setWishlist] = useState(items || []);
   const [similarProductsList, setSimilarProductsList] = useState([]);
-  const { cartOperations, isInCart } = useCart(userData);
+  const { cartOperations, isInCart } = useCart();
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const [isLightTheme] = useContext(ThemeContext);
+  const itemName = t(`${modalItem.translationsKey}.name`);
 
-  const language = i18n.language === 'ua' ? 0 : 1;
-  const styles = useStyles(isLightTheme);
+  const styles = useStyles();
 
   const { wishlist: updatedWishlist, wishlistOperations } = useWishlist();
   const { removeFromWishlist } = wishlistOperations;
@@ -61,24 +59,31 @@ const FilledWishlist = ({ items }) => {
   return (
     <>
       <div className={styles.root}>
-        <div className={styles.title}>{t('wishlist.wishlistTitles.filled')}</div>
+        <PathBack
+          className={styles.pathBack}
+          categoryLink={routes.pathToCategory}
+          categoryText='cart.pathBack.toCatalog'
+          currentPageText='wishlist.wishlistTitles.filled'
+        />
+        <PageTitle title={t('wishlist.wishlistTitles.filled')} marginForCrumbs />
         <div className={styles.table}>
           <Table>
             <TableHead>
               <TableRow classes={{ root: styles.tableHeader }}>
                 <TableCell>{t('wishlist.wishlistTableFields.item')}</TableCell>
                 <TableCell>{t('wishlist.wishlistTableFields.price')}</TableCell>
-                <TableCell />
+                <TableCell>{t('wishlist.wishlistTableFields.actions')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {wishlist.map((item, i) => (
                 <WishlistItem
-                  key={i}
+                  key={item._id}
                   item={item}
                   setModalVisibility={() => {
                     setModalVisibility(!modalVisibility);
                   }}
+                  wishlistOperations={wishlistOperations}
                   cartOperations={cartOperations}
                   isInCart={isInCart}
                   setModalItem={setModalItem}
@@ -88,15 +93,14 @@ const FilledWishlist = ({ items }) => {
           </Table>
         </div>
         {modalVisibility && (
-          <div>
-            <Modal
-              itemName={t(`${modalItem.translationsKey}.name`)}
-              message={t('modal.modalDeleteFromWishlistMessage')}
-              isOpen={modalVisibility}
-              onAction={onModalAction}
-              language={language}
-            />
-          </div>
+          <ConfirmDialog
+            title={t('common.modalHeader')}
+            isOpen={modalVisibility}
+            onAction={onModalAction}
+            message={`${t('modal.modalDeleteFromWishlistMessage')} ${itemName}?`}
+            confirmButtonText={t('common.buttons.confirm')}
+            dismisButtonText={t('common.buttons.cancel')}
+          />
         )}
       </div>
       <SimilarProducts cartList={similarProductsList} />

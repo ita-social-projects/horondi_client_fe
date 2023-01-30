@@ -6,7 +6,6 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import { Link } from 'react-router-dom';
-import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
@@ -21,12 +20,11 @@ import {
 } from '../../../configs';
 import Delivery from './delivery';
 import routes from '../../../configs/routes';
-import { addOrder, addPaymentMethod, getFondyData } from '../../../redux/order/order.actions';
+import { addOrder, getFondyData } from '../../../redux/order/order.actions';
 import {
   checkoutDefaultProps,
   checkoutFormBtnValue,
   checkoutPropTypes,
-  getThemeColor,
   handleError,
   updateInitialValues,
   stateInitialValues,
@@ -41,21 +39,23 @@ import {
 } from '../../../services/session-storage.service';
 import { checkoutPayMethod } from './const';
 import YourOrder from '../../orders/order/your-order';
+import PageTitle from '../../../components/page-title';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import { useAppStyles } from '../../../components/app/app.styles';
 import { CurrencyContext } from '../../../context/currency-context';
+import BackButton from '../../../components/back-button';
+import { useCart } from '../../../hooks/use-cart';
 
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 const userContactLabels = userContactInputLabels();
 
-const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
+const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) => {
   const { currency } = useContext(CurrencyContext);
   const styles = useStyles();
   const appStyles = useAppStyles();
   const userData = useSelector(({ User }) => User.userData);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
-  const { clearCart } = cartOperations;
   const dispatch = useDispatch();
   const [deliveryType, setDeliveryType] = useState(
     getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
@@ -63,10 +63,12 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
   const [countryOption, setCountryOption] = useState(countryOptions.WITHIN_UKRAINE);
   const [initialValues, setInitialValues] = useState(stateInitialValues);
   const [pricesFromQuery, setPricesFromQuery] = useState([]);
+  const { cartOperations } = useCart();
 
   const handleCountryOption = (_, newTabValue) => setCountryOption(newTabValue);
 
-  const { discount, categories } = promoCode?.getPromoCodeByCode || {};
+  const { discount, categories, _id: promoCodeId } = promoCode?.getPromoCodeByCode || {};
+  const { _id: certificateId } = certificate?.getCertificateByParams || {};
 
   const totalPriceToPay = pricesFromQuery
     .map((item, index) => {
@@ -82,45 +84,60 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
     <div className={styles.consentMessage}>
       {' '}
       {t('checkout.checkoutAdditionalInfo.consent.0')}
-      <Link
-        className={styles.consentLink}
-        to={pathToUserAgreement}
-        target='_blank'
-        rel='noreferrer'
-      >
+      <Link className={styles.consentLink} to={pathToUserAgreement} rel='noreferrer'>
         {' '}
         {t('checkout.checkoutAdditionalInfo.consent.1')}{' '}
       </Link>{' '}
       {t('checkout.checkoutAdditionalInfo.consent.2')}
-      <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
+      <Link className={styles.consentLink} to={pathToTerms} rel='noreferrer'>
         {' '}
         {t('checkout.checkoutAdditionalInfo.consent.3')}{' '}
       </Link>
     </div>
   );
 
-  const { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
-    enableReinitialize: true,
-    validationSchema: validationSchema(deliveryType, countryOption, t),
-    initialValues,
+  const { values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
+    useFormik({
+      enableReinitialize: true,
+      validationSchema: validationSchema(deliveryType, countryOption, t),
+      initialValues,
 
-    onSubmit: (data) => {
-      if (data.paymentMethod === checkoutPayMethod.card) {
-        dispatch(addPaymentMethod(checkoutPayMethod.card));
-        dispatch(
-          getFondyData({
-            order: orderInputData(data, deliveryType, cartItems, countryOption),
-            currency
-          })
-        );
-      } else {
-        dispatch(addOrder(orderInputData(data, deliveryType, cartItems, countryOption)));
-        dispatch(addPaymentMethod(checkoutPayMethod.cash));
+      onSubmit: (data) => {
+        if (data.paymentMethod === checkoutPayMethod.card) {
+          dispatch(
+            getFondyData({
+              order: orderInputData(
+                data,
+                deliveryType,
+                cartItems,
+                countryOption,
+                promoCodeId,
+                certificateId
+              ),
+              currency,
+              language
+            })
+          );
+        } else {
+          dispatch(
+            addOrder(
+              orderInputData(
+                data,
+                deliveryType,
+                cartItems,
+                countryOption,
+                promoCodeId,
+                certificateId
+              )
+            )
+          );
+          handleCashPayment();
+        }
+        clearSessionStorage();
+        cartOperations.addPromocode(null);
+        cartOperations.addCertificate(null);
       }
-      clearSessionStorage();
-      clearCart();
-    }
-  });
+    });
 
   useEffect(() => {
     setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values);
@@ -128,7 +145,7 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
 
   useEffect(() => {
     if (userData) {
-      setInitialValues(updateInitialValues(userData, deliveryType));
+      setInitialValues(updateInitialValues({ ...userData }, deliveryType));
     }
   }, [userData, deliveryType]);
 
@@ -137,13 +154,8 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
       <form onSubmit={handleSubmit} className={appStyles.containerApp}>
         <Grid item className={styles.checkoutFormContainer}>
           <div className={styles.checkoutTitleInfo}>
-            <div className={styles.checkoutTitleInfoData}>
-              <Link to={pathToCart} className={styles.backBtn}>
-                <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
-              </Link>
-            </div>
-            <h2 className={styles.checkoutTitle}>{t('checkout.checkoutTitles.checkoutTitle')}</h2>
-            <div className={styles.checkoutTitleLine} />
+            <BackButton path={pathToCart} />
+            <PageTitle title={t('checkout.checkoutTitles.checkoutTitle')} titleLine />
           </div>
           <Grid item className={styles.userInfoContainer}>
             <div>
@@ -158,15 +170,17 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
                       name={field.name}
                       className={styles.textField}
                       variant={TEXT_FIELD_VARIANT.OUTLINED}
-                      label={field.label}
+                      label={t(field.label)}
                       value={values[field.name]}
                       onChange={handleChange}
                       error={handleError(touched[field.name], errors[field.name])}
                       InputProps={
-                        field.name === 'phoneNumber' && {
-                          maxLength: 9,
-                          startAdornment: <InputAdornment position='start'>+380</InputAdornment>
-                        }
+                        field.name === 'phoneNumber'
+                          ? {
+                            maxLength: 10,
+                            startAdornment: <InputAdornment position='start'>+38</InputAdornment>
+                          }
+                          : {}
                       }
                     />
                     {touched[field.name] && errors[field.name] && (
@@ -209,6 +223,7 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
               handleChange={handleChange}
               setFieldValue={setFieldValue}
               setDeliveryType={setDeliveryType}
+              resetForm={resetForm}
             />
             <div>
               <h2 className={styles.title}>{t('checkout.checkoutTitles.payment')}</h2>
@@ -274,7 +289,7 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
               </p>
             </div>
           </Grid>
-          <Grid item className={styles.deliveryContainer}>
+          <Grid>
             <YourOrder
               checkoutFormBtnValue={checkoutFormBtnValue}
               consentLink={consentLink}
@@ -287,6 +302,7 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
               deliveryType={deliveryType}
               setPricesFromQuery={setPricesFromQuery}
               promoCode={promoCode}
+              certificate={certificate}
             />
           </Grid>
         </Grid>

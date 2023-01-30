@@ -44,6 +44,8 @@ export const addOrder = async (order) => {
           fixedExchangeRate
           totalPriceToPay
           paymentStatus
+          promoCodeId
+          certificateId
         }
         ... on Error {
           statusCode
@@ -56,7 +58,7 @@ export const addOrder = async (order) => {
   return result?.data?.addOrder;
 };
 
-export const getPaymentCheckout = async (orderId, currency, amount) => {
+export const getPaymentCheckout = async (orderId, currency, amount, language) => {
   const getPaymentCheckoutQuery = `
     query($data: PaymentInput!) {
       getPaymentCheckout(data: $data) {
@@ -108,102 +110,60 @@ export const getPaymentCheckout = async (orderId, currency, amount) => {
     }
   `;
   const result = await getItems(getPaymentCheckoutQuery, {
-    data: { orderId, currency, amount }
+    data: { orderId, currency, amount, language }
   });
 
   return result?.data?.getPaymentCheckout;
 };
 
-export const orderPaidSubscription = gql`
-  subscription OrderPaid($orderId: String!) {
-    paidOrder(orderId: $orderId) {
-      __typename
-      ... on Order {
-        _id
-        orderNumber
-        recipient {
-          firstName
-          lastName
-          email
-          phoneNumber
-        }
-        delivery {
-          sentBy
-        }
-        items {
-          product {
-            name {
-              lang
-              value
+export const sendOrderToEmail = async (language, paidOrderNumber) => {
+  const sendOrderToEmailQuery = gql`
+    query ($language: Int!, $paidOrderNumber: String!) {
+      sendOrderToEmail(language: $language, paidOrderNumber: $paidOrderNumber) {
+        __typename
+        ... on Order {
+          _id
+          orderNumber
+          recipient {
+            firstName
+            lastName
+            email
+            phoneNumber
+          }
+          delivery {
+            sentBy
+          }
+          items {
+            product {
+              name {
+                lang
+                value
+              }
+              images {
+                primary {
+                  thumbnail
+                }
+              }
             }
-            images {
-              primary {
-                thumbnail
+            fixedPrice
+            quantity
+            options {
+              size {
+                name
               }
             }
           }
-          fixedPrice
-          quantity
-          options {
-            size {
-              name
-            }
-          }
+          totalPriceToPay
+          paymentStatus
         }
-        totalPriceToPay
-        paymentStatus
-      }
-      ... on Error {
-        statusCode
-        message
+        ... on Error {
+          statusCode
+          message
+        }
       }
     }
-  }
-`;
+  `;
+  const result = await getItems(sendOrderToEmailQuery, { language, paidOrderNumber });
 
-export const sendOrderToEmail = gql`
-  query ($language: Int!, $paidOrderNumber: String!) {
-    sendOrderToEmail(language: $language, paidOrderNumber: $paidOrderNumber) {
-      __typename
-      ... on Order {
-        _id
-        orderNumber
-        recipient {
-          firstName
-          lastName
-          email
-          phoneNumber
-        }
-        delivery {
-          sentBy
-        }
-        items {
-          product {
-            name {
-              lang
-              value
-            }
-            images {
-              primary {
-                thumbnail
-              }
-            }
-          }
-          fixedPrice
-          quantity
-          options {
-            size {
-              name
-            }
-          }
-        }
-        totalPriceToPay
-        paymentStatus
-      }
-      ... on Error {
-        statusCode
-        message
-      }
-    }
-  }
-`;
+  return result?.data?.sendOrderToEmail;
+};

@@ -25,3 +25,19 @@ describe('Button  component should initiat some action', () => {
     expect(mockHandleClick).toHaveBeenCalled();
   });
 });
+describe('Button  component with loading', () => {
+  const loading = true;
+  beforeEach(() => {
+    render(
+      <AuthButton loading={loading} onclick={mockHandleClick}>
+        enter
+      </AuthButton>
+    );
+  });
+
+  it('Should render button with loading', () => {
+    const loader = screen.getByTestId('loader');
+
+    expect(loader).toBeInTheDocument();
+  });
+});

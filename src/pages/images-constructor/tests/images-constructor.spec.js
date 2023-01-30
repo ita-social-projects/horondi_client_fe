@@ -3,13 +3,18 @@ import * as redux from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, fireEvent, waitForElement } from '@testing-library/react';
 
+import { ThemeProvider } from '@material-ui/core';
 import Modal from '../../../components/modal';
 import ImagesConstructor from '../images-constructor';
 import { mockAllConstructors } from './images-constructor.variables';
 import { DollarIcon } from '../../../images/profile-icons';
+import { theme } from '../../../components/app/app-theme/app.theme';
+
+const themeValue = theme('light');
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
+const mockGetConstructorPrice = jest.fn();
 
 jest.mock('../../../hooks/use-currency', () => ({
   useCurrency: () => ({
@@ -18,26 +23,27 @@ jest.mock('../../../hooks/use-currency', () => ({
   })
 }));
 
+jest.mock('../constructor-sumbit/constructor-submit.js', () => () => null);
+
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
   useSelector: () => ({ currency: 0 })
-}));
-
-jest.mock('../images-constructor.style', () => ({
-  useStyles: () => ({})
-}));
-
-jest.mock('../constructor-sumbit/constructor-submit.styles', () => ({
-  useStyles: () => ({})
 }));
 
 jest.mock('i18next', () => ({
   useTranslation: () => ({ i18n: { language: 'ua' }, t: () => 'test' })
 }));
 
+jest.mock('../../../hooks/use-cart.js', () => ({
+  useCart: () => ({
+    cartOperations: {
+      getConstructorPrice: mockGetConstructorPrice
+    }
+  })
+}));
+
 jest.mock('../../../utils/checkout', () => ({ getCurrentCurrency: () => '1' }));
 jest.mock('../../../utils/constructor', () => ({
-  constructorEndPrice: () => '',
   constructorPartPrice: () => [1, 2, 3]
 }));
 
@@ -46,17 +52,19 @@ const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 
 mockUseDispatch.mockImplementation(() => mockDispatch);
 
-beforeEach(async () => {
-  render(
-    <MockedProvider mocks={mockAllConstructors} addTypename={false}>
-      <ImagesConstructor />
-    </MockedProvider>
-  );
-
-  await new Promise((resolve) => setTimeout(resolve, 0));
-});
-
 describe('ImagesConstructor component tests', () => {
+  beforeEach(async () => {
+    render(
+      <ThemeProvider theme={themeValue}>
+        <MockedProvider mocks={mockAllConstructors} addTypename={false}>
+          <ImagesConstructor />
+        </MockedProvider>
+      </ThemeProvider>
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  });
+
   it('renders h1', async () => {
     waitForElement(() => {
       expect(screen.getByText(/Створи сам/i)).toBeInTheDocument();

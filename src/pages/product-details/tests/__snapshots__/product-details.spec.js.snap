@@ -6,11 +6,11 @@ exports[`Product details test Should render product details component 1`] = `
     className="undefined  "
   >
     <ProductPath />
-    <Link
-      to="/catalog/:category"
+    <WithStyles(ForwardRef(Button))
+      onClick={[Function]}
     >
       <ArrowIcon />
-    </Link>
+    </WithStyles(ForwardRef(Button))>
     <div>
       <div>
         <ProductInfo
@@ -47,23 +47,9 @@ exports[`Product details test Should render product details component 1`] = `
             }
             setSizeIsNotSelectedError={[Function]}
           />
-          <WithStyles(ForwardRef(Tooltip))
-            placement="bottom"
-            title="product.tooltips.addWishful"
-          >
-            <Memo(ForwardRef(FavoriteBorderIcon))
-              data-cy="not-wishful"
-              onClick={[Function]}
-            />
-          </WithStyles(ForwardRef(Tooltip))>
         </div>
       </div>
     </div>
-    <Toast
-      isOpenedSnackbar={false}
-      message="product.toastMessage.addedToWishList"
-      setIsOpenedSnackbar={[Function]}
-    />
   </WithStyles(ForwardRef(Card))>
 </div>
 `;

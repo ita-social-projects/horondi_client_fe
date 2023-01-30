@@ -32,5 +32,7 @@
     "btnTitle": "Confirm Email",
     "text": "Please confirm this email by clicking the button below."
   },
-  "checkEmailText": "Please, check your email address"
+  "checkEmailText": "Please, check your email address",
+  "updateSuccess": "Your profile is updated",
+  "updateError": "Couldn't update your profile"
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -27,7 +27,7 @@ const ProductListFilter = ({ filterParams }) => {
   const filtersOptions = useProductFilters(filterParams, filters);
   const [resetPrices, setResetPrices] = useState(false);
 
-  const searchParams = new URLSearchParams(search);
+  const searchParams = useMemo(() => new URLSearchParams(search), [search]);
 
   const { error, loading } = useQuery(getAllFiltersQuery, {
     onCompleted: (data) => {
@@ -42,8 +42,6 @@ const ProductListFilter = ({ filterParams }) => {
       });
     }
   });
-
-  if (error || loading) return errorOrLoadingHandler(error, loading);
 
   const handleClearFilter = () => {
     const sortQuery = searchParams.get(TEXT_FIELDS.SORT);
@@ -65,9 +63,12 @@ const ProductListFilter = ({ filterParams }) => {
     )
   );
 
+  const errorOrLoading = (error || loading) && errorOrLoadingHandler(error, loading);
+
   return (
     <div>
       <Grid container direction='column' className={styles.wrapper} spacing={2}>
+        {errorOrLoading}
         <Button className={styles.button} data-cy='clear_filter_button' onClick={handleClearFilter}>
           {t('common.clearFilter')}
         </Button>

@@ -3,42 +3,33 @@ import BG from '../../images/welcome.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   confirmation: {
-    background: `url(${BG}) no-repeat `,
-    backgroundSize: 'cover',
-    height: '700px',
-    position: 'relative'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: `center/cover url(${BG}) no-repeat `,
+    flex: 1,
+    '@media (max-width: 768px)': {
+      padding: '30px 10px 20px 10px'
+    }
   },
   welcome: {
-    minHeight: '100px',
-    padding: '30px',
-    width: '400px',
+    display: 'flex',
+    flexDirection: 'column',
+    minWidth: '320px',
+    padding: '32px',
     textAlign: 'center',
-    position: 'absolute',
-    top: '209px',
-    left: '0px',
-    right: '0px',
-    margin: 'auto',
     borderRadius: '7px',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    '& h2': {
-      margin: '0',
-      color: 'white',
-      textTransform: 'uppercase',
-      fontSize: '3rem'
-    },
-    '& h3': {
-      margin: '0',
-      color: 'white',
-      fontSize: '1.5rem'
-    },
     '& button': {
       marginTop: '45px',
-      height: '45px',
       backgroundColor: '#404040',
       color: 'white',
       width: '135px',
       '&:hover': {
         backgroundColor: 'black'
+      },
+      '@media (max-width: 400px)': {
+        width: '114px'
       }
     }
   },
@@ -47,5 +38,9 @@ export const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       textTransform: 'capitalize'
     }
+  },
+  text: {
+    color: theme.palette.common.white,
+    marginBottom: '12px'
   }
 }));

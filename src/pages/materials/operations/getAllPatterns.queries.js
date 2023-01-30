@@ -28,7 +28,9 @@ export const getMaterialsBlocksByType = gql`
         _id
         title
         type
-        image
+        image {
+          medium
+        }
         text {
           lang
           value

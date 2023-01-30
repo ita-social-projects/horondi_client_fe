@@ -32,7 +32,9 @@ describe('tests for worldwide delivery component', () => {
   });
 
   it('test typing in worldwideCity input', () => {
-    render(<Worldwide {...props} values={{ worldWideCountry: 'Ukraine' }} />);
+    render(
+      <Worldwide {...props} values={{ worldWideCountry: 'Ukraine', stateOrProvince: 'Kyiv' }} />
+    );
 
     const citiesWrapper = screen.getByTestId('worldWideCity');
     const citiesInput = within(citiesWrapper).getByRole('textbox');

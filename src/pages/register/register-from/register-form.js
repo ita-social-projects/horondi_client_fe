@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TextField, FormControlLabel, Checkbox } from '@material-ui/core';
+import { FormControlLabel, Checkbox } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { Form, Field } from 'formik';
 
 import { TEXT_FIELD_VARIANT } from '../../../configs';
 import { USER_REGISTER_LABELS } from '../constants';
@@ -10,13 +9,15 @@ import { useStyles } from './register-form.styles';
 import { endAdornment } from '../../../utils/eyeToggle';
 import GoogleBtn from '../../../components/google-log-in-btn/index';
 import FacebookBtn from '../../../components/facebook-log-in-btn';
-import { Loader } from '../../../components/loader/loader';
 import routes from '../../../configs/routes';
 import { AuthButton, AuthHeading } from '../../../components/auth-form';
+import AppTextField from '../../../components/app-text-field';
 
 const { pathToLogin, pathToTerms } = routes;
 
 export default function RegisterForm({
+  formOperations,
+  touched,
   loading,
   values,
   errors,
@@ -24,15 +25,16 @@ export default function RegisterForm({
   setShowPassword,
   showPasswordConfirm,
   setShowPasswordConfirm,
-  registerError,
-  setShouldValidate
+  registerError
 }) {
   const styles = useStyles();
   const { t } = useTranslation();
   const [checked, setChecked] = useState(false);
-  const handleChange = (event) => {
+  const handleChecked = useCallback((event) => {
     setChecked(event.target.checked);
-  };
+  }, []);
+  const { handleSubmit, handleChange, handleBlur } = formOperations;
+  const { pass, passConfirm } = USER_REGISTER_LABELS;
   const consentLink = (
     <div className={styles.consentMessage}>
       {t('register.formConsent.text')}
@@ -41,70 +43,53 @@ export default function RegisterForm({
       </Link>
     </div>
   );
-  const type = (name) => {
-    if (name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm) {
-      return USER_REGISTER_LABELS.pass;
-    }
-    return name;
-  };
 
   const inputProps = (name) => {
-    if (name === USER_REGISTER_LABELS.pass) {
-      return endAdornment(showPassword, setShowPassword);
-    }
-    if (name === USER_REGISTER_LABELS.passConfirm) {
-      return endAdornment(showPasswordConfirm, setShowPasswordConfirm);
-    }
+    if (name === pass) return endAdornment(showPassword, setShowPassword);
+    if (name === passConfirm) return endAdornment(showPasswordConfirm, setShowPasswordConfirm);
     return {};
   };
+  const formFields = Object.keys(values).map((name) => (
+    <AppTextField
+      key={name}
+      type={name === passConfirm ? pass : name}
+      name={name}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      label={t(`register.placeholders.${name}`)}
+      variant={TEXT_FIELD_VARIANT.OUTLINED}
+      fullWidth
+      errorMsg={!!touched[name] && t(errors[name])}
+      InputProps={inputProps(name)}
+    />
+  ));
 
   return (
-    <Form className={styles.registerForm}>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <AuthHeading>{t('register.formLabel')}</AuthHeading>
-          {Object.keys(values).map((name) => (
-            <Field
-              key={name}
-              type={type(name)}
-              name={name}
-              as={TextField}
-              label={t(`register.placeholders.${name}`)}
-              variant={TEXT_FIELD_VARIANT.OUTLINED}
-              fullWidth
-              error={!!errors[name]}
-              helperText={t(errors[name])}
-              className={`${styles.dataInput} ${
-                name === USER_REGISTER_LABELS.email && styles.afterText
-              }`}
-              InputProps={inputProps(name)}
-            />
-          ))}
-          <FormControlLabel
-            checked={checked}
-            onChange={handleChange}
-            control={<Checkbox className={styles.checkbox} />}
-            label={consentLink}
-          />
-          <div className={styles.registerGroup}>
-            <AuthButton onClick={setShouldValidate} disabled={!checked}>
-              {' '}
-              {t('register.formLabel')}
-            </AuthButton>
-            <p className={styles.registerError}>{registerError}</p>
-            <p className={styles.googleText}>{t('register.googleSignIn')}</p>
-            <GoogleBtn />
-            <FacebookBtn />
-          </div>
-          <div>
-            <Link to={pathToLogin} className={styles.loginBtn}>
-              {t('register.loginFormLabel')}
-            </Link>
-          </div>
-        </>
-      )}
-    </Form>
+    <form onSubmit={(e) => e.preventDefault()} className={styles.registerForm}>
+      <AuthHeading>{t('register.formLabel')}</AuthHeading>
+      {formFields}
+      <FormControlLabel
+        className={styles.checkBox}
+        checked={checked}
+        onChange={handleChecked}
+        control={<Checkbox className={styles.checkbox} />}
+        label={consentLink}
+      />
+      <AuthButton
+        onClick={handleSubmit}
+        disabled={!checked}
+        loading={loading}
+        className={styles.button}
+      >
+        {t('register.formLabel')}
+      </AuthButton>
+      <div className={styles.registerError}>{registerError}</div>
+      <div className={styles.googleText}>{t('register.googleSignIn')}</div>
+      <GoogleBtn />
+      <FacebookBtn />
+      <Link to={pathToLogin} className={styles.loginBtn}>
+        {t('register.loginFormLabel')}
+      </Link>
+    </form>
   );
 }

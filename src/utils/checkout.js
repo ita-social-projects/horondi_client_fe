@@ -38,6 +38,21 @@ export const stateInitialValues = {
   cityCode: ''
 };
 
+export const deliveryMethodValues = {
+  courierOrganization: '',
+  courierOffice: '',
+  city: '',
+  street: '',
+  house: '',
+  flat: '',
+  region: '',
+  district: '',
+  regionId: '',
+  districtId: '',
+  cityId: '',
+  cityCode: ''
+};
+
 export const checkoutPropTypes = {
   language: PropTypes.number,
   isLightTheme: PropTypes.bool,
@@ -127,8 +142,11 @@ const productItemsInput = (cartItems) =>
   cartItems.map((item) => ({
     product: item.productId,
     quantity: item.quantity,
-    isFromConstructor: item.constructor.isConstructor,
+    isFromConstructor: item.isFromConstructor,
     price: item.sizeAndPrice.price,
+    constructorBasics: item.constructorBasics || null,
+    constructorBottom: item.constructorBottom || null,
+    constructorFrontPocket: item.constructorFrontPocket || null,
     options: {
       size: item.sizeAndPrice.size._id
     }
@@ -136,7 +154,14 @@ const productItemsInput = (cartItems) =>
 
 const handleOrderItem = (item) => item || '';
 
-export const orderInputData = (data, deliveryType, cartItems, countryOption) => {
+export const orderInputData = (
+  data,
+  deliveryType,
+  cartItems,
+  countryOption,
+  _id = '',
+  certificateId = ''
+) => {
   const recipient = {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -170,7 +195,9 @@ export const orderInputData = (data, deliveryType, cartItems, countryOption) => 
       },
       items,
       paymentMethod,
-      userComment
+      userComment,
+      promoCodeId: _id,
+      certificateId
     };
   }
 
@@ -191,7 +218,9 @@ export const orderInputData = (data, deliveryType, cartItems, countryOption) => 
       },
       items,
       paymentMethod,
-      userComment
+      userComment,
+      promoCodeId: _id,
+      certificateId
     };
   }
 };
@@ -215,19 +244,19 @@ export const courierInputLabels = () => [
 export const userContactInputLabels = () => [
   {
     name: 'firstName',
-    label: i18next.t(`checkout.checkoutTextFields.firstName`)
+    label: 'checkout.checkoutTextFields.firstName'
   },
   {
     name: 'lastName',
-    label: i18next.t(`checkout.checkoutTextFields.lastName`)
+    label: 'checkout.checkoutTextFields.lastName'
   },
   {
     name: 'email',
-    label: i18next.t(`checkout.checkoutTextFields.email`)
+    label: 'checkout.checkoutTextFields.email'
   },
   {
     name: 'phoneNumber',
-    label: i18next.t(`checkout.checkoutTextFields.contactPhoneNumber`)
+    label: 'checkout.checkoutTextFields.contactPhoneNumber'
   }
 ];
 

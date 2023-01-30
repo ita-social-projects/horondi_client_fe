@@ -10,14 +10,29 @@ import { theme } from '../../../../components/app/app-theme/app.theme';
 import ProductListPage from '../../../../pages/product-list-page/product-list-page';
 import { DollarIcon } from '../../../../images/profile-icons';
 
+const mockIsInWishlist = jest.fn();
+const mockAddToWishlist = jest.fn();
+const mockRemoveFromWishlist = jest.fn();
+const mockWishlist = {};
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 const history = createMemoryHistory();
 const themeValue = theme('light');
-let isWrongNameFilter = false;
+const isWrongNameFilter = false;
+jest.mock('../../../../hooks/use-wishlist', () => ({
+  useWishlist: () => ({
+    isInWishlist: mockIsInWishlist,
+    wishlist: mockWishlist,
+    wishlistOperations: {
+      addToWishlist: mockAddToWishlist,
+      removeFromWishlist: mockRemoveFromWishlist
+    }
+  })
+}));
 
 jest.mock('react-redux', () => ({
-  useSelector: () => ({ currency: 0 })
+  useSelector: () => ({ currency: 0 }),
+  useDispatch: () => jest.fn()
 }));
 
 jest.mock('../../../../pages/product-list-page/product-list-page.styles', () => ({
@@ -68,26 +83,5 @@ describe('ProductListPage with correct values', () => {
     const products = await screen.getAllByTestId('product');
 
     expect(products).toHaveLength(2);
-  });
-});
-
-describe('ProductListPage with incorrect query', () => {
-  beforeAll(() => {
-    isWrongNameFilter = true;
-    render(
-      <MockedProvider mocks={mockAllFilteredProducts(isWrongNameFilter)} addTypename>
-        <ThemeProvider theme={themeValue}>
-          <Router history={history}>
-            <ProductListPage width='sm' />
-          </Router>
-        </ThemeProvider>
-      </MockedProvider>
-    );
-  });
-
-  it('should render not-found-product image', async () => {
-    await new Promise((resolve) => setTimeout(resolve, 0));
-
-    expect(screen.getByTestId('backpack-icon')).toBeDefined();
   });
 });

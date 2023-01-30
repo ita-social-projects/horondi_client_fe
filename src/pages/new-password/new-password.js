@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
+import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './new-password.styles';
-import { formRegExp } from '../../configs/regexp';
 import { endAdornment } from '../../utils/eyeToggle';
 import { resetPassword, resetState } from '../../redux/user/user.actions';
-import {
-  handleNewPasswodLoaderOrWindow,
-  handleErrorMessage
-} from '../../utils/handle-new-password';
+import { handleErrorMessage } from '../../utils/handle-new-password';
+import { newPasswordSchema } from '../../validators/new-password';
 import { AuthWrapper, AuthHeading, AuthButton } from '../../components/auth-form';
+import AppTextField from '../../components/app-text-field';
 
 const NewPassword = ({ token }) => {
   const styles = useStyles();
-  const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-  const { t } = useTranslation();
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
@@ -33,83 +28,65 @@ const NewPassword = ({ token }) => {
     dispatch(resetState());
   }, [dispatch]);
 
-  const handleRecovery = async ({ password }) => {
-    dispatch(resetPassword({ password, token }));
-  };
+  const { handleSubmit, errors, values, handleChange, handleBlur, touched } = useFormik({
+    validationSchema: newPasswordSchema,
+    initialValues: { password: '', confirmPassword: '' },
+    onSubmit: ({ password }) => {
+      dispatch(resetPassword({ password, token }));
+    }
+  });
 
   const successWindow = (
     <div>
-      <h2 className={styles.heading}>{t('newPassword.success')}</h2>
-      <p className={styles.recoveryText}>{t('newPassword.redirect')}</p>
+      <h2>{t('newPassword.success')}</h2>
+      <p>{t('newPassword.redirect')}</p>
     </div>
   );
 
-  const validationSchema = Yup.object({
-    password: Yup.string()
-      .matches(formRegExp.password, t('error.profile.pass'))
-      .required(t('error.profile.pass')),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password')], t('error.confirmPassword'))
-      .when('password', {
-        is: (val) => {
-          if (val) return val;
-        },
-        then: Yup.string().required(t('error.confirmPassword'))
-      })
-  });
+  const formFieldsInfo = [
+    {
+      name: 'password',
+      label: t('common.newPass'),
+      inputProps: endAdornment(showPassword, setShowPassword)
+    },
+    {
+      name: 'confirmPassword',
+      label: t('common.confirmPass'),
+      inputProps: endAdornment(showConfirmPassword, setShowConfirmPassword)
+    }
+  ];
+
+  const formFields = formFieldsInfo.map(({ name, label, inputProps }) => (
+    <AppTextField
+      key={name}
+      name={name}
+      type='password'
+      label={label}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      value={values[name]}
+      variant='outlined'
+      fullWidth
+      InputProps={inputProps}
+      errorMsg={!!touched[name] && t(errors[name])}
+    />
+  ));
 
   return (
-    <Formik
-      onSubmit={handleRecovery}
-      initialValues={{ password: '', confirmPassword: '' }}
-      validateOnBlur={shouldValidate}
-      validateOnChange={shouldValidate}
-      validationSchema={validationSchema}
-    >
-      {({ errors }) => (
-        <AuthWrapper>
-          {passwordReset || loading ? (
-            handleNewPasswodLoaderOrWindow(passwordReset, successWindow)
-          ) : (
-            <Form className='newPasswordForm'>
-              <AuthHeading>{t('common.enterNew')}</AuthHeading>
-              <Field
-                name='password'
-                as={TextField}
-                type='password'
-                label={t('common.newPass')}
-                className={styles.passwordInput}
-                variant='outlined'
-                fullWidth
-                InputProps={endAdornment(showPassword, setShowPassword)}
-                error={!!errors.password}
-                helperText={errors.password || ''}
-              />
-              <Field
-                name='confirmPassword'
-                as={TextField}
-                type='password'
-                label={t('common.newPass')}
-                className={styles.passwordInput}
-                variant='outlined'
-                fullWidth
-                InputProps={endAdornment(showConfirmPassword, setShowConfirmPassword)}
-                error={!!errors.confirmPassword}
-                helperText={errors.confirmPassword || ''}
-              />
-              <AuthButton
-                onclick={() => {
-                  setShouldValidate(true);
-                }}
-              >
-                {t('common.change')}
-              </AuthButton>
-              {handleErrorMessage(userError, styles.serverError)}
-            </Form>
-          )}
-        </AuthWrapper>
+    <AuthWrapper>
+      {passwordReset ? (
+        successWindow
+      ) : (
+        <form onSubmit={(e) => e.preventDefault()}>
+          <AuthHeading>{t('common.enterNew')}</AuthHeading>
+          {formFields}
+          <AuthButton loading={loading} onclick={handleSubmit} className={styles.button}>
+            {t('common.change')}
+          </AuthButton>
+          {handleErrorMessage(t(userError), styles.serverError)}
+        </form>
       )}
-    </Formik>
+    </AuthWrapper>
   );
 };
 

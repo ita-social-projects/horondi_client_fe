@@ -11,7 +11,7 @@ import routes from '../../configs/routes';
 import { USER_IS_BLOCKED, AUTH_ERRORS } from '../../configs';
 import { handleUserError } from '../user/user.sagas';
 
-const { pathToThanks, pathToErrorPage, pathToAllProducts } = routes;
+const { pathToErrorPage, pathToAllProducts } = routes;
 
 export function* handleAddOrder({ payload }) {
   try {
@@ -44,13 +44,17 @@ export function* handleGetFondyUrl({ payload }) {
 
     const { totalPriceToPay, fixedExchangeRate } = newOrder;
     const orderPrice =
-      payload.currency === 'UAH' ? totalPriceToPay * fixedExchangeRate : totalPriceToPay;
+      payload.currency === 'UAH'
+        ? Math.round(totalPriceToPay * fixedExchangeRate)
+        : totalPriceToPay;
+    const priceForCheckout = orderPrice.toFixed(2).toString().replace(/\./g, '');
 
     const orderWithCheckoutUrl = yield call(
       getPaymentCheckout,
       newOrder._id,
       payload.currency,
-      (Math.round(orderPrice) * 100).toString()
+      priceForCheckout,
+      payload.language
     );
 
     setToLocalStorage(orderDataToLS.order, orderWithCheckoutUrl);
@@ -59,9 +63,6 @@ export function* handleGetFondyUrl({ payload }) {
 
     if (orderWithCheckoutUrl.paymentUrl) {
       window.open(orderWithCheckoutUrl.paymentUrl);
-      window.open(
-        `${process.env.REACT_APP_ROOT_PATH}${pathToThanks}/${orderWithCheckoutUrl.orderNumber}`
-      );
     }
 
     yield put(push(`${pathToAllProducts}`));

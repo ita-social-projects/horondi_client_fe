@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Rating from '@material-ui/lab/Rating';
 import { useTheme } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarRating from '../../../../components/star-rating';
 
 import { useStyles } from './similar-products-item.styles';
 import { getImage } from '../../../../utils/imageLoad';
@@ -37,16 +36,10 @@ const SimilarProductsItem = ({ imageUrl, id, rate, price, translationsKey }) => 
       <div className={styles.similarItem}>
         <div className={styles.info}>
           <span>{t(`${translationsKey}.name`)}</span>
-          <div className={styles.priceOfSimilarProducts}>
-            <span>{price}</span>
+          <div className={styles.priceOfSimilarProducts}>{price}</div>
+          <div className={styles.rate}>
+            <StarRating size='small' readOnly rate={rate} precision={1} />
           </div>
-          <Rating
-            className={styles.rating}
-            value={rate}
-            readOnly
-            emptyIcon={<StarBorderIcon className={styles.emptyStar} fontSize='inherit' />}
-            size='small'
-          />
         </div>
       </div>
     </Link>

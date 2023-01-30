@@ -4,7 +4,7 @@ import { getAllConstructors } from './operations/getAllConstructors.queries';
 import { getConstructorByModel } from './operations/getConstructorByModel.queries';
 
 const useConstructorLoader = () => {
-  const [constructorValues, setConstructorValues] = useState({});
+  const [constructorValues, setConstructorValues] = useState(null);
   const [constructorModel, setConstructorModel] = useState('');
   const currentConstructorModel = useRef({});
   const allModels = useRef([]);
@@ -38,25 +38,22 @@ const useConstructorLoader = () => {
 
   useEffect(() => {
     if (constructorByModel) {
-      const pocket =
-        constructorByModel.getConstructorByModel.pocketsWithRestrictions[0]
-          ?.currentPocketWithPosition?.pocket;
+      const constructor = constructorByModel.getConstructorByModel;
 
       const values = {
-        name: constructorByModel.getConstructorByModel.name,
-        size: constructorByModel.getConstructorByModel.model.sizes[0],
-        pattern: constructorByModel.getConstructorByModel.patterns[0],
-        bottom: constructorByModel.getConstructorByModel.bottoms[0],
-        basic: constructorByModel.getConstructorByModel.basics[0],
-        model: constructorByModel.getConstructorByModel.model,
-        basePrice: constructorByModel.getConstructorByModel.basePrice,
-        pocket
+        name: constructor.name,
+        sizeAndPrice: { size: constructor.model.sizes[0] },
+        pattern: constructor.patterns[0],
+        bottom: constructor.bottoms[0],
+        basic: constructor.basics[0],
+        model: constructor.model,
+        pocket: constructor.pockets[0],
+        basePrice: constructor.basePrice
       };
 
       setConstructorValues(values);
 
       currentConstructorModel.current = constructorByModel.getConstructorByModel;
-
       currentConstructorModel.current.model && setValuesLoading(false);
     }
   }, [constructorByModel]);
@@ -64,7 +61,18 @@ const useConstructorLoader = () => {
   useEffect(() => {
     !called && constructorModel && getConstructorByModelHandler();
     called && refetch();
-  }, [constructorModel]);
+  }, [called, constructorModel, getConstructorByModelHandler, refetch]);
+
+  useEffect(() => {
+    if (constructorValues) {
+      setAllPrice({
+        pattern: constructorValues.pattern.absolutePrice || null,
+        bottom: constructorValues.bottom.absolutePrice || null,
+        basic: constructorValues.basic.absolutePrice || null,
+        size: constructorValues.sizeAndPrice.size.absolutePrice || null
+      });
+    }
+  }, [constructorValues, setAllPrice]);
 
   return {
     constructorValues,

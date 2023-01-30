@@ -6,8 +6,9 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh',
-    minHeight: '612px',
+    maxHeight: '660px',
+    minHeight: '550px',
+    marginTop: '50px',
     '& > div': {
       width: '100%'
     },

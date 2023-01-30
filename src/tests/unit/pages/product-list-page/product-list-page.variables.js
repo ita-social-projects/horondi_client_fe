@@ -64,7 +64,8 @@ const mockedItems = [
       primary: {
         large: 'large_4051sf11kxg2hbo3_41.png',
         medium: 'medium_4051sf11kxg2hbo3_41.png',
-        small: 'small_4051sf11kxg2hbo3_41.png'
+        small: 'small_4051sf11kxg2hbo3_41.png',
+        thumbnail: 'thumbnail_4051sf11kxg2hbo3_41.png'
       }
     },
     pattern: {
@@ -83,18 +84,21 @@ const mockedItems = [
     basePrice: 50,
     availableCount: 0,
     available: true,
+    isDeleted: false,
     rate: 5,
     translationsKey: '61af5b8d97e964ccc50e2c27',
     sizes: [
       {
         size: {
-          available: true
+          available: true,
+          _id: '619e295b5bbfb0002540a383'
         },
         price: 77
       },
       {
         size: {
-          available: true
+          available: true,
+          _id: '619e295b5bbfb0002540a383'
         },
         price: 76
       }
@@ -163,7 +167,8 @@ const mockedItems = [
       primary: {
         large: 'large_4051sf11kxg2hbo3_41.png',
         medium: 'medium_4051sf11kxg2hbo3_41.png',
-        small: 'small_4051sf11kxg2hbo3_41.png'
+        small: 'small_4051sf11kxg2hbo3_41.png',
+        thumbnail: 'thumbnail_4051sf11kxg2hbo3_41.png'
       }
     },
     pattern: {
@@ -182,18 +187,21 @@ const mockedItems = [
     basePrice: 5,
     availableCount: 0,
     available: true,
+    isDeleted: false,
     rate: 5,
     translationsKey: '61af5b8d97e964ccc50e2c27',
     sizes: [
       {
         size: {
-          available: true
+          available: true,
+          _id: '619e295b5bbfb0002540a383'
         },
         price: 77
       },
       {
         size: {
-          available: true
+          available: true,
+          _id: '619e295b5bbfb0002540a383'
         },
         price: 76
       }

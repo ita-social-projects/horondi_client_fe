@@ -64,7 +64,7 @@ describe('Similar products test', () => {
   });
 
   it('should render rating component', () => {
-    expect(screen.getByLabelText(/stars/i)).toBeInTheDocument();
+    expect(screen.getByRole('img')).toBeInTheDocument();
   });
 });
 

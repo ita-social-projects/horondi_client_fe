@@ -15,6 +15,9 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 800px)': {
       margin: '0 auto'
     },
+    '@media (max-width: 600px)': {
+      padding: '20px 0px 25px 0px'
+    },
     '@media (max-width: 350px)': {
       maxWidth: '300px'
     }
@@ -45,13 +48,15 @@ export const useStyles = makeStyles(() => ({
   },
   newsItemContent: {
     padding: '0px',
-    height: '270px',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    '@media (min-width: 753px)': {
+      height: '270px'
+    }
   },
   ArticleTitleContainer: {
     padding: '0px',
-    '@media (min-width: 768px)': {
-      height: '100px'
+    '@media (min-width: 753px)': {
+      height: '80px'
     }
   },
   ArticleTitle: {

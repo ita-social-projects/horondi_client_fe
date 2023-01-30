@@ -1,68 +1,49 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
-  profileTitleInfo: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  profileTitle: {
-    fontSize: 48,
-    color: palette.textColor,
-    margin: '72px 0px',
-    fontWeight: '600',
-    fontFamily: 'Open Sans'
-  },
-  titleLine: {
-    width: '100%',
-    height: 1,
-    borderBottom: '1px solid #E8E8E8',
-    marginBottom: 37
-  },
   profile: {
     display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    '@media screen and (max-width: 1136px)': {
-      justifyContent: 'center'
+    gap: '24px',
+    '@media screen and (max-width: 1144px)': {
+      flexDirection: 'column',
+      maxWidth: 635,
+      margin: '0 auto'
     }
   },
   userFormControl: {
-    maxWidth: 635,
-    marginBottom: 56
+    marginBottom: 56,
+    flexBasis: '60%',
+    '@media (max-width: 1144px)': {
+      marginBottom: 0
+    }
   },
   userForm: {
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
     padding: '56px 95px',
-    marginBottom: 20,
     display: 'grid',
     gridTemplateColumns: 'repeat(3,1fr)',
-    rowGap: '23px',
-    position: 'relative',
-    '@media (max-width: 768px)': {
-      padding: '56px 40px'
+    rowGap: '8px',
+    '@media (max-width: 768px)': { padding: '48px 85px' },
+    '@media (max-width: 575px)': {
+      padding: '40px '
     }
   },
   formTitle: {
     fontSize: 24,
     fontWeight: 800,
     color: palette.textColor,
-    margin: 0,
+    margin: '0 0 12px',
     gridColumn: 'span 2',
     '@media (max-width: 768px)': {
       gridColumn: 'span 3',
-      margin: '0 auto'
+      textAlign: 'center'
     }
   },
   dataInput: {
     gridColumn: 'span 3',
     position: 'relative',
-    '& label.Mui-focused': {
-      color: palette.textColor
-    },
-    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: palette.textColor
+    '& .MuiInputAdornment-positionStart': {
+      marginRight: '4px'
     }
   },
   nameInputs: {
@@ -72,55 +53,35 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   button: {
-    fontSize: '1rem',
-    lineHeight: '20px',
-    width: '100%',
-    gridColumn: 'span 3',
-    textTransform: 'uppercase'
+    gridColumn: 'span 3'
   },
   userActions: {
+    flexBasis: '40%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    width: 445,
-    '@media (max-width: 1200px)': {
+    '@media (max-width: 1144px)': {
       marginBottom: '56px'
-    }
-  },
-  userActionsButton: {
-    border: '1px solid',
-    borderColor: palette.button.normal.borderColor,
-    padding: '12px 48px',
-    '& span': {
-      fontWeight: 600
-    }
-  },
-  saveBtn: {
-    backgroundColor: palette.button.normal.backgroundColor,
-    color: palette.button.normal.color,
-    padding: '16px 0',
-    '&:hover': {
-      backgroundColor: palette.button.hover.backgroundColor,
-      color: palette.button.hover.color
     }
   },
   newPassword: {
     minHeight: 100,
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
-    padding: '22px 32px',
-    marginBottom: 20
+    padding: '32px',
+    marginBottom: 20,
+    '@media (max-width: 1144px)': {
+      padding: '32px 95px'
+    },
+    '@media (max-width: 575px)': {
+      padding: '32px 40px'
+    }
   },
   userActionsInput: {
     margin: '16px 0px 8px 0px'
   },
-  confirmUser: {
-    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
-    minHeight: 100,
-    padding: '20px 34px'
-  },
   userActionsText: {
     display: 'block',
-    margin: '16px 0',
+    margin: '12px 0',
     color: palette.info.main
   },
   emailSent: {
@@ -136,10 +97,5 @@ export const useStyles = makeStyles(({ palette }) => ({
   openedLetterIcon: {
     fontSize: '52px',
     marginBottom: '16px'
-  },
-  error: {
-    color: '#e60000',
-    marginLeft: '3%',
-    gridColumn: 'span 2'
   }
 }));

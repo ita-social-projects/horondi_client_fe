@@ -47,7 +47,9 @@ export const fullMockedOrders = {
               }
             }
           ],
-          totalItemsPrice: 76
+          totalPriceToPay: 76,
+          fixedExchangeRate: '36.6',
+          itemsPriceWithDiscount: [76]
         }
       ],
       ordersCount: 40

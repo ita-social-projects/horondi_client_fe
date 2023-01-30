@@ -3,6 +3,7 @@
 exports[`Empty cart component tests should match snapshot 1`] = `
 <EmptyOrder
   buttonTitle="cart.empty"
+  currentPageText="cart.pathBack.yourCart"
   emptyTitle="cart.emptyCart"
   name="empty-cart"
 />

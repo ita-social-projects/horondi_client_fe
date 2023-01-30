@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useTranslation } from 'react-i18next';
 import { useLazyQuery } from '@apollo/client';
+import { InputAdornment } from '@material-ui/core';
+import ClearIcon from '@material-ui/icons/Clear';
 import { useStyles } from './search-bar.styles';
 import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 import SearchIcon from './SearchIcon';
@@ -32,12 +34,19 @@ const SearchBar = ({
     fetchPolicy: 'no-cache'
   });
 
-  const visibilityToggle = (value) => {
-    setSearchParams((prevState) => ({
-      ...prevState,
-      searchBarVisibility: value
-    }));
-  };
+  const visibilityToggle = useCallback(
+    (value) => {
+      setSearchParams((prevState) => ({
+        ...prevState,
+        searchBarVisibility: value
+      }));
+    },
+    [setSearchParams]
+  );
+
+  const handleOnBlur = useCallback(() => {
+    setTimeout(() => visibilityToggle(false), 100);
+  }, [visibilityToggle]);
 
   useEffect(() => {
     if (debouncedSearchValue) {
@@ -50,7 +59,7 @@ const SearchBar = ({
     } else {
       handleOnBlur();
     }
-  }, [debouncedSearchValue]);
+  }, [debouncedSearchValue, getProductsQuery, handleOnBlur, setSearchParams]);
 
   const handleSearch = (event) => {
     const { value } = event.target;
@@ -59,26 +68,41 @@ const SearchBar = ({
 
   const mainClass = fromNavBar ? styles.root : styles.notFromNavbar;
 
-  const handleOnBlur = () => {
-    setTimeout(() => visibilityToggle(false), 100);
-  };
-
   const handleOnFocus = () => {
     if (searchValue) {
       visibilityToggle(true);
     }
   };
 
+  const textFieldClear = () => {
+    setSearchValue('');
+  };
+
   return (
     <div className={mainClass}>
-      <SearchIcon />
       <TextField
         placeholder={t('searchBar.search')}
         value={defaultValue || searchValue}
         onBlur={handleOnBlur}
         onFocus={handleOnFocus}
-        inputProps={{ maxLength: 20 }}
         onChange={searchHandler || handleSearch}
+        InputProps={{
+          inputProps: { maxLength: 20 },
+          startAdornment: (
+            <InputAdornment position='end'>
+              <SearchIcon />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position='start'>
+              <ClearIcon
+                data-testid='clear-icon'
+                className={styles.clearInputIcon}
+                onClick={textFieldClear}
+              />
+            </InputAdornment>
+          )
+        }}
       />
     </div>
   );

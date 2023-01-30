@@ -55,7 +55,7 @@ describe('tests for footer lists', () => {
   it('should render footer information list', () => {
     expect(screen.queryByText('footer.footerInformation.privacyPolicy')).toBeInTheDocument();
     expect(screen.queryByText('footer.footerInformation.paymentAndShipping')).toBeInTheDocument();
-    expect(screen.queryByText('footer.footerInformation.materials')).toBeInTheDocument();
+    expect(screen.queryByText('footer.footerInformation.userAgreement')).toBeInTheDocument();
     expect(screen.queryByText('footer.footerInformation.aboutUs')).toBeInTheDocument();
   });
 

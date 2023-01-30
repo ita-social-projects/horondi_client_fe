@@ -9,14 +9,6 @@ const buttonStyles = {
 };
 
 export const useStyles = makeStyles(({ palette }) => ({
-  pageTitle: {
-    display: 'flex',
-    fontWeight: '500',
-    justifyContent: 'center',
-    fontSize: '48px',
-    borderBottom: '1px solid gray',
-    padding: '72px 0'
-  },
   chooseCertificate: {
     fontSize: '24px',
     fontWeight: 'bold',
@@ -64,14 +56,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     '&:hover': {
       color: palette.button.hover.color,
       backgroundColor: palette.button.hover.backgroundColor
-    }
-  },
-  textField: {
-    '& label.Mui-focused': {
-      color: palette.textColor
     },
-    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: palette.textColor
+    '&:disabled': {
+      color: palette.button.disabled.color,
+      backgroundColor: palette.button.disabled.backgroundColor
     }
   }
 }));

@@ -1,12 +1,12 @@
 import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/core';
 import AnswersQuestionsPage from '../answers-questions-page';
 import { mockAllQuestionsAnswers } from './answers-questions.variables';
+import { theme } from '../../../components/app/app-theme/app.theme';
 
-jest.mock('../answers-questions-page.style', () => ({
-  useStyles: () => ({})
-}));
+const themeValue = theme('light');
 
 jest.mock('i18next', () => ({
   useTranslation: () => ({ i18n: { language: 'ua' }, t: () => 'test' })
@@ -14,9 +14,11 @@ jest.mock('i18next', () => ({
 
 beforeEach(async () => {
   render(
-    <MockedProvider mocks={mockAllQuestionsAnswers} addTypename={false}>
-      <AnswersQuestionsPage />
-    </MockedProvider>
+    <ThemeProvider theme={themeValue}>
+      <MockedProvider mocks={mockAllQuestionsAnswers} addTypename={false}>
+        <AnswersQuestionsPage />
+      </MockedProvider>
+    </ThemeProvider>
   );
 
   await new Promise((resolve) => setTimeout(resolve, 2000));

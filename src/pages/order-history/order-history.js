@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import OrderHistoryItem from '../../containers/orders/order-history/order-history-item';
 import EmptyOrderHistory from '../../containers/orders/order-history/empty-order-history';
 import OrderHistoryPagination from '../../containers/orders/order-history/order-history-pagination/index';
+import PageTitle from '../../components/page-title';
 import { useStyles } from './order-history.styles';
 import { LIMIT_HISTORY_ORDERS } from './constants';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
@@ -33,7 +34,7 @@ const OrderHistory = () => {
 
   if (loadingOrders || errorOrders) return errorOrLoadingHandler(errorOrders, loadingOrders);
 
-  const { ordersCount, userOrders } = data.getUserOrders;
+  const { ordersCount, userOrders } = data?.getUserOrders || {};
   const quantityPages = Math.ceil(ordersCount / LIMIT_HISTORY_ORDERS);
 
   const changeHandler = (value) => {
@@ -42,21 +43,23 @@ const OrderHistory = () => {
 
   return (
     <div className={appStyles.rootApp}>
-      {userOrders && userOrders.length ? (
-        <div className={appStyles.containerApp}>
-          <div className={styles.mainTitle}>{t('orderHistory.title')}</div>
-          <div>
-            {userOrders.map((order) => (
-              <OrderHistoryItem order={order} key={order.orderNumber} />
-            ))}
-          </div>
-          {quantityPages >= 2 && (
-            <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
-          )}
-        </div>
-      ) : (
-        <EmptyOrderHistory />
-      )}
+      <div className={appStyles.containerApp}>
+        {userOrders && userOrders.length ? (
+          <>
+            <PageTitle title={t('orderHistory.title')} />
+            <div className={styles.orderTable}>
+              {userOrders.map((order) => (
+                <OrderHistoryItem order={order} key={order.orderNumber} />
+              ))}
+              {quantityPages >= 2 && (
+                <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
+              )}
+            </div>
+          </>
+        ) : (
+          <EmptyOrderHistory />
+        )}
+      </div>
     </div>
   );
 };

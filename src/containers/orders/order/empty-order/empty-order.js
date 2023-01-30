@@ -10,14 +10,18 @@ import { BackpackIcon } from '../../../../images/backpack-icon';
 
 const { pathToCategory } = routes;
 
-const EmptyOrder = ({ emptyTitle, buttonTitle, name }) => {
+const EmptyOrder = ({ emptyTitle, buttonTitle, currentPageText, name }) => {
   const styles = useStyles();
 
   return (
     <>
-      <PathBack />
+      <PathBack
+        categoryLink={pathToCategory}
+        categoryText='cart.pathBack.toCatalog'
+        currentPageText={currentPageText}
+      />
       <div className={styles.root} data-cy={name}>
-        <Typography data-testid='title' className={styles.title} variant='h2'>
+        <Typography data-testid='title' className={styles.emptyTitle} variant='h2'>
           {emptyTitle}
         </Typography>
         <BackpackIcon className={styles.defaultBackpackIcon} />

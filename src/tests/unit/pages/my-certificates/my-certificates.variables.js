@@ -1,8 +1,16 @@
-import { getAllCertificates } from '../../../../pages/my-certificates/operations/my-certificates.queries';
+import { getAllUserCertificates } from '../../../../pages/my-certificates/operations/my-certificates.queries';
+
+export const mockStore = {
+  userData: {
+    email: 'sashkohorondi@gmail.com',
+    certificateExpires: '2022-10-16T05:00:00.000Z'
+  },
+  currency: 0
+};
 
 export const certificateMock1 = {
   request: {
-    query: getAllCertificates,
+    query: getAllUserCertificates,
     variables: {
       limit: 5,
       skip: (1 - 1) * 5
@@ -10,7 +18,7 @@ export const certificateMock1 = {
   },
   result: {
     data: {
-      getAllCertificates: {
+      getAllUserCertificates: {
         __typename: 'PaginatedCertificate',
         items: [
           {
@@ -42,7 +50,7 @@ export const certificateMock1 = {
 
 export const certificateMock2 = {
   request: {
-    query: getAllCertificates,
+    query: getAllUserCertificates,
     variables: {
       limit: 5,
       skip: (1 - 1) * 5
@@ -50,7 +58,7 @@ export const certificateMock2 = {
   },
   result: {
     data: {
-      getAllCertificates: {
+      getAllUserCertificates: {
         __typename: 'PaginatedCertificate',
         items: [
           {
@@ -82,7 +90,7 @@ export const certificateMock2 = {
 
 export const certificateMock3 = {
   request: {
-    query: getAllCertificates,
+    query: getAllUserCertificates,
     variables: {
       limit: 5,
       skip: (1 - 1) * 5
@@ -90,7 +98,7 @@ export const certificateMock3 = {
   },
   result: {
     data: {
-      getAllCertificates: {
+      getAllUserCertificates: {
         __typename: 'PaginatedCertificate',
         items: [
           {
@@ -144,6 +152,25 @@ export const certificateMock3 = {
             dateEnd: '2023-01-14T16:10:29.323Z'
           }
         ],
+        count: 7
+      }
+    }
+  }
+};
+
+export const certificateMock4 = {
+  request: {
+    query: getAllUserCertificates,
+    variables: {
+      limit: 5,
+      skip: (1 - 1) * 5
+    }
+  },
+  result: {
+    data: {
+      getAllUserCertificates: {
+        __typename: 'PaginatedCertificate',
+        items: [],
         count: 7
       }
     }

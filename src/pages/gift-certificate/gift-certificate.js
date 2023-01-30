@@ -9,27 +9,21 @@ import { useStyles } from './gift-certificate.styles';
 import { validationSchema } from '../../validators/email';
 import { certificateRules } from '../../locales/en/certificate.json';
 import CertificateCheckbox from './certificate-checkbox';
+import PageTitle from '../../components/page-title';
 import { useAppStyles } from '../../components/app/app.styles';
-import routes from '../../configs/routes';
 import { generateCertificate } from './operations/gift-certificate.mutations';
 import { getPaymentCheckoutForCertificates } from './operations/gift-certificate.queries';
 import { getCurrentCurrency } from '../../utils/checkout';
-import { setToLocalStorage } from '../../services/local-storage.service';
-import { orderDataToLS } from '../../utils/order';
-
-const { pathToCertificateThanks } = routes;
 
 const GiftCertificate = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const styles = useStyles();
   const appStyles = useAppStyles();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const [getPaymentCheckoutForCertificate] = useLazyQuery(getPaymentCheckoutForCertificates, {
     onCompleted: (data) => {
-      const { paymentUrl, paymentToken, certificatesOrderId } =
-        data.getPaymentCheckoutForCertificates;
-      setToLocalStorage(orderDataToLS.certificatesOrderId, certificatesOrderId);
-      window.open(`${process.env.REACT_APP_ROOT_PATH}${pathToCertificateThanks}/${paymentToken}`);
+      const { paymentUrl } = data.getPaymentCheckoutForCertificates;
       window.open(paymentUrl);
     }
   });
@@ -37,12 +31,14 @@ const GiftCertificate = () => {
   const [generateCertificates] = useMutation(generateCertificate, {
     onCompleted: (data) => {
       const { certificates, certificatesPrice } = data.generateCertificate;
+      certificates[0].email = values.email;
       getPaymentCheckoutForCertificate({
         variables: {
           data: {
             currency: getCurrentCurrency(currency),
             amount: String(certificatesPrice),
-            certificates
+            certificates,
+            language
           }
         }
       });
@@ -121,6 +117,7 @@ const GiftCertificate = () => {
   ));
 
   const certificateText = (index) => t(`certificate.certificateRules.${index}`);
+  const disableSubmit = findCheckedCertificates(checkboxesArr);
 
   const certificateRulesContent = certificateRules.map((_, index) => (
     <React.Fragment key={index}>
@@ -132,7 +129,7 @@ const GiftCertificate = () => {
   return (
     <div className={appStyles.rootApp}>
       <div className={appStyles.containerApp}>
-        <h1 className={styles.pageTitle}>{t('certificate.giftCertificate')}</h1>
+        <PageTitle title={t('certificate.giftCertificate')} titleLine />
         <h2 className={styles.chooseCertificate}>{t('certificate.chooseCertificate')}</h2>
         <div className={styles.checkboxWrapper}>{checkboxContent}</div>
         <div className={styles.lowerWrapper}>
@@ -143,6 +140,7 @@ const GiftCertificate = () => {
                 id='email'
                 data-testid='email'
                 fullWidth
+                type='email'
                 label={t('checkout.checkoutTextFields.email')}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
                 className={styles.textField}
@@ -159,6 +157,7 @@ const GiftCertificate = () => {
                 className={styles.purchaseButton}
                 fullWidth
                 type='submit'
+                disabled={!disableSubmit.length}
               >
                 {t('buttons.buyButton')}
               </Button>

@@ -29,13 +29,15 @@ jest.mock('../../../../hooks/use-add-product-to-wishlist-handler', () => ({
 const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 const mockUseSelector = jest.spyOn(redux, 'useSelector');
 const mockAddToCart = jest.fn();
+const mockGetConstructorPrice = jest.fn();
 
 jest.mock('../../../../hooks/use-cart', () => ({
   useCart: () => ({
-    cart: mockCart,
+    cartItems: mockCart,
     isInCart: () => false,
     cartOperations: {
-      addToCart: mockAddToCart
+      addToCart: mockAddToCart,
+      getConstructorPrice: mockGetConstructorPrice
     }
   })
 }));
@@ -52,7 +54,6 @@ describe('Constructor submit tests', () => {
       <ThemeProvider theme={themeValue}>
         <ConstructorSubmit
           product={constructorValues}
-          isWishful={false}
           constructorValues={constructorValues}
           sizeAndPrice={{}}
         />

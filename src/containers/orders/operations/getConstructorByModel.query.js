@@ -27,14 +27,13 @@ export const getConstructorByModel = gql`
             _id
             name
             available
+            absolutePrice
+            relativePrice
           }
         }
         basics {
           _id
-          name {
-            lang
-            value
-          }
+          translationsKey
           features {
             material {
               _id
@@ -43,55 +42,70 @@ export const getConstructorByModel = gql`
               _id
             }
           }
+          name {
+            lang
+            value
+          }
           images {
             large
             medium
             small
             thumbnail
           }
+          available
           absolutePrice
+          relativePrice
         }
         bottoms {
           _id
+          translationsKey
+          features {
+            material {
+              _id
+            }
+            color {
+              _id
+            }
+          }
           name {
             lang
             value
           }
-          features {
-            material {
-              _id
-              translationsKey
-            }
-          }
-          absolutePrice
           images {
             large
             medium
             small
             thumbnail
           }
+          absolutePrice
+          relativePrice
         }
         patterns {
           _id
-          constructorImg
+          translationsKey
+          features {
+            material {
+              _id
+              name {
+                lang
+                value
+              }
+            }
+          }
           name {
             lang
             value
           }
-          absolutePrice
-        }
-        pocketsWithRestrictions {
-          currentPocketWithPosition {
-            pocket {
-              _id
-              images {
-                large
-                medium
-                small
-                thumbnail
-              }
-            }
+          constructorImg
+          images {
+            large
+            medium
+            small
+            thumbnail
           }
+          constructorImg
+          absolutePrice
+          relativePrice
         }
       }
       ... on Error {

@@ -16,12 +16,18 @@
     "measurement": "Габарити"
   },
   "weight": {
-    "weightLabel": "Вага(кг)",
-    "volumeLabel": "Об'єм(л)"
+    "weightLabel": "Вага",
+    "volumeLabel": "Об'єм",
+    "heightLabel": "Висота",
+    "widthLabel": "Ширина",
+    "depthLabel": "Глибина"
   },
+  "measurment": { "kg": "кг", "l": "л", "sm": "см" },
   "priceFrom": "від ",
   "sizeNotAvailable": "Товар недоступний",
-  "unavailable": "немає в наявності",
+  "isDeleted": "Знято з виробництва",
+  "unavailable": "Немає в наявності",
+  "category": "Категорія",
   "pdpButtons": {
     "cartButton": "Додати до кошика",
     "buyButton": "Купити зараз",
@@ -65,6 +71,7 @@
     "unregisteredTip": "Вам потрібно увійти, щоб залишити рейтинг",
     "registeredTip": "Вам потрібно купити продукт, щоб залишити рейтинг",
     "successfulTip": "Встановити рейтинг",
+    "emptyComments": "У цього товару поки відсутні відгуки.",
     "loadMore": "ПОКАЗАТИ ЩЕ",
     "hideBtn": "Приховати коментарі"
   },
@@ -77,6 +84,8 @@
   "size": {
     "S": "S",
     "M": "M",
-    "L": "L"
+    "L": "L",
+    "XL": "XL",
+    "XXL": "XXL"
   }
 }

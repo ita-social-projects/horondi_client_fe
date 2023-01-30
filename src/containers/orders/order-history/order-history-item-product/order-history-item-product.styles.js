@@ -11,25 +11,36 @@ export const useStyles = makeStyles(() => ({
     width: '130px',
     height: '133px',
     objectFit: 'cover',
-    '@media (max-width: 768px)': {
+    '@media (max-width: 810px)': {
       width: '84px',
       height: '110px'
     },
-    '@media (max-width: 576px)': {
+    '@media (max-width: 610px)': {
       width: '57px',
       height: '68px'
+    }
+  },
+  imageCell: {
+    '@media (max-width: 366px)': {
+      display: 'none'
+    }
+  },
+  empty: {
+    display: 'none',
+    '@media (max-width: 366px)': {
+      display: 'table-cell'
     }
   },
   imgCanvasItem: {
     width: 130,
     height: 133,
     padding: 10,
-    '@media (max-width: 768px)': {
+    '@media (max-width: 810px)': {
       width: 84,
       height: 100,
       padding: 0
     },
-    '@media (max-width: 576px)': {
+    '@media (max-width: 610px)': {
       width: '57px',
       height: '68px'
     }
@@ -41,20 +52,20 @@ export const useStyles = makeStyles(() => ({
     textTransform: 'uppercase',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'spaceBetween',
+    justifyContent: 'center',
     marginLeft: '-15px',
     '& svg': {
       fontSize: '20px',
       marginRight: '5px'
     },
-    '@media (max-width: 768px)': {
+    '@media (max-width: 810px)': {
       fontSize: '14px',
       '& svg': {
         fontSize: '14px',
         marginRight: '5px'
       }
     },
-    '@media (max-width: 576px)': {
+    '@media (max-width: 610px)': {
       fontSize: '12px',
       '& svg': {
         fontSize: '12px',
@@ -62,44 +73,58 @@ export const useStyles = makeStyles(() => ({
       }
     }
   },
+  product: {
+    '@media (max-width: 366px)': {
+      width: '80px'
+    }
+  },
   productName: {
     fontWeight: 'bold',
     fontSize: '24px',
     lineHeight: '32px',
     marginBottom: '0px',
-    marginTop: '40px',
+    marginTop: '0px',
     whiteSpace: 'nowrap',
-    '@media (max-width: 768px)': {
+    '@media (max-width: 810px)': {
       fontSize: '20px',
+      lineHeight: '26px',
       marginTop: '20px'
     },
-    '@media (max-width: 576px)': {
+    '@media (max-width: 610px)': {
       fontSize: '14px',
+      lineHeight: '18px',
       whiteSpace: 'normal',
-      marginTop: '0px'
+      marginTop: '0px',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
   },
   productBottom: {
     fontSize: '14px',
     lineHeight: '22px',
     marginTop: '0px',
-    '@media (max-width: 576px)': {
-      fontSize: '12px'
+    '@media (max-width: 610px)': {
+      fontSize: '10px',
+      lineHeight: '14px'
     }
   },
   description: {
     fontSize: '20px',
-    '@media (max-width: 768px)': {
+    textAlign: 'center',
+    '@media (max-width: 810px)': {
       fontSize: '14px'
     }
   },
   tableBody: () => ({
     '& > td': {
-      '@media (max-width: 768px)': {
+      '@media (max-width: 810px)': {
         padding: '10px'
       },
-      '@media (max-width: 576px)': {
-        padding: '2px'
+      '@media (max-width: 610px)': {
+        padding: '6px'
+      },
+      '@media (max-width: 366px)': {
+        padding: '4px'
       }
     }
   }),

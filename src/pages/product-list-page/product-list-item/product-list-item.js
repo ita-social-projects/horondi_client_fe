@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -7,42 +7,33 @@ import { useTheme } from '@material-ui/styles';
 
 import { useStyles } from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
-import { getImage } from '../../../utils/imageLoad';
-import { IMG_URL } from '../../../configs';
-import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
-import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import routes from '../../../configs/routes';
 import { useCurrency } from '../../../hooks/use-currency';
+import useProductImage from '../../../hooks/use-product-image';
+import AddToWishListIcon from '../../../components/add-to-wishlist-icon';
 
 const ProductListItem = ({ product }) => {
   const { t } = useTranslation();
   const { palette } = useTheme();
 
-  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
-
-  const currencySign = getCurrencySign();
-
-  const [image, setImage] = useState(IMG_URL + product.images.primary.small);
-
+  const { getPriceWithCurrency, currencySign } = useCurrency();
+  const { imageUrl, checkImage } = useProductImage();
   const { pathToProducts } = routes;
   const isLightTheme = palette.type === 'light';
 
   useEffect(() => {
-    getImage(product.images.primary.small)
-      .then((src) => setImage(src))
-      .catch(() => setImage(isLightTheme ? productPlugLight : productPlugDark));
-
-    return () => setImage(null);
-  }, [isLightTheme, product.images.primary.small]);
+    checkImage(product.images.primary.small, isLightTheme);
+  }, [isLightTheme, product.images.primary.small, checkImage]);
 
   const checkDisabledProduct = () => {
     const availableSizes = product.sizes.filter(
       ({ size, price }) => size.available && { size, price }
     );
 
-    const priceWithCurrency = getPriceWithCurrency(availableSizes[0]?.price);
+    const lowestPrice = availableSizes[0]?.price;
+    const priceWithCurrency = lowestPrice && getPriceWithCurrency(lowestPrice);
 
-    return product.available ? (
+    return product.available && lowestPrice ? (
       <div className={styles.price}>
         <div>
           {t('common.from') + priceWithCurrency}
@@ -55,14 +46,16 @@ const ProductListItem = ({ product }) => {
     );
   };
 
-  const styles = useStyles({ image });
+  const styles = useStyles({ imageUrl });
+
   return (
-    <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper} data-testid='product'>
+    <Grid item xs={6} sm={6} md={6} lg={4} className={styles.wrapper} data-testid='product'>
+      <AddToWishListIcon product={product} className={styles.addToFavouriteButton} />
       <Link to={`${pathToProducts}/${product._id}`}>
         <div className={styles.productItem}>
           {product.available ? '' : <div className={styles.unavailableContainer} />}
           <div className={styles.name}>
-            <StarRating size='small' readOnly rate={product.rate} />
+            <StarRating size='small' readOnly rate={product.rate} precision={1} />
             <div>
               <span className={styles.title}>
                 {t(`${product.translationsKey}.name`)}

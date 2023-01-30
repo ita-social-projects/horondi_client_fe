@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
+import { ThemeProvider } from '@material-ui/styles';
 import CheckoutForm from '../checkout-form';
 import Delivery from '../delivery/delivery';
 import {
@@ -14,22 +15,21 @@ import {
   mockedCartItemsData
 } from './checkout-form.variables';
 import { DollarIcon } from '../../../../images/profile-icons';
+import { theme } from '../../../../components/app/app-theme/app.theme';
+import ThemeContext from '../../../../context/theme-context';
 
-const mockClearCart = jest.fn();
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 const mockGetProductPriceWithPromoCode = jest.fn(() => 50);
 const dispatch = jest.fn();
-const mockCartOperations = {
-  clearCart: mockClearCart
-};
 
+window.FB = { init: jest.fn() };
 jest.mock('../checkout-form.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
 jest.mock('../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('../../../../hooks/use-cart', () => ({
   useCart: () => ({
-    cart: mockedCartItemsData,
+    cartItems: mockedCartItemsData,
     cartOperations: { getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode }
   })
 }));
@@ -48,15 +48,15 @@ jest.mock('../../../../services/session-storage.service.js', () => ({
 }));
 
 const props = {
-  cartItems: [{ price: 20 }],
-  cartOperations: mockCartOperations,
+  cartItems: [{ sizeAndPrice: { price: 20, size: { _id: '1' } } }],
   promoCode: {
     getPromoCodeByCode: {
       code: 'test',
       discount: 10,
       categories: ['bags']
     }
-  }
+  },
+  handleCashPayment: jest.fn()
 };
 
 const userData = {
@@ -68,6 +68,8 @@ const userData = {
 };
 
 const handleSubmit = jest.fn();
+const themeValue = theme('light');
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => userData);
@@ -104,75 +106,101 @@ describe('CheckoutForm tests for: ', () => {
             mockProduct)
           }
         >
-          <CheckoutForm {...props} onSubmit={handleSubmit} />
+          <ThemeProvider theme={themeValue}>
+            <ThemeContext.Provider value={themeContextProviderMockValues}>
+              <CheckoutForm {...props} onSubmit={handleSubmit} />
+            </ThemeContext.Provider>
+          </ThemeProvider>
         </MockedProvider>
       </BrowserRouter>
     );
   });
   it('first name field', async () => {
-    const firstNameField = screen.getByTestId('firstName').querySelector('input');
-    fireEvent.change(firstNameField, { target: { value: 'Roman' } });
-    expect(firstNameField.value).toEqual('Roman');
+    const firstNameField = await screen.findByTestId('firstName');
+    const input = firstNameField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Roman' } });
+
+    expect(input.value).toEqual('Roman');
   });
 
   it('last name field', async () => {
-    const lastNameField = screen.getByTestId('lastName').querySelector('input');
-    fireEvent.change(lastNameField, { target: { value: 'Denes' } });
-    expect(lastNameField.value).toEqual('Denes');
+    const lastNameField = await screen.findByTestId('lastName');
+    const input = lastNameField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Denes' } });
+
+    expect(input.value).toEqual('Denes');
   });
 
   it('email field', async () => {
-    const emailField = screen.getByTestId('email').querySelector('input');
-    fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
-    expect(emailField.value).toEqual('netro@gmail.com');
+    const emailField = await screen.findByTestId('email');
+    const input = emailField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'netro@gmail.com' } });
+
+    expect(input.value).toEqual('netro@gmail.com');
   });
 
   it('phoneNumber field', async () => {
-    const phoneNumberField = screen.getByTestId('phoneNumber').querySelector('input');
-    fireEvent.change(phoneNumberField, { target: { value: '380686717536' } });
-    expect(phoneNumberField.value).toEqual('380686717536');
+    const phoneNumberField = await screen.findByTestId('phoneNumber');
+    const input = phoneNumberField.querySelector('input');
+    fireEvent.change(input, { target: { value: '686717536' } });
+
+    expect(input.value).toEqual('686717536');
   });
 
   it('region field', async () => {
-    const regionField = screen.getByTestId('region').querySelector('input');
-    fireEvent.change(regionField, { target: { value: 'Вінницька' } });
-    expect(regionField.value).toEqual('Вінницька');
+    const regionField = await screen.findByTestId('region');
+    const input = regionField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Вінницька' } });
+
+    expect(input.value).toEqual('Вінницька');
   });
 
   it('districts field', async () => {
-    const districtsField = screen.getByTestId('district').querySelector('input');
-    fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
-    expect(districtsField.value).toEqual('Гайсинський');
+    const districtsField = await screen.findByTestId('district');
+    const input = districtsField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Гайсинський' } });
+
+    expect(input.value).toEqual('Гайсинський');
   });
 
   it('cities field', async () => {
-    const citiesField = screen.getByTestId('cities').querySelector('input');
-    fireEvent.change(citiesField, { target: { value: 'Адамівка' } });
-    expect(citiesField.value).toEqual('Адамівка');
+    const citiesField = await screen.findByTestId('cities');
+    const input = citiesField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Адамівка' } });
+
+    expect(input.value).toEqual('Адамівка');
   });
 
   it('streets field', async () => {
-    const streetsField = screen.getByTestId('streets').querySelector('input');
-    fireEvent.change(streetsField, { target: { value: 'Південна' } });
-    expect(streetsField.value).toEqual('Південна');
+    const streetsField = await screen.findByTestId('streets');
+    const input = streetsField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Південна' } });
+
+    expect(input.value).toEqual('Південна');
   });
 
   it('building field', async () => {
-    const buildingField = screen.getByTestId('house').querySelector('input');
-    fireEvent.change(buildingField, { target: { value: '34' } });
-    expect(buildingField.value).toEqual('34');
+    const buildingField = await screen.findByTestId('house');
+    const input = buildingField.querySelector('input');
+    fireEvent.change(input, { target: { value: '34' } });
+
+    expect(input.value).toEqual('34');
   });
 
   it('flat field', async () => {
-    const flatField = screen.getByTestId('flat').querySelector('input');
-    fireEvent.change(flatField, { target: { value: '36' } });
-    expect(flatField.value).toEqual('36');
+    const flatField = await screen.findByTestId('flat');
+    const input = flatField.querySelector('input');
+    fireEvent.change(input, { target: { value: '36' } });
+
+    expect(input.value).toEqual('36');
   });
 
   it('paymentMetod field', async () => {
-    const paymentMetodField = screen.getByTestId('paymentMetod').querySelector('input');
-    fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
-    expect(paymentMetodField.value).toEqual('CASH');
+    const paymentMetodField = await screen.findByTestId('paymentMetod');
+    const input = paymentMetodField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'CASH' } });
+
+    expect(input.value).toEqual('CASH');
   });
 
   it('click on button action', async () => {
@@ -192,7 +220,7 @@ describe('CheckoutForm tests for: ', () => {
     fireEvent.change(firstNameField, { target: { value: 'Roman' } });
     fireEvent.change(lastNameField, { target: { value: 'Denes' } });
     fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
-    fireEvent.change(phoneNumberField, { target: { value: '686717536' } });
+    fireEvent.change(phoneNumberField, { target: { value: '0686717536' } });
     fireEvent.change(regionField, { target: { value: 'Вінницька' } });
     fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
     fireEvent.change(citiesField, { target: { value: 'Адамівка' } });
@@ -203,6 +231,7 @@ describe('CheckoutForm tests for: ', () => {
 
     fireEvent.click(button);
     await new Promise((resolve) => setTimeout(resolve, 0));
-    await expect(dispatch).toHaveBeenCalledTimes(1);
+
+    expect(dispatch).toHaveBeenCalledTimes(1);
   });
 });

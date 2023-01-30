@@ -2,12 +2,12 @@ import React from 'react';
 import { fireEvent, render, screen, wait } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
+import { ThemeProvider } from '@material-ui/core';
 import GiftCertificate from '../../../../pages/gift-certificate/gift-certificate';
 import { mocks, mockStore } from './gift-certificate.variables';
+import { theme } from '../../../../components/app/app-theme/app.theme';
 
-jest.mock('../../../../pages/gift-certificate/gift-certificate.styles.js', () => ({
-  useStyles: () => ({})
-}));
+const themeValue = theme('light');
 
 jest.mock('react-redux');
 
@@ -16,9 +16,11 @@ useSelector.mockImplementation(() => mockStore);
 describe('GiftCertificate page tests', () => {
   beforeEach(() => {
     render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <GiftCertificate />
-      </MockedProvider>
+      <ThemeProvider theme={themeValue}>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <GiftCertificate />
+        </MockedProvider>
+      </ThemeProvider>
     );
   });
 

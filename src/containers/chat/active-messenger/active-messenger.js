@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@apollo/client';
-import { TextField, Button, Snackbar } from '@material-ui/core';
+import { TextField, Snackbar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
 import { get } from 'lodash';
@@ -11,6 +11,7 @@ import { useStyles } from '../chat.style';
 import { handleHelperText } from '../../../utils/handle-active-massenger';
 import { sendEmailMutation } from '../operations/chat.mutations';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
+import { AuthButton } from '../../../components/auth-form';
 
 export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
   const style = useStyles({ iconsVisible, mailFormVisible });
@@ -50,17 +51,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
-  const handleValidForms = () => {
-    setShouldValidate(true);
-    allFieldsValidated && sendHandler();
-  };
-
-  const handleClick = () => {
-    setOpen(true);
-    setUser(CHAT_USER_DATA);
-  };
-
-  const sendHandler = () => {
+  const sendHandler = useCallback(() => {
     setAllFieldsValidated(false);
     sendEmail({
       variables: {
@@ -71,6 +62,16 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
       }
     });
     handleClick();
+  }, [email, firstName, language, message, sendEmail]);
+
+  const handleValidForms = useCallback(() => {
+    setShouldValidate(true);
+    allFieldsValidated && sendHandler();
+  }, [allFieldsValidated, sendHandler]);
+
+  const handleClick = () => {
+    setOpen(true);
+    setUser(CHAT_USER_DATA);
   };
 
   const handleClose = (_event, reason) => {
@@ -90,7 +91,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
     }
   }, [firstNameValidated, emailValidated, messageValidated]);
 
-  if (loading || error) return errorOrLoadingHandler(error, loading);
+  if (error) return errorOrLoadingHandler(error);
 
   return (
     <form className={style.contactForm}>
@@ -103,7 +104,6 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           label={t('common.name')}
           variant='outlined'
           name='firstName'
-          size='small'
           rows={1}
           error={!firstNameValidated && shouldValidate}
           helperText={helperTextForName}
@@ -119,7 +119,6 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           label={t('common.email')}
           variant='outlined'
           name='email'
-          size='small'
           rows={1}
           error={!emailValidated && shouldValidate}
           helperText={handleHelperText(emailValidated, shouldValidate, 'profile.email')}
@@ -135,7 +134,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           variant='outlined'
           name='message'
           multiline
-          rows={10}
+          rows={8}
           inputProps={{ maxLength: 500 }}
           error={!messageValidated && shouldValidate}
           helperText={handleHelperText(messageValidated, shouldValidate, 'profile.message')}
@@ -151,9 +150,9 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           {t('chat.thanksMsg')}
         </Alert>
       </Snackbar>
-      <Button className={style.btnSend} onClick={handleValidForms}>
+      <AuthButton className={style.btnSend} onClick={handleValidForms} loading={loading}>
         {t('buttons.sendBtn')}
-      </Button>
+      </AuthButton>
     </form>
   );
 };

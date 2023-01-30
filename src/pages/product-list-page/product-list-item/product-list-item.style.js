@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles(({ palette }) => ({
   productItem: (props) => ({
-    background: `url(${props.image}) no-repeat center / cover ${
+    background: `center / cover url(${props.imageUrl}) no-repeat  ${
       palette.type === 'light' ? '#e3e7ea' : '#262626'
     }`,
     height: '100%',
@@ -13,11 +13,20 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   }),
   wrapper: {
-    height: '380px',
     width: '100%',
+    maxHeight: '380px',
+    aspectRatio: 0.8,
     cursor: 'pointer',
+    position: 'relative',
+    '@media (max-width: 600px)': {
+      maxHeight: '340px'
+    },
+    '@media (max-width: 500px)': {
+      maxWidth: '100%',
+      flexBasis: '100%'
+    },
     '@media (max-width: 450px)': {
-      height: '320px'
+      maxHeight: '300px'
     }
   },
   unavailableContainer: {
@@ -30,7 +39,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
-    height: '4rem',
+    height: 'fit-content',
     width: '100%',
     position: 'absolute',
     backgroundColor: 'rgba(3,3,3,0.6)',
@@ -40,30 +49,49 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '12px'
+    fontSize: '12px',
+    '@media (max-width: 600px)': { padding: '4px 8px' }
   },
   title: {
     display: 'flex',
     justifyContent: 'space-between',
-    fontSize: '14px',
+    alignItems: 'center',
+    columnGap: '8px',
+    fontSize: '16px',
     marginTop: '5px',
-    textTransform: 'capitalize'
+    minHeight: '38px',
+    textTransform: 'capitalize',
+    '@media (max-width: 750px)': { fontSize: '14px' }
   },
   unavailableText: {
     fontSize: '10px',
     lineHeight: '28px',
-    textTransform: 'capitalize'
+    textTransform: 'none'
   },
   price: {
-    marginLeft: '10px',
     display: 'flex',
     whiteSpace: 'nowrap',
     alignItems: 'center',
     fontSize: '20px',
     fontWeight: '600',
-    color: 'white'
+    color: 'white',
+    '@media (max-width: 600px)': {
+      fontSize: '18px'
+    }
   },
   currency: {
     paddingTop: '5px'
+  },
+  addToFavouriteButton: {
+    position: 'absolute',
+    top: '18px',
+    right: '18px',
+    zIndex: 2,
+    background: palette.common.white,
+    opacity: '0.5',
+    width: '30px',
+    height: '30px',
+    '& svg': { color: palette.common.black },
+    '&:hover': { opacity: '0.8', background: palette.common.white }
   }
 }));

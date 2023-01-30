@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Button, Divider, List, Paper, Typography } from '@material-ui/core';
 import SelfPickup from '../../../checkout/checkout-form/delivery/self-pickup/self-pickup';
 import { useCart } from '../../../../hooks/use-cart';
@@ -6,10 +6,10 @@ import OrderItem from './order-item';
 import { useCurrency } from '../../../../hooks/use-currency';
 
 const YourOrder = ({ ...props }) => {
-  const { getCurrencySign, getPriceWithCurrency } = useCurrency();
-  const { cart } = useCart();
+  const { currencySign, getPriceWithCurrency } = useCurrency();
+  const { cartItems, cartOperations } = useCart();
+  const { getTotalPriceWithCertificate } = cartOperations;
   const {
-    currency,
     checkoutFormBtnValue,
     consentLink,
     t,
@@ -19,16 +19,26 @@ const YourOrder = ({ ...props }) => {
     styles,
     deliveryType,
     setPricesFromQuery,
-    promoCode
+    promoCode,
+    certificate
   } = props;
 
-  const [productPrices, setProductPrices] = useState([]);
-  const currencySign = getCurrencySign();
-  useEffect(() => {
-    setPricesFromQuery(
-      productPrices.map((item) => ({ price: item.price, category: item.category }))
-    );
-  }, [setPricesFromQuery, productPrices, currency]);
+  const totalPrice = certificate
+    ? getTotalPriceWithCertificate(certificate)
+    : getPriceWithCurrency(totalPriceToPay);
+
+  const orderItems =
+    cartItems &&
+    cartItems.map((item) => (
+      <OrderItem
+        key={item.id}
+        product={item}
+        setProductPrices={setPricesFromQuery}
+        data-testid='orderItem'
+        promoCode={promoCode}
+      />
+    ));
+
   return (
     <Paper className={styles.yourOrderContainer} elevation={4}>
       <Typography
@@ -42,17 +52,7 @@ const YourOrder = ({ ...props }) => {
       </Typography>
       <Divider variant='fullWidth' />
       <List className={styles.yourOrderList} data-testid='orderList'>
-        {cart
-          ? cart.map((item) => (
-            <OrderItem
-              key={item.id}
-              product={item}
-              setProductPrices={setProductPrices}
-              data-testid='orderItem'
-              promoCode={promoCode}
-            />
-          ))
-          : null}
+        {orderItems}
       </List>
       <Divider variant='fullWidth' />
       {deliveryType === 'SELFPICKUP' && (
@@ -65,7 +65,7 @@ const YourOrder = ({ ...props }) => {
         {t('common.toPay')}:
         <div className={styles.totalPrice}>
           {currencySign}
-          {getPriceWithCurrency(totalPriceToPay)}
+          {totalPrice}
         </div>{' '}
       </Typography>
       <Divider variant='fullWidth' />

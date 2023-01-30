@@ -1,34 +1,31 @@
 {
-    "thanksPageTitle": {
-        "thanks": "Thank you!",
-        "yourOrder": "Your order",
-        "size": "Size -",
-        "alt": "Product",
-        "result": "Result",
-        "linkToPayment": "Payment link"
-    },  
-    "thanksCard": {
-        "thanksForBuy": "Thank you for your purchase!",
-        "orderNumber": "Order №",
-        "certificateName": "Certificate code: ",
-        "certificatePrice": "Price: ",
-        "email": "Email: ",
-        "certificatePaymentStatus": "Payment status: ",
-        "dateStart": "Start date: ",
-        "dateEnd": "End date: ",
-        "customer": "Customer: ",
-        "phone": "Phone: ",
-        "deliveryType": "Delivery type: ",
-        "address": "Address: ",
-        "continueShopping": "CONTINUE SHOPPING",
-        "goToHomePage": "GO TO HOME PAGE",
-        "guest": "Guest",
-        "selfDelivery": "Lviv, Zavods'ka st., 31"
-    },
-    "paymentStatus": {
-        "created": "Order is created",
-        "processing": "Order is pending payment",
-        "paid": "Order is paid"
-      }
+  "thanksPageTitle": {
+    "thanks": "Thank you!",
+    "yourOrder": "Your order",
+    "size": "Size -",
+    "alt": "Product",
+    "result": "Result",
+    "linkToPayment": "Payment link"
+  },
+  "thanksCard": {
+    "thanksForBuy": "Thank you for your purchase!",
+    "orderNumber": "Order №",
+    "email": "Email: ",
+    "certificateThanks": "Your order № <strong>{{name}}</strong> for <strong>{{value}} UAH</strong> has been successfully processed. Information about the certificate will be sent to the e-mail <strong>{{email}}</strong> ",
+    "dateStart": "Start date: ",
+    "dateEnd": "End date: ",
+    "customer": "Customer: ",
+    "phone": "Phone: ",
+    "deliveryType": "Delivery type: ",
+    "address": "Address: ",
+    "continueShopping": "CONTINUE SHOPPING",
+    "goToHomePage": "GO TO HOME PAGE",
+    "guest": "Guest",
+    "selfDelivery": "Lviv, Zavods'ka st., 31"
+  },
+  "paymentStatus": {
+    "created": "Order is created",
+    "processing": "Order is pending payment",
+    "paid": "Order is paid"
+  }
 }
-  

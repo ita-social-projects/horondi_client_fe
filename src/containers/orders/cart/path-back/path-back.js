@@ -4,18 +4,20 @@ import { useTranslation } from 'react-i18next';
 import routes from '../../../../configs/routes';
 import { useStyles } from './path-back.styles';
 
-const { pathToCategory, pathToMain } = routes;
+const { pathToMain } = routes;
 
-const PathBack = () => {
+const PathBack = ({ categoryLink, categoryText, currentPageText, className }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
   return (
-    <div className={styles.path}>
+    <div className={`${styles.path} ${className}`}>
       <div className={styles.pathLine}>
-        <Link to={pathToMain}>{t('cart.pathBack.toMain')}</Link> /{' '}
-        <Link to={pathToCategory}>{t('cart.pathBack.toCatalog')}</Link> /{' '}
-        {t('cart.pathBack.yourCart')}
+        <Link to={pathToMain}>{t('cart.pathBack.toMain')}</Link>
+        {` / `}
+        <Link to={categoryLink}>{t(categoryText)}</Link>
+        {` / `}
+        <span>{t(currentPageText)}</span>
       </div>
     </div>
   );

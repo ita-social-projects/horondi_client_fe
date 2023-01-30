@@ -4,7 +4,6 @@ export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
-export const CART_KEY = 'newCart';
 
 export const ERROR_PAGE_IMAGES = {
   light: './images/error-page/error-light.png',
@@ -98,6 +97,8 @@ export const URL_QUERIES_NAME = {
   defaultPage: '1'
 };
 
+export const FILTER_NAMES = ['category', 'models', 'patterns'];
+
 export const TEXT_VALUE = 'text';
 
 export const MATERIAL_UI_COLOR = {
@@ -107,8 +108,7 @@ export const MATERIAL_UI_COLOR = {
   ACTION: 'action'
 };
 
-export const cartKey = 'cart';
-export const newCartKey = 'newCart';
+export const CART_KEY = 'cart';
 export const WISHLIST_KEY = 'wishlist';
 export const countPerPage = 'countPerPage';
 
@@ -119,4 +119,14 @@ export const TEXT_FIELDS = {
   SORT: 'sort'
 };
 
-export const ROW_FIELDS = ['certificate', 'code', 'price', 'expiration', 'status'];
+export const ROW_FIELDS = {
+  CERTIFICATE: [
+    'certificate.certificate',
+    'certificate.code',
+    'certificate.price',
+    'certificate.expiration',
+    'certificate.status',
+    'certificate.actions'
+  ],
+  ORDER: ['cart.product', 'cart.size', 'cart.price', 'cart.quantity', 'cart.toPay', 'cart.actions']
+};

@@ -6,9 +6,7 @@ const AuthFormWrapper = (props) => {
   return (
     <div className={styles.imgBackground}>
       <div className={styles.outerForm}>
-        <div className={styles.innerForm}>
-          <div className={styles.minimumWidth}>{props.children}</div>
-        </div>
+        <div className={styles.innerForm}>{props.children}</div>
       </div>
     </div>
   );

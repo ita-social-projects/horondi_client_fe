@@ -9,6 +9,7 @@ import ErrorBoundary from '../components/error-boundary';
 import Loader from '../components/loader';
 import ProtectedRoute from '../components/protected-route';
 import AppHeader from '../components/app-header';
+import ScrollToTop from '../components/scroll-to-top/scroll-to-top';
 import AppFooter from '../components/app-footer';
 import Home from '../pages/home';
 import ProductDetails from '../pages/product-details';
@@ -78,13 +79,15 @@ const Routes = () => {
     userIsChecked: User.userIsChecked,
     userData: User.userData
   }));
+  const expireDate = userData?.certificateExpires;
 
   return (
     <ConnectedRouter history={history}>
       <Suspense fallback={<Loader />}>
         <ErrorBoundary>
-          <AppHeader />
-          <div className={styles.root}>
+          <ScrollToTop />
+          <AppHeader expireDate={expireDate} />
+          <div className={`${styles.root} mui-fixed`}>
             <Switch>
               <Route path={pathToMain} exact component={Home} />
               <Route path={pathToErrorPage} exact component={ErrorPage} />
@@ -114,7 +117,7 @@ const Routes = () => {
                 isAuthed={!userData}
                 redirectTo={pathToMain}
               />
-              <Route path={pathToThanks} component={ThanksPage} />
+              <Route path={pathToThanks} exact component={ThanksPage} />
               <Route path={pathToCertificateThanks} component={CertificateThanksPage} />
               <Route path={pathToCart} exact component={Cart} />
               <Route path={pathToCheckout} exact component={Checkout} />

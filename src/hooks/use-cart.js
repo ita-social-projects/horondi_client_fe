@@ -1,54 +1,61 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  clearNewCart,
-  getFromLocalStorage,
-  setToLocalStorage
-} from '../services/local-storage.service';
+import { useCallback, useContext } from 'react';
+import { CartContext } from '../context/cart-context';
+import { CurrencyContext } from '../context/currency-context';
 import { calcPriceForCart } from '../utils/priceCalculating';
-import { CART_KEY } from '../configs';
-import { setCart } from '../redux/common-store/common.actions';
 import { useCurrency } from './use-currency';
 
-export const useCart = (user = null) => {
-  const dispatch = useDispatch();
-  const { getPriceWithCurrency } = useCurrency();
+export const useCart = () => {
+  const { getPriceWithCurrency, getCertificatePriceInUSD } = useCurrency();
 
-  const [cart, setNewCart] = useState(getFromLocalStorage(CART_KEY) || []);
+  const { cartItems, setCartItems, promoCode, setPromocode, certificate, setCertificate } =
+    useContext(CartContext);
 
-  useEffect(() => {
-    setToLocalStorage(CART_KEY, [...cart]);
-    dispatch(setCart(cart));
-  }, [cart, user, dispatch]);
+  const { currency } = useContext(CurrencyContext);
 
   const addToCart = (item) => {
-    setNewCart((prevCart) => [item, ...prevCart]);
+    setCartItems((prevCart) => [item, ...prevCart]);
   };
 
   const clearCart = () => {
-    clearNewCart();
+    setCartItems([]);
+    setPromocode(null);
+    setCertificate(null);
+  };
+
+  const addPromocode = (promoCode) => {
+    setPromocode(promoCode);
+  };
+
+  const addCertificate = (certificate) => {
+    setCertificate(certificate);
   };
 
   const getCartItem = (id) =>
-    cart.find((cartItem) => cartItem.id === id || cartItem.productId === id);
+    cartItems.find((cartItem) => cartItem.id === id || cartItem.productId === id);
+
+  const getTotalPriceWithCertificate = (certificate) => {
+    const { value } = certificate.getCertificateByParams;
+    const withCertificateValue = currency === 'USD' ? getCertificatePriceInUSD(value) : value;
+    return getPriceWithCurrency(getTotalPrice() - withCertificateValue, 1);
+  };
 
   const getTotalPricesWithPromoCode = (promoCode) => {
     const { discount, categories } = promoCode.getPromoCodeByCode;
-    const newArr = cart.map((item) => {
+    const newArr = cartItems.map((item) => {
       const { price } = item.sizeAndPrice;
 
       const isAllowCategory = categories.find(
         (el) => el.toLowerCase() === item.category.code.toLowerCase()
       );
       if (isAllowCategory) {
-        return [Math.round(price - (price / 100) * discount), item.quantity];
+        return [getPriceWithCurrency(Math.round(price - (price / 100) * discount)), item.quantity];
       }
-      return [Math.round(price), item.quantity];
+      return [getPriceWithCurrency(price), item.quantity];
     });
-    return newArr.reduce(
-      (acc, item) => acc + getPriceWithCurrency(calcPriceForCart(item[0], item[1])),
-      0
-    );
+    return newArr.reduce((acc, item) => {
+      const [itemPrice, itemQuantity] = item;
+      return acc + calcPriceForCart(itemPrice, itemQuantity);
+    }, 0);
   };
 
   const getProductPriceWithPromoCode = (id, promoCode) => {
@@ -69,39 +76,63 @@ export const useCart = (user = null) => {
   const getProductPrice = (id) => getPriceWithCurrency(getCartItem(id).sizeAndPrice.price);
 
   const setCartItem = (id, item) => {
-    const newCart = cart.map((cartItem) => (cartItem.id === id ? item : cartItem));
-    setNewCart(newCart);
+    setCartItems((prev) => prev.map((cartItem) => (cartItem.id === id ? item : cartItem)));
   };
 
   const removeFromCart = (item) => {
-    setNewCart((prevCart) => prevCart.filter((cartItem) => cartItem.id !== item.id));
+    const newCartItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
+    newCartItems.length ? setCartItems(newCartItems) : clearCart();
   };
 
   const isInCart = (productId, sizeId = null) =>
-    cart.find(
+    cartItems.find(
       (cartItem) =>
         productId === cartItem.productId &&
         (sizeId ? sizeId === cartItem.sizeAndPrice.size._id : true)
     );
 
-  const changeQuantity = (id, count) => {
-    setNewCart((prevCart) =>
-      prevCart.map((el) => {
-        if (el.id === id) el.quantity = count;
-        return el;
-      })
-    );
-  };
+  const changeQuantity = useCallback(
+    (id, count) => {
+      setCartItems((prevCart) =>
+        prevCart.map((el) => {
+          if (el.id === id) el.quantity = count;
+          return el;
+        })
+      );
+    },
+    [setCartItems]
+  );
 
   const getTotalPrice = () =>
-    cart.reduce(
+    cartItems.reduce(
       (acc, item) =>
         acc + calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), item.quantity),
       0
     );
 
+  const getConstructorPrice = (constructorData) => {
+    const prices = [
+      constructorData.pattern,
+      constructorData.bottom,
+      constructorData.basic,
+      constructorData.sizeAndPrice.size
+    ];
+
+    return prices.reduce((acc, cur) => {
+      if (cur.absolutePrice) {
+        acc += cur.absolutePrice;
+      }
+
+      if (cur.relativePrice) {
+        acc += constructorData.basePrice * (cur.relativePrice / 100);
+      }
+
+      return Math.round(acc);
+    }, constructorData.basePrice);
+  };
+
   const changeSize = (id, sizeAndPrice) => {
-    setNewCart((prevCart) =>
+    setCartItems((prevCart) =>
       prevCart.map((el) => {
         if (el.id === id) {
           el.sizeAndPrice = sizeAndPrice;
@@ -111,11 +142,14 @@ export const useCart = (user = null) => {
     );
   };
 
-  const changeSizeConstructor = (id, size) => {
-    setNewCart((prevCart) =>
+  const changeSizeConstructor = (id, size, constructorData) => {
+    setCartItems((prevCart) =>
       prevCart.map((el) => {
         if (el.id === id) {
-          el.sizeAndPrice.size = size;
+          el.sizeAndPrice = {
+            size,
+            price: getConstructorPrice(constructorData)
+          };
         }
         return el;
       })
@@ -125,6 +159,8 @@ export const useCart = (user = null) => {
   const cartOperations = {
     addToCart,
     setCartItem,
+    addPromocode,
+    addCertificate,
     removeFromCart,
     changeQuantity,
     changeSize,
@@ -134,12 +170,16 @@ export const useCart = (user = null) => {
     changeSizeConstructor,
     getProductPriceWithPromoCode,
     getTotalPricesWithPromoCode,
-    getProductPrice
+    getTotalPriceWithCertificate,
+    getProductPrice,
+    getConstructorPrice
   };
 
   return {
     isInCart,
-    cart,
+    cartItems,
+    promoCode,
+    certificate,
     cartOperations
   };
 };

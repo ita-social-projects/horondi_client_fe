@@ -28,7 +28,8 @@ jest.mock('@material-ui/styles', () => ({
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: () => 'test'
+    t: () => 'test',
+    i18n: { language: 'ua' }
   })
 }));
 
@@ -50,20 +51,17 @@ jest.mock('../../../../hooks/use-currency', () => ({
 }));
 
 describe('test SearchBarListItem component', () => {
-  const etalonString = 'test';
-  let container;
-
   beforeEach(() => {
-    ({ container } = render(<SearchBarListItem product={product} />));
+    render(<SearchBarListItem product={product} />);
   });
 
-  it('Component should render appropriate `h4`', () => {
-    const el = container.querySelector('h4');
-    expect(el.textContent).toBe(etalonString);
+  it('Component should render title `h6`', () => {
+    const el = screen.getByTestId('title');
+    expect(el).toBeInTheDocument();
   });
 
-  it('after click on button component should call dispatch', () => {
-    const el = container.querySelector('button');
+  it('after click on list-item component should call dispatch', () => {
+    const el = screen.getByTestId('list-item');
     el.click();
     expect(mockDispatch).toHaveBeenCalled();
   });

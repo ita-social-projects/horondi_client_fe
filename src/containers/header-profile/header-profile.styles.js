@@ -29,8 +29,8 @@ export const useStyles = makeStyles(() => ({
 
   list: {
     '& .MuiPaper-root': {
-      marginTop: '21px',
-      marginLeft: `${window.innerWidth - document.body.clientWidth + 1}px`,
+      marginTop: '19px',
+      minWidth: '230px',
       padding: '8px 0',
       backgroundColor: '#000',
       borderRadius: '0px'
@@ -45,6 +45,9 @@ export const useStyles = makeStyles(() => ({
       '& svg': {
         margin: '0 16px'
       }
+    },
+    '@media (max-width: 1000px)': {
+      marginTop: '-9px'
     }
   }
 }));

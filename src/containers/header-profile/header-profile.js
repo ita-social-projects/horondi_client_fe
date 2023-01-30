@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useHistory } from 'react-router';
@@ -44,6 +44,13 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
   const history = useHistory();
 
+  useLayoutEffect(() => {
+    window.addEventListener('scroll', () => handleClose());
+    return () => {
+      window.removeEventListener('scroll', () => handleClose());
+    };
+  }, []);
+
   const configsUser = {
     currency: getFromLocalStorage('currency'),
     language: i18n.language,
@@ -78,7 +85,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   };
 
   useEffect(() => {
-    if (userData && userData.configs) {
+    if (userData?.configs) {
       const { theme, language, currency } = userData.configs;
 
       setLightMode(theme === 'light');
@@ -90,7 +97,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       setToLocalStorage('currency', currency);
       dispatch(changeCurrency(currency));
     }
-  }, [userData]);
+  }, [userData, setLightMode, dispatch]);
 
   const handleLogIn = () => {
     setIsMenuOpen(false);
@@ -170,6 +177,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       <Menu
         data-testid='menu'
         className={styles.list}
+        disableScrollLock
         anchorEl={anchorEl}
         keepMounted
         elevation={0}

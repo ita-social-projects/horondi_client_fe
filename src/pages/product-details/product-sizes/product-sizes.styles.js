@@ -1,58 +1,46 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => {
-  const sizeButton = {
+export const useStyles = makeStyles((theme) => ({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: '12px',
+    gap: '12px',
+    '@media (max-width: 750px)': { position: 'absolute', top: '54px', right: '4px', marginTop: 0 },
+    '@media (max-width: 500px)': {
+      position: 'static',
+      gridRow: 2
+    }
+  },
+  sizeButton: {
     width: '36px',
     height: '36px',
     fontWeight: 600,
     fontSize: 14,
     lineHeight: '19px'
-  };
-
-  return {
-    sizeButtons: {
-      '& [data-cy="sizes"]': {
-        border: `1px solid ${theme.palette.black}`,
-        borderRadius: '4px'
-      }
+  },
+  selectedSize: {
+    backgroundColor: theme.palette.button.normal.backgroundColor,
+    color: theme.palette.button.normal.color,
+    '&:hover': {
+      backgroundColor: theme.palette.card.selectedButton.backgroundColor,
+      color: theme.palette.card.selectedButton.color
     },
-    label: {
-      marginBottom: 8,
-      display: 'block',
-      fontWeight: '700',
-      alignSelf: 'center',
-      '@media (max-width: 600px)': {
-        justifyContent: 'center'
-      },
-      marginRight: '10px'
-    },
-    error: {
-      fontSize: '0.75rem',
-      textAlign: 'left',
-      fontFamily: 'Roboto,Helvetica,Arial,sans-serif',
-      fontWeight: '400',
-      lineHeight: '1.66px',
-      letterSpacing: '0.03333em',
-      color: 'tomato',
-      position: 'absolute',
-      width: '160px',
-      bottom: '0'
-    },
-    sizeButton: {
-      ...sizeButton,
-      backgroundColor: theme.palette.card.childrenBackgroundColor
-    },
-    selectedSize: {
-      ...sizeButton,
-      backgroundColor: theme.palette.black,
-      color: theme.palette.white,
-      '&:hover': {
-        backgroundColor: theme.palette.card.selectedButton.backgroundColor,
-        color: theme.palette.card.selectedButton.color
-      }
-    },
-    container: {
-      margin: '25px 0'
+    '&:disabled': {
+      backgroundColor: 'rgba(2, 2, 2, 0.2)'
     }
-  };
-});
+  },
+  label: {
+    fontSize: '15px',
+    '@media (max-width: 750px)': {
+      textAlign: 'end'
+    },
+    '@media (max-width: 500px)': {
+      textAlign: 'start',
+      fontSize: '14px'
+    }
+  },
+  sizeName: {
+    fontWeight: '600'
+  }
+}));

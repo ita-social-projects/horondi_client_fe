@@ -1,141 +1,125 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const imgSides = {
-  height: '100%',
-  objectFit: 'cover',
-  borderRadius: '6px',
-  cursor: 'pointer'
-};
-
 export const useStyles = makeStyles((theme) => ({
-  imageBody: {
-    display: 'flex',
-    flex: '1 1 50%',
-    alignContent: 'space-between'
-  },
   images: {
-    maxWidth: 540,
     display: 'flex',
-    gap: '20px',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    '@media (max-width: 1150px)': {
-      margin: '0 auto',
-      maxWidth: 640
+    gridRow: '1/3',
+    gap: '24px',
+    '@media (max-width: 900px)': {
+      gridColumn: '1'
     },
-    '@media (max-width: 600px)': {
-      justifyContent: 'center',
-      marginBottom: '10px'
+    '@media (max-width: 750px)': {
+      gridColumn: '1/3',
+      gridRow: 1,
+      display: 'grid',
+      gridTemplateColumns: '74% 23.5%',
+      gap: '2.5%',
+      marginBottom: '16px'
     },
-    '& img': {
-      transform: 'scale(1)',
-      width: '100%'
-    }
-  },
-
-  imageContainer: {
-    display: 'block',
-    borderRadius: '6px',
-    overflow: 'hidden'
-  },
-
-  primaryImage: {
-    gridRow: '1 / -1',
-    backgroundSize: 'cover',
-    maxHeight: '350px',
-    width: 'auto',
-    objectFit: 'cover',
-
-    '@media (max-width: 1600px)': {
-      width: 'auto',
-      height: 'auto'
-    }
-  },
-
-  sideImage: {
-    flex: '1 1 30%',
-    ...imgSides,
-    boxShadow: theme.palette.carouselItem.shadow.boxShadow
-  },
-
-  imagePreviewContainer: {
-    display: 'grid',
-    gridTemplateColumns: '48px 1fr 48px',
-    alignItems: 'center',
-    border: theme.palette.imageContainer.border,
-    borderRadius: '6px',
-    padding: '10px',
-    maxHeight: '385px',
-    boxShadow: theme.palette.carouselItem.shadow.boxShadow,
-    height: '100%'
-  },
-
-  circle: {
-    background: 'none',
-    display: 'flex',
-    width: '48px',
-    height: '48px',
-    border: 'solid 1px',
-    borderColor: theme.palette.textColor,
-    borderRadius: '50%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    '& svg': {
-      fill: theme.palette.textColor
-    },
-    '&:disabled': { opacity: '0.2' }
-  },
-
-  additionalImagePreview: {
-    display: 'flex',
-    alignItems: 'flex-end',
-    gap: 30,
-    maxHeight: '120px',
-    justifyContent: 'space-between',
-    '@media (max-width: 600px)': {
-      gap: 15,
-      maxHeight: '100px'
-    },
-    height: '100%'
-  },
-
-  lastImage: {
-    ...imgSides,
-    filter: 'brightness(50%)',
-    boxShadow: theme.palette.carouselItem.shadow.boxShadow
-  },
-
-  lastImageText: {
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
-    zIndex: 3,
-    textAlign: 'center',
-    fontSize: '16px',
-    fontWeight: 600,
-    lineHeight: '24px',
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 5px',
     '@media (max-width: 500px)': {
-      padding: '0',
-      fontSize: '14px'
+      marginBottom: '8px'
     }
   },
   imageItem: {
-    flex: '1 1 30%',
-    height: '100%',
-    border: theme.palette.imageContainer.border,
-    borderRadius: '6px'
+    width: '30%',
+    display: 'flex',
+    '@media (max-width: 750px)': { width: '100%' }
+  },
+  lastImage: {
+    width: '100%',
+    aspectRatio: 1,
+    objectFit: 'cover',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow,
+    filter: 'brightness(50%)'
   },
   lastImagesBox: {
-    flex: '1 1 30%',
     position: 'relative',
+    display: 'flex',
     color: 'white',
+    width: '30%',
     cursor: 'pointer',
+    '@media (max-width: 750px)': { width: '100%' }
+  },
+  lastImageText: {
+    position: 'absolute',
+    display: 'flex',
+    textAlign: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    padding: '4px',
     height: '100%',
+    color: 'white',
+    zIndex: 3,
+    fontSize: '16px',
+    fontWeight: 600,
+    '@media (max-width: 900px)': { fontSize: '14px' },
+    '@media (max-width: 750px)': { fontSize: '12px' },
+    '@media (max-width: 500px)': { fontSize: '10px' }
+  },
+  imagePreviewContainer: ({ imageUrl }) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     border: theme.palette.imageContainer.border,
-    borderRadius: '6px'
-  }
+    borderRadius: '6px',
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow,
+    aspectRatio: 1,
+    background: `url(${imageUrl}) center center / cover no-repeat`,
+    maxHeight: '520px',
+    maxWidth: '520px',
+    '@media (max-width: 750px)': { maxHeight: '528px', maxWidth: '528px' }
+  }),
+  sideImage: {
+    width: '100%',
+    aspectRatio: 1,
+    objectFit: 'cover',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow
+  },
+  additionalImagePreview: {
+    display: 'flex',
+    alignItems: 'center',
+    maxWidth: '520px',
+    gap: '26px',
+    '@media (max-width: 900px)': { gap: '20px' },
+    '@media (max-width: 750px)': {
+      flexDirection: 'column',
+      gridColumn: 2,
+      gap: '2%',
+      alignItems: 'start',
+      maxWidth: '173px'
+    }
+  },
+  circle: {
+    margin: '10px',
+    borderRadius: '50%',
+    background: 'rgba(0,0,0,0.5)',
+    border: 'none',
+    color: 'white',
+    minWidth: '43px',
+    minHeight: '43px',
+    opacity: '0.8',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '& svg': {
+      fontSize: '24px',
+      verticalAlign: 'middle',
+      '@media (max-width: 750px)': { fontSize: '20px' },
+      '@media (max-width: 500px)': { fontSize: '18px' }
+    },
+    '&:disabled': { opacity: '0.2' },
+    '@media (max-width: 750px)': { minWidth: '38px', minHeight: '38px' },
+    '@media (max-width: 500px)': {
+      minWidth: '32px',
+      minHeight: '32px',
+      margin: '5px'
+    }
+  },
+  imageOpener: { width: '100%', height: '100%', cursor: 'pointer' }
 }));

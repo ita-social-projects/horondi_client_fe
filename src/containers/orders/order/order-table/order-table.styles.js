@@ -1,15 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const title = {
-  fontWeight: '600',
-  fontSize: '48px',
-  lineHeight: '65px'
-};
-
-export const useStyles = makeStyles(({ palette }) => ({
-  titleWrapper: {
-    ...title
-  },
+export const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '1440px',
     display: 'flex',
@@ -20,43 +11,62 @@ export const useStyles = makeStyles(({ palette }) => ({
   table: {
     width: '100%',
     whiteSpace: 'nowrap',
-    '@media (max-width: 750px)': {
-      width: '600px',
-      overflowX: 'auto'
+    '& .MuiTableCell-root': {
+      '@media (max-width: 650px)': {
+        borderBottom: 'none'
+      }
     },
-    '@media (max-width: 600px)': {
-      width: '400px',
-      overflowX: 'auto'
-    },
-    '@media (max-width: 400px)': {
-      width: '300px',
-      overflowX: 'auto'
+    '& tbody tr': {
+      '@media (max-width: 650px)': {
+        display: 'grid',
+        gridTemplateColumns: '2fr 1fr 1fr',
+        gridTemplateRows: '1fr 0 1fr',
+        borderBottom: '1px solid lightgrey',
+        padding: '12px 0'
+      },
+      '@media (max-width: 450px)': {
+        gridTemplateRows: 'auto',
+        padding: '12px'
+      }
     },
     '& td': {
-      padding: '32px 0',
+      padding: '16px 0',
       lineHeight: '28px',
-      fontSize: '20px',
-      fontWeight: 400,
-      textAlign: 'center'
-    },
-    '& td:first-child': {
-      textAlign: 'left'
+      fontSize: theme.typography.h4.fontSize,
+      fontWeight: theme.typography.h4.fontWeight,
+      textAlign: 'center',
+      '&:first-child': {
+        alignItems: 'center',
+        textAlign: 'left',
+        '@media (max-width: 650px)': {
+          alignItems: 'center'
+        },
+        '@media (max-width: 450px)': {
+          alignItems: 'start',
+          width: '100%'
+        }
+      },
+      '@media (max-width: 900px)': {
+        fontSize: '18px'
+      },
+      '@media (max-width: 650px)': {
+        margin: 'auto',
+        padding: 0
+      }
     }
   },
   tableHeader: {
     borderTopWidth: '1px',
     borderTopStyle: 'solid',
-    borderTopColor: palette.cart.borderColor,
+    borderTopColor: theme.palette.cart.borderColor,
     '& >th': {
       padding: '10px 0',
-      fontSize: '14px',
-      fontWeight: 600,
-      lineHeight: '20px',
-      textAlign: 'center'
-    },
-    '@media (max-width: 425px)': {
-      '& >th': {
-        verticalAlign: 'text-top'
+      fontSize: theme.typography.h6.fontSize,
+      fontWeight: theme.typography.body1.fontWeight,
+      lineHeight: theme.typography.h6.lineHeight,
+      textAlign: 'center',
+      '@media (max-width: 650px)': {
+        display: 'none'
       }
     }
   }

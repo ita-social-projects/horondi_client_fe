@@ -8,10 +8,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     marginBottom: '100px'
   },
-  contactsTitle: {
-    fontWeight: '300',
-    fontSize: '3em'
-  },
   content: {
     marginRight: '400px',
     position: 'relative',

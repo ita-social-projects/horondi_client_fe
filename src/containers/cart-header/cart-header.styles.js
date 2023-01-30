@@ -16,7 +16,7 @@ export const useStyles = makeStyles(() => ({
       backgroundColor: '#F44336'
     },
     '@media (max-width: 900px)': {
-      marginRight: '10px'
+      marginRight: fromSideBar ? '0px' : '10px'
     }
   }),
   svg: {

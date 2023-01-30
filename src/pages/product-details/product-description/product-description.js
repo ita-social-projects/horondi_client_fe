@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import parse from 'html-react-parser';
 import { Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
@@ -7,99 +7,98 @@ import { ExpandMoreOutlined } from '@material-ui/icons';
 import { useStyles } from './product-description.styles';
 import Detail from '../detail';
 
-const ProductDescription = ({ product, currentSizeIndex }) => {
+const ProductDescription = ({ product, currentSize }) => {
   const styles = useStyles();
-  const { mainMaterial, innerMaterial, bottomMaterial, sizes, translationsKey } = product;
-  const currentWeight =
-    sizes && currentSizeIndex >= 0 ? sizes[currentSizeIndex].size.weightInKg : '';
-  const currentVolume =
-    sizes && currentSizeIndex >= 0 ? sizes[currentSizeIndex].size.volumeInLiters : '';
   const { t } = useTranslation();
 
-  return (
-    <div className={styles.details}>
-      <div className={styles.description}>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreOutlined />}
-            aria-controls='panel1a-content'
-            id='panel1a-header'
-          >
-            <Typography className={styles.title}>
-              {t('product.productDescription.description')}{' '}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography component='div' className={styles.text}>
-              {parse(
-                String(t(`${translationsKey}.description`))
-                  .replace(/&nbsp;/g, '')
-                  .replace(/;/g, '. ')
-              )}
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      </div>
-
-      <div className={styles.description}>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreOutlined />}
-            aria-controls='panel1a-content'
-            id='panel1a-header'
-          >
-            <Typography className={styles.title}>
-              {t('product.productDescription.material')}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography component='div' className={styles.text}>
-              <Detail
-                subtitle={t('product.productDescription.mainMaterial')}
-                description={t(`${mainMaterial.material.translationsKey}.name`)}
-              />
-              <Detail
-                subtitle={t('product.productDescription.innerMaterial')}
-                description={t(`${innerMaterial.material.translationsKey}.name`)}
-              />
-              <Detail
-                subtitle={t('product.productDescription.bottomMaterial')}
-                description={t(`${bottomMaterial.material.translationsKey}.name`)}
-              />
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      </div>
-
-      <div className={styles.description}>
-        {currentVolume && currentWeight && product.available ? (
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreOutlined />}
-              aria-controls='panel1a-content'
-              id='panel1a-header'
-            >
-              <Typography className={styles.title}>
-                {t('product.productDescription.measurement')}{' '}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography component='div' className={styles.text}>
-                <Detail
-                  subtitle={t('product.weight.volumeLabel')}
-                  description={`${currentVolume}`}
-                />
-                <Detail
-                  subtitle={t('product.weight.weightLabel')}
-                  description={`${currentWeight}`}
-                />
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-        ) : null}
-      </div>
-    </div>
+  const descriptions = useMemo(
+    () => [
+      {
+        tittle: t('product.productDescription.description'),
+        text: parse(
+          String(t(`${product.translationsKey}.description`))
+            .replace(/&nbsp;/g, '')
+            .replace(/;/g, '. ')
+        )
+      },
+      {
+        tittle: t('product.productDescription.material'),
+        details: [
+          {
+            subtitle: t('product.productDescription.mainMaterial'),
+            description: t(`${product.mainMaterial.material.translationsKey}.name`)
+          },
+          {
+            subtitle: t('product.productDescription.innerMaterial'),
+            description: t(`${product.innerMaterial.material.translationsKey}.name`)
+          },
+          {
+            subtitle: t('product.productDescription.bottomMaterial'),
+            description: t(`${product.bottomMaterial.material.translationsKey}.name`)
+          }
+        ]
+      },
+      {
+        tittle: Object.keys(currentSize).length > 0 && t('product.productDescription.measurement'),
+        details: [
+          {
+            subtitle: t('product.weight.heightLabel'),
+            description: currentSize && `${currentSize.heightInCm} ${t('product.measurment.sm')}`
+          },
+          {
+            subtitle: t('product.weight.widthLabel'),
+            description: currentSize && `${currentSize.widthInCm} ${t('product.measurment.sm')}`
+          },
+          {
+            subtitle: t('product.weight.depthLabel'),
+            description: currentSize && `${currentSize.depthInCm} ${t('product.measurment.sm')}`
+          },
+          {
+            subtitle: t('product.weight.weightLabel'),
+            description: currentSize && `${currentSize.weightInKg} ${t('product.measurment.kg')}`
+          },
+          {
+            subtitle: t('product.weight.volumeLabel'),
+            description: currentSize && `${currentSize.volumeInLiters} ${t('product.measurment.l')}`
+          }
+        ]
+      }
+    ],
+    [currentSize, t, product]
   );
+
+  const descriptionItems = useMemo(
+    () =>
+      descriptions.map((description) => {
+        const details = description.details?.map(({ subtitle, description }) => (
+          <Detail key={subtitle} subtitle={subtitle} description={description} />
+        ));
+
+        return (
+          description.tittle && (
+            <div className={styles.description} key={description.tittle}>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreOutlined />}
+                  aria-controls='panel1a-content'
+                  id='panel1a-header'
+                >
+                  <Typography className={styles.title}>{description.tittle}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography component='div' className={styles.text}>
+                    {description.text || details}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            </div>
+          )
+        );
+      }),
+    [descriptions, styles]
+  );
+
+  return <div className={styles.details}>{descriptionItems}</div>;
 };
 
 export default ProductDescription;

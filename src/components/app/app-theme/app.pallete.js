@@ -37,6 +37,12 @@ export const paletteGenerator = (colorSchema) => ({
       color: theme[colorSchema].card.selectedButton.color
     }
   },
+  myCertificate: {
+    backgroundColorRed: theme[colorSchema].myCertificate.backgroundColorRed,
+    backgroundColorGray: theme[colorSchema].myCertificate.backgroundColorGray,
+    notActiveTextColor: theme[colorSchema].myCertificate.notActiveTextColor,
+    iconBtnColor: theme[colorSchema].myCertificate.iconBtnColor
+  },
   catalog: {
     pageFilterCell: {
       hover: {
@@ -67,6 +73,7 @@ export const paletteGenerator = (colorSchema) => ({
     borderColor: theme[colorSchema].cart.borderColor,
     iconColor: theme[colorSchema].cart.iconColor
   },
+  notification: { backgroundColor: theme[colorSchema].notification.backgroundColor },
   contactForm: {
     background: theme[colorSchema].contactForm.background
   },

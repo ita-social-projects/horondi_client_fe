@@ -1,67 +1,75 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useMutation, useLazyQuery } from '@apollo/client';
+import React, { useContext, useLayoutEffect, useState } from 'react';
+import { useMutation } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router';
-
 import { Link } from 'react-router-dom';
-
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
 import { Loader } from '../../../../components/loader/loader';
 import PathBack from '../path-back/path-back';
 import routes from '../../../../configs/routes';
 import SimilarProducts from '../../../../pages/product-details/similar-products';
-import { TEXT_FIELD_VARIANT } from '../../../../configs';
-import { getPromoCodeByCode } from '../../operations/getPromoCodeByCode.queries';
+import CartDiscount from '../cart-discount';
 import { addProductFromConstructor } from '../../../../pages/cart/operations/cart.mutations';
 import { CurrencyContext } from '../../../../context/currency-context';
 import { useCurrency } from '../../../../hooks/use-currency';
 
-const FilledCart = ({ items, cartOperations }) => {
+const FilledCart = ({ items, cartOperations, certificate, promoCode }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
-  const { getCurrencySign } = useCurrency();
+  const { currencySign } = useCurrency();
 
   const [addConstructorProduct] = useMutation(addProductFromConstructor);
 
-  const promoCodeInput = useRef(null);
   const { pathToCategory, pathToCheckout } = routes;
   const [price, setPrice] = useState();
-  const [promoCodeValue, setPromoCodeValue] = useState('');
   const [productFromConstructorLoading, setProductFromConstructorLoading] = useState(false);
+  const [discount, setDiscount] = useState({});
 
   const { currency } = useContext(CurrencyContext);
+
+  const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode, getTotalPriceWithCertificate } =
+    cartOperations;
 
   const { cartLoading, user } = useSelector(({ User }) => ({
     user: User.userData
   }));
 
-  const [getPromoCode, { data: promoCode, error }] = useLazyQuery(getPromoCodeByCode, {
-    variables: {
-      code: promoCodeValue
+  useLayoutEffect(() => {
+    if (certificate) {
+      const { name, value } = certificate.getCertificateByParams;
+      setDiscount({ type: 'certificate', name, value });
+      return setPrice(getTotalPriceWithCertificate(certificate));
     }
-  });
+    if (promoCode) {
+      const { code, discount } = promoCode.getPromoCodeByCode;
+      setDiscount({ type: 'promoCode', name: code, value: discount });
+      return setPrice(getTotalPricesWithPromoCode(promoCode));
+    }
+    setPrice(getTotalPrice());
+  }, [
+    items,
+    currency,
+    getTotalPrice,
+    certificate,
+    promoCode,
+    getTotalPricesWithPromoCode,
+    getTotalPriceWithCertificate
+  ]);
 
-  const currencySign = getCurrencySign();
-  const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode } = cartOperations;
-
-  const checkPromoCode = () => {
-    setPromoCodeValue(promoCodeInput.current.value);
-    getPromoCode();
-    promoCodeInput.current.value = '';
-  };
-
-  useEffect(() => {
-    promoCode ? setPrice(getTotalPricesWithPromoCode(promoCode)) : setPrice(getTotalPrice());
-  }, [items, currency, getTotalPrice, promoCode, getTotalPricesWithPromoCode]);
-
-  if (cartLoading || productFromConstructorLoading) {
-    return <Loader />;
-  }
+  const totalSavePrice = (promoCode || certificate) && (
+    <div className={styles.totalPrice}>
+      <span>{t('cart.subtotal')}</span>
+      <div>
+        {currencySign}
+        {promoCode && getTotalPrice() - getTotalPricesWithPromoCode(promoCode)}
+        {certificate && getTotalPrice()}
+      </div>
+    </div>
+  );
 
   const onGoToCheckout = async () => {
     const itemsFromConstructor = items.filter((item) => item.isFromConstructor);
@@ -73,25 +81,23 @@ const FilledCart = ({ items, cartOperations }) => {
           model: item.model?._id,
           pattern: item.pattern?._id,
           mainMaterial: {
-            material: item.basic?.features.material._id,
+            material: item.basic._id,
             color: item.basic?.features.color._id
           },
           bottomMaterial: {
-            material: item.bottom?.features.material._id,
+            material: item.bottom?._id,
             color: item.bottom?.features.color._id
           },
           sizes: [item.sizeAndPrice.size._id],
-          basePrice: item.sizeAndPrice.price
-        },
-        upload: []
+          basePrice: item.basePrice
+        }
       };
 
       setProductFromConstructorLoading(true);
 
       const { data } = await addConstructorProduct({
         variables: {
-          product: input.product,
-          upload: input.upload
+          product: input.product
         }
       });
 
@@ -100,78 +106,57 @@ const FilledCart = ({ items, cartOperations }) => {
         productId: data.addProductFromConstructor._id
       });
     }
-
-    history.push(pathToCheckout, { promoCode });
+    history.push(pathToCheckout);
   };
 
+  if (cartLoading || productFromConstructorLoading) {
+    return <Loader />;
+  }
+
   return (
-    <>
-      <PathBack />
-      <div className={styles.root} data-cy='filled-cart'>
-        <div className={styles.orderWrapper}>
-          <div className={styles.orderTable}>
-            <OrderTable
-              items={items}
-              user={user}
-              cartOperations={cartOperations}
-              promoCode={promoCode}
-            />
-          </div>
+    <div className={styles.root} data-cy='filled-cart'>
+      <PathBack
+        className={styles.pathBack}
+        categoryLink={pathToCategory}
+        categoryText='cart.pathBack.toCatalog'
+        currentPageText='cart.pathBack.yourCart'
+      />
+      <div className={styles.orderWrapper}>
+        <div className={styles.orderTable}>
+          <OrderTable
+            items={items}
+            user={user}
+            cartOperations={cartOperations}
+            promoCode={promoCode}
+            certificateData={certificate}
+          />
         </div>
-        <div>
-          <div className={styles.promoAndTotalWrapper}>
-            <div className={styles.promoWrapper}>
-              <div>
-                <TextField
-                  className={styles.textField}
-                  InputProps={{
-                    className: styles.promoInput
-                  }}
-                  placeholder={t('cart.promoPlaceHolder')}
-                  variant={TEXT_FIELD_VARIANT.OUTLINED}
-                  inputRef={promoCodeInput}
-                  error={!!error}
-                  helperText={error && t('cart.notFound')}
-                />
-                <Button
-                  data-testid='promoButton'
-                  variant='contained'
-                  className={`${styles.promoButton} ${styles.promoInput}`}
-                  onClick={checkPromoCode}
-                >
-                  {t('cart.applyPromoCode')}
-                </Button>
-              </div>
-              <Link to={pathToCategory}>
-                <Button className={styles.shoppingButton}>{t('cart.continue')}</Button>
-              </Link>
-            </div>
-            <div className={styles.totalWrapper}>
-              {promoCode && (
-                <div className={styles.totalPrice}>
-                  <span>{t('cart.saving')}</span>
-                  <div>
-                    {currencySign}
-                    {getTotalPrice() - getTotalPricesWithPromoCode(promoCode)}
-                  </div>
-                </div>
-              )}
-              <div className={styles.totalPrice}>
-                <span>{t('cart.totalPrice')}</span>
-                <div>
-                  {currencySign}
-                  {price}
-                </div>
-              </div>
-              <Button variant='contained' className={styles.ordersButton} onClick={onGoToCheckout}>
-                {t('cart.checkout')}
-              </Button>
-            </div>
-          </div>
-        </div>
-        <SimilarProducts cartList={items} />
       </div>
-    </>
+      <div className={styles.promoAndTotalWrapper}>
+        <CartDiscount
+          discount={discount}
+          setDiscount={setDiscount}
+          cartOperations={cartOperations}
+        />
+        <div className={styles.totalWrapper}>
+          {totalSavePrice}
+          <div className={styles.totalPrice}>
+            <span>{t('cart.totalPrice')}</span>
+            <div>
+              {currencySign}
+              {price}
+            </div>
+          </div>
+          <Button variant='contained' className={styles.ordersButton} onClick={onGoToCheckout}>
+            {t('cart.checkout')}
+          </Button>
+          <Link to={pathToCategory}>
+            <Button className={styles.shoppingButton}>{t('cart.continue')}</Button>
+          </Link>
+        </div>
+      </div>
+      <SimilarProducts cartList={items} />
+    </div>
   );
 };
 

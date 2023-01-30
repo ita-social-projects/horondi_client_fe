@@ -35,6 +35,13 @@ jest.mock('@apollo/client', () => ({
   ]
 }));
 
+jest.mock('../../../../hooks/use-wishlist', () => ({
+  useWishlist: () => ({
+    wishlist: [{ _id: '614cb8' }, { _id: '61af5' }],
+    wishlistOperations: {}
+  })
+}));
+
 const state = {
   language: 1,
   currency: 1

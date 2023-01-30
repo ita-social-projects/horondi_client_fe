@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -8,6 +8,7 @@ export const useStyles = makeStyles(() => ({
     '& .MuiOutlinedInput-root': {
       fontSize: '18px',
       fontWeight: 400,
+      '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: palette.text.secondary },
       '@media (max-width: 425px)': {
         fontSize: '16px'
       }

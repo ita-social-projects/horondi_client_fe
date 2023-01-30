@@ -1,70 +1,87 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const title = {
-  fontWeight: 'normal',
-  fontSize: '2.375em',
-  margin: '67px',
-  '@media (max-width: 550px)': {
-    fontSize: '33px',
-    margin: '48px'
+export const useStyles = makeStyles((theme) => ({
+  iconBtn: {
+    color: 'inherit',
+    opacity: '0.6',
+    backgroundColor: 'inherit',
+    border: 'none',
+    '&:hover': {
+      color: theme.palette.blue,
+      cursor: 'pointer'
+    }
   },
-  '@media (max-width: 380px)': {
-    fontSize: '26px',
-    margin: '25px'
-  }
-};
-
-export const useStyles = makeStyles(({ palette }) => ({
-  titleWrapper: {
-    ...title
-  },
-  root: {
-    maxWidth: '1110px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginBottom: '40px'
+  image: {
+    height: '85px',
+    width: '170px',
+    '@media (max-width: 860px)': {
+      gridRow: '1/span 3',
+      gridColumn: 1,
+      height: '70px',
+      width: '140px'
+    },
+    '@media (max-width: 450px)': { display: 'none' }
   },
   table: {
-    width: '100%',
-    '@media (max-width: 700px)': {
-      maxWidth: '600px',
-      overflowX: 'auto'
-    },
+    '@media (max-width: 750px)': { borderTop: theme.palette.imageContainer.border },
     '& td': {
-      padding: '24px 0px',
-      lineHeight: '28px',
-      fontSize: '20px',
-      fontWeight: 400,
-      '@media (max-width: 700px)': {
-        fontSize: '15px',
-        lineHeight: '20px'
-      }
-    },
-    '& td:last-child': {
-      color: palette
-    },
-    '& td:first-child': {
-      textAlign: 'left',
-      '& img': {
-        '@media (max-width: 700px)': {
-          width: '134px',
-          height: '63px',
-          marginRight: '5px'
-        }
+      fontSize: '18px',
+      padding: '20px 12px',
+      '@media (max-width: 860px)': {
+        fontSize: theme.typography.h5.fontSize
+      },
+      '@media (max-width: 750px)': {
+        padding: 0,
+        border: 'none'
       }
     }
   },
-  tableHeader: {
-    borderTopWidth: '1px',
-    borderTopStyle: 'solid',
-    borderTopColor: palette.cart.borderColor,
-    '& >th': {
-      padding: '10px 0',
-      fontSize: '14px',
-      fontWeight: 600,
-      lineHeight: '20px',
-      textAlign: 'left'
+  code: {
+    fontWeight: theme.typography.body1.fontWeight,
+    '@media (max-width: 750px)': { gridRow: '1/span 3', gridColumn: 2 },
+    '@media (max-width: 610px)': { gridRow: 1 }
+  },
+  tableRow: {
+    '@media (max-width: 750px)': {
+      display: 'grid',
+      gridTemplateColumns: 'fit-content(100px)',
+      gridAutoRows: 'auto',
+      padding: '18px 0 ',
+      columnGap: '12px',
+      borderBottom: theme.palette.imageContainer.border,
+      justifyItems: 'left',
+      alignItems: 'center'
+    }
+  },
+  price: {
+    whiteSpace: 'nowrap',
+    '@media (max-width: 750px)': { gridColumn: 4, gridRow: 3 },
+    '@media (max-width: 610px)': { gridColumn: 3, justifySelf: 'center' }
+  },
+  actionItems: {
+    textAlign: 'center',
+    '@media (max-width: 750px)': { gridColumn: 4, gridRow: 1 },
+    '@media (max-width: 610px)': { gridColumn: 3, justifySelf: 'center' }
+  },
+  date: {
+    '@media (max-width: 750px)': { gridColumn: 3, gridRow: 3 },
+    '@media (max-width: 610px)': { gridColumn: 2 }
+  },
+  status: {
+    color: theme.palette.green,
+    '@media (max-width: 750px)': { gridColumn: 3, gridRow: 1 },
+    '@media (max-width: 610px)': { gridColumn: 2, gridRow: 2 }
+  },
+  notActive: {
+    filter: 'grayscale(100%)',
+    backgroundColor: theme.palette.myCertificate.backgroundColorGray,
+    '& td': { color: theme.palette.myCertificate.notActiveTextColor },
+    pointerEvents: 'none'
+  },
+  expires: {
+    backgroundColor: theme.palette.myCertificate.backgroundColorRed,
+    '& td:nth-child(4)': {
+      color: theme.palette.red
     }
   }
 }));

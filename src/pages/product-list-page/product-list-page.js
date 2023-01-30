@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pagination } from '@material-ui/lab';
-import { Typography } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import withWidth from '@material-ui/core/withWidth';
@@ -14,6 +12,7 @@ import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
+import PageTitle from '../../components/page-title';
 import { URL_QUERIES_NAME } from '../../configs';
 import { TEMPORARY_WIDTHS, DRAWER_PERMANENT, DRAWER_TEMPORARY } from './constants';
 import { getFilteredProductsQuery } from './operations/product-list.queries';
@@ -24,7 +23,7 @@ import { BackpackIcon } from '../../images/backpack-icon';
 
 const ProductListPage = ({ width }) => {
   const { search } = useLocation();
-  const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
+  const searchParams = useMemo(() => new URLSearchParams(search), [search]);
   const sortParamsFromQuery = searchParams.get(URL_QUERIES_NAME.sort);
   const nameFilter = searchParams.get(URL_QUERIES_NAME.nameFilter);
   const { t } = useTranslation();
@@ -66,10 +65,6 @@ const ProductListPage = ({ width }) => {
   });
 
   useEffect(() => {
-    setSearchParams(new URLSearchParams(search));
-  }, [search]);
-
-  useEffect(() => {
     setSortParams(() => getSortParamsFromQuery(sortParamsFromQuery));
     setPaginationParams((prevState) => ({
       ...prevState,
@@ -82,9 +77,10 @@ const ProductListPage = ({ width }) => {
   const changeHandler = (_e, value) => {
     searchParams.set(URL_QUERIES_NAME.page, value);
     history.push(`?${searchParams.toString()}`);
+    window.scrollTo(0, 0);
   };
 
-  const handleFilterShow = () => setFilterMenuStatus((prevState) => !prevState);
+  const handleFilterShow = useCallback(() => setFilterMenuStatus((prevState) => !prevState), []);
 
   useEffect(() => {
     if (data) {
@@ -94,7 +90,7 @@ const ProductListPage = ({ width }) => {
         pagesCount: Math.ceil(data.getProducts.count / countPerPage)
       }));
     }
-  }, [data]);
+  }, [data, countPerPage]);
 
   const itemsToShow = () => {
     if (products?.length > 0) {
@@ -144,15 +140,8 @@ const ProductListPage = ({ width }) => {
   return (
     <Container maxWidth='lg'>
       <div className={styles.root}>
-        <Typography className={styles.header}>{t('common.scrollbar.catalog')}</Typography>
-        <div className={styles.sortDiv}>
-          <ProductSort />
-        </div>
-        <div className={styles.filterButtonBlock}>
-          <Button className={styles.button} variant='contained' onClick={handleFilterShow}>
-            {t('common.showFilters')}
-          </Button>
-        </div>
+        <PageTitle title={t('common.scrollbar.catalog')} titleLine />
+        <ProductSort handleFilterShow={handleFilterShow} />
         <div className={styles.list}>
           <Drawer
             id='menuDrawer'

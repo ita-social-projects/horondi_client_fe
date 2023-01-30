@@ -6,7 +6,7 @@ import ClassicButton from '../../../components/classic-button';
 import ModelItem from '../../../components/model-item';
 import { getAllModelsQuery } from './operations/getAllModels.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
-import { URL_QUERIES_NAME, countPerPage } from '../../../configs/index';
+import { URL_QUERIES_NAME } from '../../../configs/index';
 import { useAppStyles } from '../../../components/app/app.styles';
 
 const ModelsList = () => {
@@ -29,7 +29,7 @@ const ModelsList = () => {
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
-    <div className={appStyles.rootApp}>
+    <div id='models' data-section-style='light' className={appStyles.rootApp}>
       <div
         className={`${appStyles.containerApp} ${styles.root}`}
         data-section-style='light'
@@ -45,7 +45,7 @@ const ModelsList = () => {
             <ModelItem
               key={model._id}
               model={model}
-              modelsUrl={`${URL_QUERIES_NAME.modelsFilter}=${model._id}&page=1&${countPerPage}`}
+              modelsUrl={`${URL_QUERIES_NAME.modelsFilter}=%2C${model._id}`}
             />
           ))}
         </div>

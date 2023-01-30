@@ -7,9 +7,10 @@
   "promoPlaceHolder": "Promocode or certificate",
   "applyPromoCode": "Add",
   "continue": "Continue shopping",
-  "totalPrice": "Total price",
-  "saving": "Save",
-  "notFound": "Promo code not found",
+  "totalPrice": "Total",
+  "subtotal": "Subtotal",
+  "promoCodeNotFound": "Promo code not found",
+  "certificateNotFound": "Certificate not found",
   "checkout": "Go to checkout",
   "pathBack": {
     "toMain": "Home",
@@ -23,6 +24,14 @@
   "size": "Size",
   "price": "Price",
   "quantity": "Quantity",
-  "toPay": "Total price",
-  "actions": "Action"
+  "toPay": "Total",
+  "actions": "Action",
+  "discountInformation": "Discount information",
+  "discountType": {
+    "certificate": "Certificate",
+    "promoCode": "Promo Code"
+  },
+  "discountSize": "Discount size*",
+  "discountRemark": "*If the amount of the discount covers the price of the product, the balance will be debited, leaving 1 hryvnia for payment",
+  "resetDiscount": "Reset discount"
 }

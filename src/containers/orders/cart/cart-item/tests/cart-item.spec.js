@@ -2,12 +2,17 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
+import { ThemeProvider } from '@material-ui/styles';
 import CartItem from '../cart-item';
 import { props, mockProduct, constructor, itemData } from './cart-item.variables';
 import { DollarIcon } from '../../../../../images/profile-icons';
+import ThemeContext from '../../../../../context/theme-context';
+import { theme } from '../../../../../components/app/app-theme/app.theme';
 
 jest.mock('react-redux');
 jest.mock('../cart-item.styles', () => ({ useStyles: () => ({}) }));
+const themeValue = theme('light');
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 const mockChangeQuantity = jest.fn();
 const mockChangeSizeConstructor = jest.fn();
@@ -38,9 +43,13 @@ describe('Cart item component tests', () => {
   it('should calculate price with promoCode', async () => {
     render(
       <MockedProvider mocks={mockProduct} addTypename={false}>
-        <Router>
-          <CartItem {...props} cartOperations={mockCartOperations} />
-        </Router>
+        <ThemeProvider theme={themeValue}>
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <Router>
+              <CartItem {...props} cartOperations={mockCartOperations} />
+            </Router>
+          </ThemeContext.Provider>
+        </ThemeProvider>
       </MockedProvider>
     );
 
@@ -52,14 +61,18 @@ describe('Cart item component tests', () => {
   it('should calculate price without promoCode', async () => {
     render(
       <MockedProvider mocks={mockProduct} addTypename={false}>
-        <Router>
-          <CartItem
-            {...props}
-            item={constructor}
-            promoCode={null}
-            cartOperations={mockCartOperations}
-          />
-        </Router>
+        <ThemeProvider theme={themeValue}>
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <Router>
+              <CartItem
+                {...props}
+                item={constructor}
+                promoCode={null}
+                cartOperations={mockCartOperations}
+              />
+            </Router>
+          </ThemeContext.Provider>
+        </ThemeProvider>
       </MockedProvider>
     );
     await new Promise((resolve) => setTimeout(resolve, 0));
@@ -69,9 +82,13 @@ describe('Cart item component tests', () => {
   it('should increment product quantity', async () => {
     render(
       <MockedProvider mocks={mockProduct} addTypename={false}>
-        <Router>
-          <CartItem {...props} cartOperations={mockCartOperations} />
-        </Router>
+        <ThemeProvider theme={themeValue}>
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <Router>
+              <CartItem {...props} cartOperations={mockCartOperations} />
+            </Router>
+          </ThemeContext.Provider>
+        </ThemeProvider>
       </MockedProvider>
     );
     await new Promise((resolve) => setTimeout(resolve, 0));

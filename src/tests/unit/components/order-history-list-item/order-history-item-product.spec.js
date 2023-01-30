@@ -12,6 +12,7 @@ import {
 } from './order-history-item-product.variables';
 import { theme } from '../../../../components/app/app-theme/app.theme';
 import { DollarIcon } from '../../../../images/profile-icons';
+import ThemeContext from '../../../../context/theme-context';
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
@@ -24,6 +25,7 @@ jest.mock(
 );
 
 const themeValue = theme('light');
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 let wrapper;
 
 jest.mock('../../../../hooks/use-currency', () => ({
@@ -46,7 +48,9 @@ describe('OrderHistoryOrderItem component tests', () => {
       <MockedProvider mocks={mockConstructor}>
         <BrowserRouter>
           <ThemeProvider theme={themeValue}>
-            <OrderHistoryItemProduct item={item} />
+            <ThemeContext.Provider value={themeContextProviderMockValues}>
+              <OrderHistoryItemProduct item={item} />
+            </ThemeContext.Provider>
           </ThemeProvider>
         </BrowserRouter>
       </MockedProvider>
@@ -55,9 +59,9 @@ describe('OrderHistoryOrderItem component tests', () => {
   it('Should render OrderHistoryOrderItem', () => {
     expect(wrapper).toBeDefined();
   });
-  it('renders 6 cells in a row', () => {
+  it('renders 7 cells in a row', () => {
     const cells = document.querySelectorAll('td');
-    expect(cells.length).toBe(6);
+    expect(cells.length).toBe(7);
   });
   it('renders <img/>', () => {
     const img = document.querySelector('img');
@@ -73,7 +77,9 @@ describe('OrderHistoryOrderItem component tests,renders plug for product', () =>
       <MockedProvider mocks={mockConstructor}>
         <BrowserRouter>
           <ThemeProvider theme={themeValue}>
-            <OrderHistoryItemProduct item={nullProduct} />
+            <ThemeContext.Provider value={themeContextProviderMockValues}>
+              <OrderHistoryItemProduct item={nullProduct} />
+            </ThemeContext.Provider>
           </ThemeProvider>
         </BrowserRouter>
       </MockedProvider>

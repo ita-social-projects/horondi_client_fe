@@ -1,9 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  root: ({ isModelsVisible, modelsCount }) => ({
-    height: !isModelsVisible ? '960px' : `${(modelsCount / 2) * 210 + 250}px`,
-    minHeight: '480px',
+  root: () => ({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -21,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
       color: theme.palette.textColor,
       backgroundColor: theme.palette.backgroundColor,
       borderColor: theme.palette.textColor,
-      margin: 50,
+      margin: 55,
       '&:hover': {
         color: theme.palette.button.hoverSecondary.color,
         backgroundColor: theme.palette.button.hoverSecondary.backgroundColor
@@ -51,19 +49,21 @@ export const useStyles = makeStyles((theme) => ({
     }
   }),
   modelsWrapperClosed: () => ({
-    height: 200
+    height: 260
   }),
   modelsWrapperOpened: () => ({
-    height: 400,
-    '@media (max-width: 480px)': {
-      height: 600
+    height: 510,
+    '@media (max-width: 568px)': {
+      height: 760
     }
   }),
+
   modelsTitle: () => ({
     color: theme.palette.textColor,
     fontSize: 34,
     marginBottom: 30,
     fontWeight: '400',
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
+    paddingLeft: '20px'
   })
 }));

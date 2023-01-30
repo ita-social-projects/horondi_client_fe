@@ -1,11 +1,11 @@
-import React, { useMemo, useState, useLayoutEffect, useContext } from 'react';
+import React, { useMemo, useState, useLayoutEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import { useTheme } from '@material-ui/styles';
 import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SideBarItem from './sidebar-item';
@@ -16,17 +16,18 @@ import SidemenuRightBar from '../sidemenu-right-bar';
 import routes from '../../configs/routes';
 import { getCategoriesForBurgerMenu } from './operations/burger-menu.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
-import ThemeContext from '../../context/theme-context';
 import CertificateIcon from './CertificateIcon';
+import { getAllConstructors } from '../../pages/images-constructor/operations/getAllConstructors.queries';
 
 const { pathToConstructor, pathToGiftСertificate } = routes;
 
 const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
+  const { palette } = useTheme();
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
-  const [isLightTheme] = useContext(ThemeContext);
+  const [isConstructor, setIsConstructor] = useState(false);
 
   const sidebar = clsx({
     [styles.drawer]: true,
@@ -46,7 +47,19 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   }, []);
 
   const { loading, error } = useQuery(getCategoriesForBurgerMenu, {
-    onCompleted: (data) => setCategories(data.getCategoriesForBurgerMenu)
+    onCompleted: (data) =>
+      setCategories(
+        data.getCategoriesForBurgerMenu.filter((category) => category.models.length > 0)
+      )
+  });
+
+  useQuery(getAllConstructors, {
+    variables: {
+      limit: 0,
+      skip: 0
+    },
+    onCompleted: ({ getAllConstructors }) =>
+      setIsConstructor(Boolean(getAllConstructors.items.length))
   });
 
   const categoriesList = useMemo(
@@ -63,6 +76,25 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       )),
     [categories, styles, setIsMenuOpen]
   );
+
+  const constructorLink = useMemo(() => {
+    if (isConstructor) {
+      return (
+        <>
+          <Link
+            to={pathToConstructor}
+            className={styles.mainItem}
+            onClick={() => setIsMenuOpen(false)}
+            data-testid='linkToConstructor'
+          >
+            <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
+          </Link>
+          <div className={styles.itemHighlighting} />
+        </>
+      );
+    }
+    return null;
+  }, [isConstructor, styles, setIsMenuOpen, t]);
 
   const subList = useMemo(
     () => (
@@ -114,24 +146,14 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           <CertificateIcon data-testid='link' alt='tre' />
         </Link>
         <div className={styles.itemHighlighting} />
-
-        <Link
-          to={pathToConstructor}
-          className={styles.mainItem}
-          onClick={() => setIsMenuOpen(false)}
-          data-testid='linkToConstructor'
-        >
-          <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
-        </Link>
-        <div className={styles.itemHighlighting} />
-
+        {constructorLink}
         {subList}
         <SocialLinks
           showTitle
           fromSideBar
           socialIconsStyles={styles.socialIconsStyles}
           position='flex-start'
-          color={isLightTheme ? '#000000' : '#FFFFFF'}
+          color={palette.textColor}
           setIsMenuOpen={setIsMenuOpen}
         />
       </div>

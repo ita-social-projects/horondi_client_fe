@@ -51,13 +51,13 @@ import {
   USER_IS_BLOCKED,
   USER_TOKENS,
   AUTH_ERRORS,
-  newCartKey,
   WISHLIST_KEY
 } from '../../configs';
+import { USER_ERROR } from '../../pages/login/constants';
 import routes from '../../configs/routes';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
-import { setCart, setNewWishlist } from '../common-store/common.actions';
+import { setNewWishlist } from '../common-store/common.actions';
 import i18n from '../../i18n';
 
 const { pathToLogin } = routes;
@@ -78,6 +78,7 @@ export function* handleGoogleUserLogin({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(getGoogleUser, payload);
     yield setLoginUser(user);
+    yield put(setUserIsConfirmed(true));
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
   } catch (e) {
@@ -106,11 +107,12 @@ export function* handleUserLogin({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     yield setLoginUser(user);
-    yield put(setUserLoading(false));
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
   } catch (e) {
     yield call(handleUserError, e);
+  } finally {
+    yield put(setUserLoading(false));
   }
 }
 
@@ -134,7 +136,6 @@ export function* handleUserRecovery({ payload }) {
     yield put(resetState());
     yield put(setRecoveryLoading(true));
     yield call(recoverUser, payload);
-    yield put(setRecoveryLoading(false));
     yield put(userHasRecovered(true));
     if (payload.redirect) {
       yield delay(REDIRECT_TIMEOUT);
@@ -142,6 +143,8 @@ export function* handleUserRecovery({ payload }) {
     }
   } catch (e) {
     yield call(handleUserError, e);
+  } finally {
+    yield put(setRecoveryLoading(false));
   }
 }
 
@@ -180,8 +183,6 @@ export function* handleUserPreserve() {
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
-    const cartFromLc = getFromLocalStorage(newCartKey);
-    yield put(setCart(cartFromLc));
   } catch (e) {
     yield call(handleUserError, e);
   } finally {
@@ -240,15 +241,14 @@ export function* handleRefreshTokenInvalid() {
 
 export function* handleUserError(e) {
   if (e?.message === USER_IS_BLOCKED) {
+    yield put(setUserError(USER_ERROR[USER_IS_BLOCKED]));
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
     yield call(handleRefreshTokenInvalid);
-  } else if (e?.message === 'USER_ALREADY_EXIST') {
-    yield put(setUserError(i18n.t('error.userError.userAlredyExist')));
-  } else if (i18n.exists(`error.userError.${e?.message}`)) {
-    yield put(setUserError(i18n.t(`error.userError.${e.message}`)));
+  } else if (i18n.exists(USER_ERROR[e?.message])) {
+    yield put(setUserError(USER_ERROR[e?.message]));
   } else {
-    yield put(setUserError(i18n.t('error.userError.defaultError')));
+    yield put(setUserError('error.userError.defaultError'));
   }
 }
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Field, useFormikContext } from 'formik';
+import { useFormikContext } from 'formik';
 import { FormControlLabel } from '@material-ui/core';
 import RegisterForm from '../../../../pages/register/register-from/register-form';
-import { Loader } from '../../../../components/loader/loader';
+import AppTextField from '../../../../components/app-text-field';
 
 jest.mock('../../../../pages/register/register-from/register-form.styles', () => ({
   useStyles: () => ({})
@@ -13,11 +13,16 @@ jest.mock('../../../../components/google-log-in-btn/google-button.styles', () =>
 }));
 jest.mock('react-redux');
 jest.mock('formik');
-window.FB = { init: jest.fn() };
 
 const dispatch = jest.fn();
 const props = {
+  formOperations: {
+    handleSubmit: jest.fn(),
+    handleChange: jest.fn(),
+    handleBlur: jest.fn()
+  },
   loading: false,
+  touched: {},
   values: {
     email: '',
     firstName: '',
@@ -27,8 +32,7 @@ const props = {
   errors: {},
   showPassword: true,
   setShowPassword: jest.fn(),
-  registerError: null,
-  setShouldValidate: jest.fn()
+  registerError: null
 };
 const formik = {
   initialValues: {
@@ -49,16 +53,9 @@ useDispatch.mockImplementation(() => dispatch);
 describe('RegisterForm tests', () => {
   it('should render all fields of Register Form', () => {
     const wrapper = shallow(<RegisterForm {...props} />);
-    expect(wrapper.find(Field).length).toEqual(4);
+    expect(wrapper.find(AppTextField).length).toEqual(4);
   });
-  it('should not render Loader if not loading', () => {
-    const wrapper = shallow(<RegisterForm {...props} />);
-    expect(wrapper.find(Loader)).toHaveLength(0);
-  });
-  it('should render Loader if loading', () => {
-    const wrapper = shallow(<RegisterForm {...props} loading />);
-    expect(wrapper.find(Loader)).toHaveLength(1);
-  });
+
   it('should set checkbox checked', () => {
     const wrapper = shallow(<RegisterForm {...props} />);
     const checkbox = wrapper.find(FormControlLabel);

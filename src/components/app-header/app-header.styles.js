@@ -9,16 +9,14 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     backgroundColor: '#020202',
     boxShadow: '0px 8px 16px 0px #2424241F',
-    zIndex: '1301',
-
-    transition: 'all 0.5s ease-out',
+    transition: 'transform 0.5s ease-out',
     '& .MuiToolbar-regular': {
       minHeight: '35px',
       padding: '10px 85px',
       width: '95%',
       margin: 'auto',
-      '@media (max-width: 870px)': {
-        padding: '0'
+      '@media (max-width: 1000px)': {
+        padding: '6px 0'
       }
     },
     '& .MuiTypography-body1': {
@@ -27,26 +25,14 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       position: 'fixed',
       top: 0,
-      zIndex: 1000
-    },
-    '@media (max-width: 556px)': {
-      paddingBottom: '45px'
+      gap: '48px',
+      paddingBottom: '48px'
     }
   },
   sticky: {
     transform: 'translateY(-35px)',
-    transition: 'all 0.5s ease-out',
     '@media (max-width: 485px)': {
       transform: 'translateY(-95px)'
-    }
-  },
-  headerspace: {
-    display: 'block',
-    width: '100%',
-    height: '75px',
-    backgroundColor: theme.palette.background,
-    '@media (max-width: 768px)': {
-      height: '72px'
     }
   },
   upperToolbar: {
@@ -55,51 +41,13 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     padding: '0px 80px',
     borderBottom: '1px solid rgba(91, 91, 91, 0.6)',
-    '@media (max-width: 485px)': {
+    '@media (max-width: 768px)': {
       display: 'none'
     }
   },
   theme: {
-    display: 'flex',
-    alignItems: 'center',
+    marginRight: '37px',
     marginLeft: 'auto',
-    marginRight: '40px',
-    '& .MuiTypography-root': {
-      width: '40px',
-      textAlign: 'center'
-    },
-    '& .MuiSwitch-root': {
-      width: '32px',
-      height: '14px',
-      padding: '0px',
-      margin: '0 5px',
-      display: 'flex'
-    },
-    '& .MuiSwitch-switchBase': {
-      padding: 2,
-      color: '#808080',
-      '&.Mui-checked': {
-        transform: 'translateX(17px)',
-        color: '#242424',
-        '& + .MuiSwitch-track': {
-          opacity: 1,
-          backgroundColor: '#808080',
-          borderColor: theme.palette.primary.main
-        }
-      }
-    },
-    '& .MuiSwitch-thumb': {
-      width: 10,
-      height: 10,
-      boxShadow: 'none'
-    },
-    '& .MuiSwitch-track': {
-      border: `1px solid ${theme.palette.grey[500]}`,
-      borderRadius: '12px',
-      opacity: 1,
-      backgroundColor: theme.palette.common.white
-    },
-    '& .Mui-checked': {},
     '@media (max-width: 900px)': {
       marginRight: '0px'
     }

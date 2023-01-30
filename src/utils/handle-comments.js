@@ -1,13 +1,6 @@
 import React from 'react';
 import Rating from '@material-ui/lab/Rating';
-import { TEXT_VALUE } from '../configs';
 import LoadMoreCommentsIcon from '../images/loadMoreCommentsIcon.js';
-
-export const handleClassName = (name, stylesText, stylesInput) =>
-  `${name === TEXT_VALUE ? stylesText : stylesInput}`;
-
-export const handleTextField = (name, userData) =>
-  (name !== TEXT_VALUE && !userData) || name === TEXT_VALUE;
 
 export const handleHelperText = (errorsName) => errorsName || '';
 

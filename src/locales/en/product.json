@@ -6,6 +6,7 @@
   },
   "pattern": "Pattern",
   "notAvailable": "Not available",
+  "isDeleted": "Taken out of production",
   "productDescription": {
     "description": "Product Description",
     "mainMaterial": "Main material",
@@ -16,12 +17,17 @@
     "measurement": "Measurement"
   },
   "weight": {
-    "weightLabel": "Weight(kg)",
-    "volumeLabel": "Volume(L)"
+    "weightLabel": "Weight",
+    "volumeLabel": "Volume",
+    "heightLabel": "Height",
+    "widthLabel": "Width",
+    "depthLabel": "Depth"
   },
+  "measurment": { "kg": "kg", "l": "L", "sm": "sm" },
   "priceFrom": "from ",
   "sizeNotAvailable": "Product isn't available",
-  "unavailable": "unavailable",
+  "unavailable": "Unavailable",
+  "category": "Category",
   "pdpButtons": {
     "cartButton": "Add to cart",
     "buyButton": "Buy now",
@@ -65,6 +71,7 @@
     "unregisteredTip": "You should be logged in to leave rate",
     "registeredTip": "You should buy the product to leave rate",
     "successfulTip": "Set rate",
+    "emptyComments": "There are no reviews for this product yet.",
     "loadMore": "SHOW MORE",
     "hideBtn": "Hide comments"
   },
@@ -77,6 +84,8 @@
   "size": {
     "S": "Small",
     "M": "Medium",
-    "L": "Long"
+    "L": "Large",
+    "XL": "Extra Large",
+    "XXL": "Double Extra Large"
   }
 }

@@ -46,6 +46,12 @@ export default {
         color: '#FFFFFF'
       }
     },
+    myCertificate: {
+      backgroundColorRed: '#E4B20014',
+      backgroundColorGray: '#5B5B5B0D',
+      notActiveTextColor: '#02020280',
+      iconBtnColor: '#D9D9D9'
+    },
     cart: {
       borderColor: 'rgba(91, 91, 91, 0.2)',
       iconColor: 'rgba(2, 2, 2, 0.5)'
@@ -97,6 +103,9 @@ export default {
         }
       }
     },
+    notification: {
+      backgroundColor: '#FAE69E'
+    },
     arrowIcon: {
       arrowColor: 'rgba(2, 2, 2, 0.5)'
     },
@@ -145,12 +154,21 @@ export default {
         color: '#000000'
       }
     },
+    myCertificate: {
+      backgroundColorRed: '#E4B20014',
+      backgroundColorGray: '#1D1D1D',
+      notActiveTextColor: '#FEFEFE80',
+      iconBtnColor: '#FEFEFE80'
+    },
     cart: {
       borderColor: '#5B5B5B',
       iconColor: 'rgba(230, 230, 230, 0.75)'
     },
     contactForm: {
       background: '#232323'
+    },
+    notification: {
+      backgroundColor: '#CFAF3D'
     },
     productDescription: {
       borderColor: '#5B5B5B'

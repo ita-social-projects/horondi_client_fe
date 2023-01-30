@@ -5,11 +5,12 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: 'none',
     borderBottom: '1px solid',
     backgroundColor: 'transparent',
-    '&::before': {
-      borderBottom: '1px solid'
+    '&:nth-child(2)': {
+      borderTop: '1px solid'
     },
     '&:last-child': {
-      borderBottom: '1px solid'
+      borderBottom: 0,
+      marginBottom: '40px'
     }
   },
 

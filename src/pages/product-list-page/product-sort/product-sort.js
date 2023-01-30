@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { MenuItem, Select } from '@material-ui/core';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Button, MenuItem, Select } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import useDebounce from '../../../hooks/use-debounce';
@@ -10,7 +10,7 @@ import SearchBar from '../../../containers/search-bar/search-bar';
 import { URL_QUERIES_NAME, TEXT_FIELD_VARIANT } from '../../../configs';
 import { SORT_BY_SELECT_OPTIONS } from '../constants';
 
-const ProductSort = () => {
+const ProductSort = ({ handleFilterShow }) => {
   const { t } = useTranslation();
   const styles = useStyles();
   const history = useHistory();
@@ -25,7 +25,7 @@ const ProductSort = () => {
   const [searchState, setSearchState] = useState(initialSearchState);
   const [sortType, setSortType] = useState(SORT_BY_SELECT_OPTIONS[0]);
 
-  const searchParams = new URLSearchParams(search);
+  const searchParams = useMemo(() => new URLSearchParams(search), [search]);
   const { sort, nameFilter, page, defaultPage } = URL_QUERIES_NAME;
   const nameFilterValue = searchParams.get(nameFilter);
 
@@ -55,7 +55,7 @@ const ProductSort = () => {
       searchParams.delete(nameFilter);
     }
     history.push(`?${searchParams.toString()}`);
-  }, [debouncedSearchValue]);
+  }, [debouncedSearchValue, defaultPage, history, nameFilter, page, searchParams]);
 
   const handleSearch = (event) => {
     const { value } = event.target;
@@ -72,7 +72,7 @@ const ProductSort = () => {
       searchParams.set(sort, SORT_BY_SELECT_OPTIONS[0].name);
       history.push(`?${searchParams.toString()}`);
     }
-  });
+  }, [history, query, searchParams, sort]);
 
   const sortByText = t('common.sortBy');
   const selectOptions = SORT_BY_SELECT_OPTIONS.map((optionValue) => (
@@ -105,6 +105,9 @@ const ProductSort = () => {
         </Select>
       </div>
       <CountPerPage />
+      <Button className={styles.button} variant='contained' fullWidth onClick={handleFilterShow}>
+        {t('common.showFilters')}
+      </Button>
     </div>
   );
 };
